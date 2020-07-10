@@ -80,7 +80,7 @@ After pulling the source code, go to root folder and follow next steps:
  
 
 * go to root folder where docker file (Dockerfile) is, type comand `docker build -t demeter/deh-dashboard .` to create docker image.
-* in terminal type `docker run demeter/deh-dashboard` to start docker image.  
+* in terminal type `docker run -p 8080:80 demeter/deh-dashboard` to start docker image.  
 
  
 
