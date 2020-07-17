@@ -1,0 +1,35 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="{toggled: toggleClass}"
+    id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+            <fa-icon [icon]="seedlingIcon" size="2x"></fa-icon>
+        </div>
+        <div class="sidebar-brand-text mx-3">Demeter</div>
+    </a>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="index.html">
+            <fa-icon [icon]="sitemapIcon"></fa-icon>
+            <span>List</span>
+        </a>
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle" (click)=toggleSidebar()>
+            <fa-icon [icon]="toggleClass ? angleRightIcon : angleLeftIcon"></fa-icon>
+        </button>
+    </div>
+
+
+</ul>
+<!-- End of Sidebar -->
