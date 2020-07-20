@@ -98,10 +98,6 @@
     margin-right: 0.1rem;
 }
 
-/* svg.svg-inline--fa.fa-angle-left.fa-w-8 path, svg.svg-inline--fa.fa-angle-right.fa-w-8 path {
-    color: #cfcfd6 !important;
-} */
-
 .sidebar #sidebarToggle:hover {
     text-decoration: none;
 }
@@ -260,9 +256,14 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
+i.fas.fa-sitemap {
+    margin-right: 5px;
+}
+
 @media (min-width: 768px) {
     .sidebar {
         width: 14rem !important;
+        height: 100vw;
     }
     .sidebar .nav-item .collapse {
         position: relative;

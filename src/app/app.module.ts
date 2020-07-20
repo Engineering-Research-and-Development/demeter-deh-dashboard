@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { TopNavBarComponent } from './components/top-nav-bar/top-nav-bar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,16 +18,16 @@ import { TopNavBarComponent } from './components/top-nav-bar/top-nav-bar.compone
     FilterBarComponent,
     MainContentComponent,
     TopNavBarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
