@@ -1,38 +1,17 @@
 <div class="row">
     <div class="col-12">
         <div class="input-group" id="adv-search">
-            <input id="dTagFilter" type="text" data-role="tagsinput" placeholder="Search for snippets, click on caret"
-                class="col-6">
+            <input id="dTagFilter" type="text" data-role="tagsinput" placeholder="Search for snippets, click on caret" class="col-6">
             <div class="input-group-btn">
                 <div class="btn-group" role="group">
-                    <div class="dropdown dropdown-lg">
-                        <button type="button" id="dFilterClearAll" class="btn">
-                            <i class="fas fa-eraser" aria-hidden="true" onclick="clearDFilter()"></i>
-                        </button>
-                        <button type="button" id="dFilterDropdown" class="btn btn-default dropdown-toggle"
-                            data-toggle="dropdown"><span class="caret"></span>
-                        </button>
-                        <div id="d_entityfilter" class="dropdown-menu dropdown-menu-right dropdown-menu-filter"
-                            role="menu">
-                            <form>
+                    <div ngbDropdown>
+                        <button type="button" id="dFilterClearAll" class="btn "><i class="fas fa-eraser" onclick="clearDFilter()"></i></button>
+                        <button type="button" id="dFilterDropdown" class="btn btn-default" ngbDropdownToggle><span class="caret"></span></button>
 
-                                <div class="form-group">
-                                    <label for="title" class="kms-title-label">Title</label>
-                                    <input type="text" class="form-control" id="title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="type" class="kms-title-label">Type</label>
-                                    <select class="form-control" id="type">
-                                        <option>Component</option>
-                                        <option>Service</option>
-                                    </select>
-                                </div>
-                            </form>
+                        <div id="d_entityfilter" class="dropdown-menu dropdown-menu-right" aria-labelledby="dFilterDropdown" ngbDropdownMenu>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="switchByFilter(dTagFilter)">
-                        <i class="fas fa-search" aria-hidden="true"></i>
-                    </button>
+                    <button type="button" class="btn btn-primary" onclick="switchByFilter(dTagFilter)"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>

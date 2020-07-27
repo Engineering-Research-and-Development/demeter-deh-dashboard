@@ -16,7 +16,7 @@ let jsonConfig = {
                 "bool": {
                     "must": [{
                         "term": {
-                            "_index": "demeterservicecomponent"
+                            "_index": "dymerservicecomponent"
                         }
                     }]
                 }
@@ -42,41 +42,49 @@ let jsonConfig = {
 
 
 
-// let jsonfilter = {
-//     "bool": {
-//         "must": [{
-//             "match": {
-//                 "_index": "demeterservicecomponent"
-//             }
-//         }]
-//     }
-// };
+let jsonfilter = {
+    "bool": {
+        "must": [{
+            "match": {
+                "_index": "dymerservicecomponent"
+            }
+        }]
+    }
+};
 
 
 
 let script = document.createElement('script');
-script.src = "http://dihiwaredym01.eng.it/public/cdn/js/dymer.viewer.js";
+script.src = "http://localhost:8080/public/cdn/js/dymer.viewer.js";
 script.id = "dymerurl";
 document.getElementsByTagName('head')[0].appendChild(script);
 
 
 
 function mainDymerView() {
-    setTimeout(function () {
+    setTimeout(function() {
         dTagFilter = $('#dTagFilter');
         dTagFilter.dymertagsinput({
             //indexmodelfilter:"hubcapmodel",
-            indexterms: ["demeterservicecomponent"],
+            indexterms: {
+                "bool": {
+                    "must": [{
+                        "term": {
+                            "_index": "dymerservicecomponent"
+                        }
+                    }]
+                }
+            },
             allowDuplicates: false,
             freeInput: false,
             itemValue: 'id', // this will be used to set id of tag
             itemText: 'label' // this will be used to set text of tag	 
         });
-        dTagFilter.on('beforeItemRemove', function (event) {
+        dTagFilter.on('beforeItemRemove', function(event) {
             $('#d_entityfilter [filter-rel="' + event.item.id + '"').prop("checked", false);
         });
     }, 3000);
-    let index = 'demeterservicecomponent';
+    let index = 'dymerservicecomponent';
     loadModelListToModal($('#cont-addentity'), index);
 
     let obj = getAllUrlParams(); //recupera i parametri presenti nell'url (passati in get)
@@ -89,4 +97,3 @@ function mainDymerView() {
     loadFilterModel(index, dTagFilter);
 
 }
-
