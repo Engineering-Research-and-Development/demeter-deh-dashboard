@@ -23,7 +23,7 @@ export class MainContentComponent implements OnInit {
           "bool": {
             "must": [{
               "term": {
-                "_index": "demeterservicecomponent"
+                "_index": "dymerservicecomponent"
               }
             }]
           }

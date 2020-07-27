@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +6,7 @@ import { LoginModalComponent } from '../modals/login-modal/login-modal.component
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  constructor(private _modalService: NgbModal) { }
+  constructor() { }
   ngOnInit(): void {
   }
   // openDymerLoginModal() {
