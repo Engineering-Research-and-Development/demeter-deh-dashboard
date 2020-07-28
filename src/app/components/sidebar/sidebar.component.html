@@ -1,6 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="{toggled: toggleClass}"
-    id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="{toggled: toggleClass}" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -14,7 +13,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" [routerLink]="['/']">
             <i class="fas fa-sitemap"></i>
             <span>List</span>
@@ -23,8 +22,9 @@
 
 
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-    <div class="text-center d-none d-md-inline">
+    <hr class="sidebar-divider d-none d-md-block" *ngIf="authService.isLoggedIn()">
+
+    <div class="text-center d-none d-md-inline" *ngIf="authService.isLoggedIn()">
         <button class="rounded-circle border-0" id="sidebarToggle" (click)=toggleSidebar()>
             <i [ngClass]="(toggleClass)?'fas fa-angle-right':'fas fa-angle-left'"></i>
         </button>

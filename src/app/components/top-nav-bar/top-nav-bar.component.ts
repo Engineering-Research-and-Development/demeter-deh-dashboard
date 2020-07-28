@@ -1,7 +1,7 @@
+import { environment } from './../../../environments/environment';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
-import { RegisterModalComponent } from '../modals/register-modal/register-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -9,8 +9,14 @@ import { RegisterModalComponent } from '../modals/register-modal/register-modal.
   styleUrls: ['./top-nav-bar.component.css']
 })
 export class TopNavBarComponent implements OnInit {
+  constructor(private _router: Router, public authService: AuthService) { }
   ngOnInit(): void {
   }
+
+  getToken() {
+    window.location.href = `http://localhost:3000/oauth2/authorize?response_type=token&client_id=${environment.ID}&state=xyz&redirect_uri=http://localhost:4200/&scope=jwt`;
+  }
+
   openLoginModal() {
     // this._modalService.open(LoginModalComponent, { windowClass: 'modal-holder', centered: true });
   }

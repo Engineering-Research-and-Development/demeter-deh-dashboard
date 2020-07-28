@@ -11,31 +11,40 @@
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
-<!--     
-    <li class="nav-item mr-2 auth-icon" (click)="openLoginModal()">
-        <fa-icon [icon]="signInIcon" aria-hidden="true" size="2x"></fa-icon> <br>
-        Login
-    </li>
-    <li class="nav-item auth-icon" (click)="openRegisterUserModal()" style="font-size: 12px; text-align: center;">
-        <fa-icon [icon]="userIcon" aria-hidden="true" size="2x"></fa-icon> <br>
-        Register
-    </li>
-   -->
-
         <!-- Nav Item - User Information -->
-        <li class="nav-item dropdown no-arrow" style="display: block;">
-            <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Dymer</span>
-                <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
+        <li ngbDropdown class="nav-item dropdown no-arrow" style="display: block;" *ngIf="authService.isLoggedIn()">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    {{ authService.currentUser?.username | titlecase}}                   
+                </span>
+
+                <div *ngIf="authService.currentUser?.isGravatarEnabled; else anonymousGravatar">
+                    <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
+                </div>
+                <ng-template #anonymousGravatar>
+                    <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
+                </ng-template>
             </a>
 
-            <div class="dropdown-menu dropdown-menu-right">
-                <a href="#" class="dropdown-item">Action 1</a>
-                <a href="#" class="dropdown-item">Action 2</a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">Action 3</a>
+            <div *ngIf="authService.isLoggedIn()" class="dropdown-menu dropdown-menu-right" aria-labelledby="dFilterDropdown" ngbDropdownMenu>
+                <button ngbDropdownItem (click)="authService.logout()">
+                    <i class="fas fa-sign-out-alt mt-3" aria-hidden="true"></i> Logout
+                </button>
             </div>
         </li>
+
+        <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
+            <a style="color:inherit" (click)="getToken()">
+                <i class="fas fa-sign-in-alt mt-3" aria-hidden="true" style="font-size: 1.5rem;"></i><br> Login
+            </a>
+        </li>
+        <!-- <li class="nav-item mr-2 auth-icon" *ngIf="authService.isLoggedIn()">
+            <a style="color:inherit" (click)="authService.logout()">
+                <i class="fas fa-sign-out-alt mt-3" aria-hidden="true" style="font-size: 1.5rem;"></i><br> Logout
+            </a>
+        </li> -->
+
+
     </ul>
 
 </nav>
