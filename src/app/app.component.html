@@ -1,18 +1,20 @@
 <div id="wrapper">
-  <span id="page-top"></span>
-  <app-sidebar></app-sidebar>
+    <span id="page-top"></span>
+    <app-sidebar></app-sidebar>
 
-  <div id="content-wrapper" class="d-flex flex-column">
-    <div id="content">
-      <app-top-nav-bar></app-top-nav-bar>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <app-top-nav-bar></app-top-nav-bar>
 
-      <div class="container-fluid">
-        <app-filter-bar></app-filter-bar>
-        <app-main-content></app-main-content>
-      </div>
-      
+            <div class="container-fluid" *ngIf="authService.isLoggedIn()">
+                <app-filter-bar></app-filter-bar>
+                <app-main-content></app-main-content>
+            </div>
+            <div *ngIf="!authService.isLoggedIn()" class="image-container">
+                <img [src]="'/assets/img/demeter_logo.png'" alt="Demeter">
+            </div>
+        </div>
     </div>
-  </div>
-  <app-footer></app-footer>
+    <app-footer></app-footer>
 </div>
 <router-outlet></router-outlet>
