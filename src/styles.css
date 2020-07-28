@@ -1001,6 +1001,12 @@
          transform: scale(1)
      }
  }
+ 
+ .image-container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
  /* .bootstrap-tagsinput {
    flex: 1;
  }
