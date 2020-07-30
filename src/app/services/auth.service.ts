@@ -40,6 +40,13 @@ export class AuthService {
     return !isExpired;
   }
 
+  isExpired(){
+    let token = this.getToken();
+    if(!token) return true;
+
+    return new JwtHelperService().isTokenExpired(token);
+  }
+
   removeToken(): void {
     if (localStorage.getItem("token")) {
       localStorage.removeItem("token");
