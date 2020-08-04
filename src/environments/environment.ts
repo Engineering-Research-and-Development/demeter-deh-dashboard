@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  ID: "050ea528-3119-4c69-8423-cd00e966e714"
+  ID: window["env"]["ID"] || "",
+  KEYROCK_URL: window["env"]["KEYROCK_URL"] || "",
+  DEH_DASHBOARD_URL: window["env"]["DEH_DASHBOARD_URL"] || "",
+  DYMER_URL: window["env"]["DYMER_URL"] || "http:localhost:8080"
+
 };
 
 /*

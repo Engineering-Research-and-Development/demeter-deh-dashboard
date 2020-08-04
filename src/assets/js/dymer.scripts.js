@@ -55,7 +55,7 @@ let jsonfilter = {
 
 
 let script = document.createElement('script');
-script.src = "http://localhost:8080/public/cdn/js/dymer.viewer.js";
+script.src = window["env"]["DYMER_URL"] + "/public/cdn/js/dymer.viewer.js";
 script.id = "dymerurl";
 document.getElementsByTagName('head')[0].appendChild(script);
 

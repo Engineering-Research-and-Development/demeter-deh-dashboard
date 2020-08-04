@@ -1,10 +1,9 @@
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { JwtModel } from './../models/jwt.model';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -54,11 +53,11 @@ export class AuthService {
   }
 
   authorize() {
-    window.location.href = `http://localhost:3000/oauth2/authorize?response_type=token&client_id=${environment.ID}&state=xyz&redirect_uri=http://localhost:4200/&scope=jwt`;
+    window.location.href = `${environment.KEYROCK_URL}/oauth2/authorize?response_type=token&client_id=${environment.ID}&state=xyz&redirect_uri=${environment.DEH_DASHBOARD_URL}/&scope=jwt`;
   }
 
   clearKayrockSession() {
-    window.location.href = `http://localhost:3000/auth/external_logout?_method=DELETE&client_id=${environment.ID}`;
+    window.location.href = `${environment.KEYROCK_URL}/auth/external_logout?_method=DELETE&client_id=${environment.ID}`;
     this.removeToken();
   }
 
