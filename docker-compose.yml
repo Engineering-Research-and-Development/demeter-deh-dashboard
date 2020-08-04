@@ -1,0 +1,19 @@
+version: "3.5"
+services:        
+    web:
+        image: demeterproject/demeter_portal:develop
+        container_name: deh-dashboard 
+        restart: always
+        #build: .
+        ports:
+            - "80:80"
+            - "433:443"
+        environment:
+            - ID=31c21fd7-e0ac-4e8c-8bbf-109c9b963b7b
+            - KEYROCK_URL=http://localhost:3000
+            - DEH_DASHBOARD_URL=http://localhost:80
+            - DYMER_URL=http://localhost:8080
+        volumes:
+        - "/app/node_modules"
+        - ".:/app"
+   
