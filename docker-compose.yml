@@ -2,10 +2,7 @@ version: "3.5"
 services:
     web:
         image:  demeterengteam/deh_dashboard:develop
-        container_name: deh-dashboard
-        depends_on:
-            - elasticsearch
-            - keyrock
+        container_name: deh-dashboard        
         restart: always
         # build: .
         ports:
