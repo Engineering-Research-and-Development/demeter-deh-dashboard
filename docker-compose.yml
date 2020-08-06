@@ -1,19 +1,21 @@
 version: "3.5"
-services:        
+services:
     web:
-        image: demeterproject/demeter_portal:develop
-        container_name: deh-dashboard 
+        image:  demeterengteam/deh_dashboard:develop
+        container_name: deh-dashboard
+        depends_on:
+            - elasticsearch
+            - keyrock
         restart: always
-        #build: .
+        # build: .
         ports:
-            - "80:80"
+            - "8085:80"
             - "433:443"
         environment:
-            - ID=31c21fd7-e0ac-4e8c-8bbf-109c9b963b7b
+            - ID=ccf08bf1-08b3-473a-a1cb-c9f3e3d0237d
             - KEYROCK_URL=http://localhost:3000
-            - DEH_DASHBOARD_URL=http://localhost:80
+            - DEH_DASHBOARD_URL=http://localhost:8085
             - DYMER_URL=http://localhost:8080
         volumes:
         - "/app/node_modules"
         - ".:/app"
-   
