@@ -8,16 +8,24 @@
                         <div id="cont-addentity"></div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-12">
-                        <br>
-                        <span class="btn btn-mini btn-primary" (click)="cambia(jsonConfig)">
-                            <i class="fas fa-list"></i> 
-                            List
-                        </span>
-                        <br><br>
+                        <div>
+                            <div class="btn-group">
+                                <span class="btn btn-link" id="list" (click)="cambia(jsonConfig)">
+                                    <i class="fas fa-list"></i>                                     
+                                    <!-- List View -->
+                                </span>
+                                <span class="btn btn-link" id="grid" (click)="cambia(jsonConfig)">
+                                    <i class="fas fa-th-large"></i> 
+                                    <!-- Grid View -->
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <br>
 
                 <div id="cont-MyList" class="col-12">
                 </div>

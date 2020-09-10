@@ -1007,6 +1007,10 @@
      align-items: center;
      justify-content: center;
  }
+ 
+ i#loginDymerBtn {
+     display: none !important;
+ }
  /* .bootstrap-tagsinput {
    flex: 1;
  }

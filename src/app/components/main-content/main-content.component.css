@@ -1,0 +1,17 @@
+span#list {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+i.fas.fa-list,
+i.fas.fa-th-large {
+    font-size: 1.4rem;
+    color: #6c757d;
+    line-height: 15px;
+}
+
+i.fas.fa-list:hover,
+i.fas.fa-th-large:hover {
+    color: #5a6268;
+    font-size: 1.5rem;
+}
