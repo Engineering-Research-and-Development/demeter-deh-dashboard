@@ -11,25 +11,25 @@ export class AppComponent implements OnInit {
 
   constructor(private _activatedRoute: ActivatedRoute, public authService: AuthService) { }
   ngOnInit(): void {
-    console.log("ex", this.authService.isExpired());
+  //   console.log("ex", this.authService.isExpired());
 
-  if(this.authService.isExpired()) {
-    this.authService.removeToken();
-  }
+  // if(this.authService.isExpired()) {
+  //   this.authService.removeToken();
+  // }
     
 
-    if (!localStorage.getItem("token") && localStorage.getItem("token") !== undefined) {
-      this._activatedRoute.queryParams.subscribe(params => {
-        let token = params["token"];
-        const tokenType = params['token_type'];
+  //   if (!localStorage.getItem("token") && localStorage.getItem("token") !== undefined) {
+  //     this._activatedRoute.queryParams.subscribe(params => {
+  //       let token = params["token"];
+  //       const tokenType = params['token_type'];
 
-        if (token) {
-          this.authService.setToken(token);
-        }
-      });
-    }
-  }
+  //       if (token) {
+  //         this.authService.setToken(token);
+  //       }
+  //     });
+  //   }
+  // }
+    this.authService.login();
 
 
-
-}
+}}
