@@ -6,6 +6,10 @@
         <i class="fas fa-bars"></i>
     </button>
 
+    <!-- slide down Login -->
+    <app-login></app-login>
+
+
     <!-- Topbar Navbar -->
     <ul class="nav navbar-nav ml-auto">
 
@@ -13,9 +17,10 @@
 
         <!-- Nav Item - User Information -->
         <li ngbDropdown class="nav-item dropdown no-arrow" style="display: block;" *ngIf="authService.isLoggedIn()">
-            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    {{ authService.currentUser?.username | titlecase}}                   
+                    {{ authService.currentUser?.username | titlecase}}
                 </span>
 
                 <div *ngIf="authService.currentUser?.isGravatarEnabled; else anonymousGravatar">
@@ -26,7 +31,8 @@
                 </ng-template>
             </a>
 
-            <div *ngIf="authService.isLoggedIn()" class="dropdown-menu dropdown-menu-right" aria-labelledby="dFilterDropdown" ngbDropdownMenu>
+            <div *ngIf="authService.isLoggedIn()" class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="dFilterDropdown" ngbDropdownMenu>
                 <button ngbDropdownItem (click)="authService.clearKayrockSession()">
                     <i class="fas fa-sign-out-alt mt-3" aria-hidden="true"></i> Logout
                 </button>
@@ -34,7 +40,7 @@
         </li>
 
         <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
-            <a style="color:inherit" (click)="authService.authorize()">
+            <a style="color:inherit" (click)="slideLogin()" class="slide-login">
                 <i class="fas fa-sign-in-alt mt-3" aria-hidden="true" style="font-size: 1.5rem;"></i><br> Login
             </a>
         </li>

@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  DoBootstrap,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { LoginComponent } from '../login/login.component';
 import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-top-nav-bar',
   templateUrl: './top-nav-bar.component.html',
-  styleUrls: ['./top-nav-bar.component.css']
+  styleUrls: ['./top-nav-bar.component.css'],
 })
 export class TopNavBarComponent implements OnInit {
-  constructor(public authService: AuthService) { }
-  ngOnInit(): void {
+  toggleSlide: boolean;
+
+  @ViewChild(LoginComponent) private loginComp: LoginComponent;
+
+  constructor(public authService: AuthService) {}
+  ngOnInit(): void {}
+
+  slideLogin() {
+    this.loginComp.animateMe();
+
+    // this.toggleSlide = !this.toggleSlide;
+    // console.log(this.toggleSlide);
   }
-
-
 }
