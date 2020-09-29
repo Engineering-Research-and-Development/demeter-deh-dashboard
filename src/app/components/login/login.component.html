@@ -1,0 +1,86 @@
+<div class="wrap" [@slideLogin]='state'>
+    <div class="container">
+
+
+        <form class="form-inline" [formGroup]="loginForm">
+
+
+
+            <div class="form-group mb-2">
+                <label class="mr-2" for="email">Email</label>
+                <input type="text" class="form-control form-control-sm" formControlName="email"
+                    [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }">
+                <div *ngIf="f.email.errors && f.email.touched" class="invalid-feedback">
+                    <small *ngIf="f.email.errors.required">Email is required</small>
+                    <small *ngIf="f.email.errors.pattern">Email must be a valid email address</small>
+                </div>
+
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <label class="mr-2" for=" password">Password</label>
+                <input type="password" class="form-control form-control-sm" formControlName="password"
+                    [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }">
+
+                <div *ngIf="f.password.errors && f.password.touched" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 3 characters</div>
+                    <div *ngIf="f.password.errors?.pattern">Passwords must have at least one non alphanumeric
+                        character.</div>
+                    <div *ngIf="f.password.errors?.pattern">Passwords must have at least one digit ('0'-'9').</div>
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="loginForm.invalid" class="btn btn-secondary btn-sm mb-2">
+                Login <i class="fas fa-sign-in-alt"></i>
+            </button>
+        </form>
+
+
+
+
+        <!-- <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" formControlName="email" class="form-control form-control-sm mx-sm-3"
+                    [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }">
+                <div *ngIf="f.email.errors && f.email.touched" class="invalid-feedback">
+                    <small *ngIf="f.email.errors.required">Email is required</small>
+                    <small *ngIf="f.email.errors.pattern">Email must be a valid email address</small>
+                </div>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" formControlName="password"
+                    class="form-control form-control-sm mx-sm-3"
+                    [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }">
+
+                <div *ngIf="f.password.errors && f.password.touched" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    <div *ngIf="f.password.errors?.pattern">Passwords must have at least one non alphanumeric
+                        character.</div>
+                    <div *ngIf="f.password.errors?.pattern">Passwords must have at least one digit ('0'-'9').</div>
+                </div>
+
+                <button type="submit" [disabled]="loginForm.invalid" class="btn btn-secondary btn-sm my-1">
+                    Login <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </form> -->
+    </div>
+</div>
+
+<!-- <button (click)="animateMe()">dffsd</button> -->
+
+<!-- <div class="login-box">
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="password" id="email" class="form-control mx-sm-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control mx-sm-3">
+
+            <button type="submit" class="btn btn-secondary my-1">Login</button>
+
+        </div>
+    </form>
+</div> -->
