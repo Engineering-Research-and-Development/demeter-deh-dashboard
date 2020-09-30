@@ -8,14 +8,17 @@ import { UserForAuthentication } from './../models/user-for-authentication.model
 import { Account } from './../models/account.model';
 
 import { mergeMap, tap } from 'rxjs/operators';
-import { map } from 'jquery';
+import { map, merge } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  user: Account
+  constructor(private _http: HttpClient) {
+    this.user = new Account;
 
-  constructor(private _http: HttpClient) { }
+  }
   get currentUser(): JwtModel {
     const token = this.getToken();
 
@@ -32,40 +35,55 @@ export class AuthService {
 
     };
 
-    let user: Account;
 
     this._http.post<HttpResponse<any>>(url, {
       "name": "gianluca@test.com",
       "password": "gianluca"
-    }, { headers }).pipe(
-      
-      tap(
-        response => {
-          console.log('response', response);
-          console.log('responseHeader', response.headers)
-          user.token = response.headers.get('X-Subject-Token')
-          user.tokenExpiration = response.body.get('token.expires_at')
-        } 
-      )
-    // ).pipe(
-    //   mergeMap(userInfo => this._http.get(url, {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Accept: 'application/json',
-    //       'X-Auth-Token': user.token,
-    //       'X-Subject-Token': user.token,
-    //     }
-    //   }).pipe(
-    //     mergeMap(userRolesInfo => this._http.get(`${environment.KEYROCK_URL}/v1/applications/${environment.ID}/users/${userInfo.get('User.id')}/roles`)
-    //     )
+    },
+      { headers, observe: 'response' as 'body' }
+    )
+      .pipe(
+        tap(
+          response => {
+            console.log('response', response);
+            console.log('responseHeader', response.headers);
+            this.user.token = response.headers.get('X-Subject-Token');
+            this.user.tokenExpiration = response.body.token.tokenExpiration;
+          })
+          ,
+          mergeMap( tokenInfo => this._http.get(url, {
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+              'X-Auth-Token': this.user.token,
+              'X-Subject-Token': this.user.token,
+            }
+          }).pipe(
+            tap(res => console.log(tokenInfo)
+          )
+          ))
+          ).subscribe(
+            data => console.log(data)
+          )
+  }
 
-    //   ))).subscribe(
-    //     data => console.log('datareceived', data));
 
+  // ).pipe(
+  //   mergeMap(userInfo => this._http.get(url, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Accept: 'application/json',
+  //       'X-Auth-Token': user.token,
+  //       'X-Subject-Token': user.token,
+  //     }
+  //   }).pipe(
+  //     mergeMap(userRolesInfo => this._http.get(`${environment.KEYROCK_URL}/v1/applications/${environment.ID}/users/${userInfo.get('User.id')}/roles`)
+  //     )
 
-      ).subscribe(
-        data => console.log('datareceived',data)
-      )  }
+  //   ))).subscribe(
+  //     data => console.log('datareceived', data));
+
+  
   setToken(token: string) {
     localStorage.setItem('token', token);
   }
