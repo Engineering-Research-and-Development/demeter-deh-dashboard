@@ -1,72 +1,120 @@
-import { throwError } from 'rxjs';
 import { environment } from './../../environments/environment';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { JwtModel } from './../models/jwt.model';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserForAuthentication } from './../models/user-for-authentication.model';
 import { Account } from './../models/account.model';
 
-import { mergeMap, tap } from 'rxjs/operators';
-import { map, merge } from 'jquery';
+import { map, mergeMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  user: Account
+  user: Account;
   constructor(private _http: HttpClient) {
-    this.user = new Account;
-
+    this.user = new Account();
   }
   get currentUser(): JwtModel {
     const token = this.getToken();
 
-    if (!token) { return null; }
+    if (!token) {
+      return null;
+    }
 
     return new JwtHelperService().decodeToken(token);
   }
 
-  login() {
+  login(): Observable<any> {
     const url = `${environment.KEYROCK_URL}/v1/auth/tokens`;
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   Accept: 'application/json'
+
+    // };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }),
+      // responseType: 'text',
+      observe: 'response' as 'responsbodye',
+    };
+
+    //  return this._http.post<HttpResponse<any>>(url, {
+    //     "name":"admin@test.com",
+    //     "password": "1234"
+    //   },
+
+    //     this._http.get<HttpResponse<any>>('http://dummy.restapiexample.com/api/v1/employees',
+    // { httpOptions }
+    // {
+    //   headers:{
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json'
+    //   },
+    //   observe: "response" as "body"
+    // }
+    // )
+
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-
+      'Access-Control-Expose-Headers': 'Authorization',
     };
+    return this._http
+      .get<HttpResponse<any>>(
+        'http://dummy.restapiexample.com/api/v1/employees',
+        { headers, observe: 'response' }
+      )
 
-
-    this._http.post<HttpResponse<any>>(url, {
-      "name": "gianluca@test.com",
-      "password": "gianluca"
-    },
-      { headers, observe: 'response' as 'body' }
-    )
       .pipe(
-        tap(
-          response => {
-            console.log('response', response);
-            console.log('responseHeader', response.headers);
-            this.user.token = response.headers.get('X-Subject-Token');
-            this.user.tokenExpiration = response.body.token.tokenExpiration;
-          })
-          ,
-          mergeMap( tokenInfo => this._http.get(url, {
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-              'X-Auth-Token': this.user.token,
-              'X-Subject-Token': this.user.token,
-            }
-          }).pipe(
-            tap(res => console.log(tokenInfo)
-          )
-          ))
-          ).subscribe(
-            data => console.log(data)
-          )
-  }
+        map((resp) => {
+          console.log('resp', resp);
 
+          console.log(resp.headers.get('X-Subject-Token'));
+          // user.tokenExpiration = resp.body.token.expires_at;
+          this.user.token = 'a777da3c-4e80-4ffb-9de2-ef5ee0f34c74';
+
+          // }
+          return this.user;
+        }),
+        mergeMap((user) =>
+          this._http
+            .get(url, {
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-Auth-Token': user.token,
+                'X-Subject-Token': user.token,
+              },
+            })
+            
+        )
+      ).pipe(
+        map((result: UserInfo) => {
+
+          console.log("fddfsaffd", result);
+          
+          this.user.id = result.User.id;
+          this.user.email = result.User.email;
+          this.user.username = result.User.username;
+          console.log('dd', this.user);
+        }),
+        mergeMap((user) => 
+          this._http
+            .get(`http://localhost:3000/v1/applications/${environment.ID}/users/${this.user.id}/roles`, {
+              headers: {
+                'X-Auth-Token': this.user.token
+              },
+            })
+            
+        )
+      )
+  }
+  // / const roleUrl = `http://localhost:3000/v1/applications/${environment.ID}/users/${this.user.id}/roles`;
 
   // ).pipe(
   //   mergeMap(userInfo => this._http.get(url, {
@@ -83,7 +131,6 @@ export class AuthService {
   //   ))).subscribe(
   //     data => console.log('datareceived', data));
 
-  
   setToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -105,7 +152,9 @@ export class AuthService {
 
   isExpired() {
     const token = this.getToken();
-    if (!token) { return true; }
+    if (!token) {
+      return true;
+    }
 
     return new JwtHelperService().isTokenExpired(token);
   }
@@ -124,7 +173,6 @@ export class AuthService {
     window.location.href = `${environment.KEYROCK_URL}/auth/external_logout?_method=DELETE&client_id=${environment.ID}`;
     this.removeToken();
   }
-
 
   //   doLogin(userForAuthentication: UserForAuthentication): Observable<Authentication> {
 
@@ -189,5 +237,20 @@ export class AuthService {
   //   sessionStorage.setItem("expires_at", JSON.stringify(authResult.tokenExpiration));
   //   sessionStorage.setItem('refresh_token', authResult.refreshToken);
   // }
+}
 
+export interface UserInfo {
+  access_token: string;
+  expires: string;
+  valid: boolean;
+
+  User: {
+    admin: boolean;
+    date_password: string;
+    email: string;
+    enabled: boolean;
+    id: string;
+    scrope: string[];
+    username: string;
+  };
 }
