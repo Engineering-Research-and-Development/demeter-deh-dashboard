@@ -7,6 +7,7 @@ import {
   animate,
 } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.state = this.state === 'small' ? 'large' : 'small';
   }
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder, private _authService: AuthService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -51,5 +52,18 @@ export class LoginComponent implements OnInit {
 
   get f() {
     return this.loginForm.controls;
+  }
+
+  login() {
+
+    if(this.loginForm.invalid) return; 
+
+    let email: string = this.loginForm.value.email;
+    let password: string = this.loginForm.value.password;
+    
+
+    this._authService.login(email, password);
+
+    // api/auth/login
   }
 }
