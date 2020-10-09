@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   trigger,
   state,
@@ -23,6 +31,7 @@ import { of } from 'rxjs';
   ],
 })
 export class LoginComponent implements OnInit {
+  @Output() hideLogin = new EventEmitter<boolean>();
   state: string = 'small';
   loginForm: FormGroup;
   success: boolean;
@@ -58,29 +67,19 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('LoginForm', 'LoginCalled')
     if (this.loginForm.invalid) return;
 
     let email: string = this.loginForm.value.email;
     let password: string = this.loginForm.value.password;
 
-    console.log('email', email)
-    console.log('password', password)
-    this._authService.login(email, password).subscribe(
-      res => {
-        if (!res.success){
+    this._authService.login(email, password).subscribe((res) => {
+      if (!res.success) {
         this.success = false;
         this.errorMessage = res.message;
-        console.log('sucess', this.success);
-        console.log(res);
-      }else{
+      } else {
         this.success = true;
-        this.state = 'small';
-
+        this.hideLogin.emit(true);
       }
-    }
-    );
-
-    // api/auth/login
+    });
   }
 }

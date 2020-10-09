@@ -132,6 +132,10 @@
     color: #3F65D4;
 }
 
+.hide-element {
+    display: none;
+}
+
 @media (min-width: 576px) {
     .topbar .dropdown {
         position: relative;

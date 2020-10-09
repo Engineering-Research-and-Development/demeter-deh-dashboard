@@ -7,8 +7,7 @@
     </button>
 
     <!-- slide down Login -->
-    <app-login></app-login>
-
+    <app-login (hideLogin)="hideLoginForm($event)" [ngClass]="{'hide-element':hideLoginParent}"></app-login>
 
     <!-- Topbar Navbar -->
     <ul class="nav navbar-nav ml-auto">

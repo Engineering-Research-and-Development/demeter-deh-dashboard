@@ -17,8 +17,7 @@ import { AuthService } from './../../services/auth.service';
   styleUrls: ['./top-nav-bar.component.css'],
 })
 export class TopNavBarComponent implements OnInit {
-  toggleSlide: boolean;
-
+  hideLoginParent:boolean;
   @ViewChild(LoginComponent) private loginComp: LoginComponent;
 
   constructor(public authService: AuthService) {}
@@ -26,10 +25,10 @@ export class TopNavBarComponent implements OnInit {
 
   slideLogin() {
     this.loginComp.animateMe();
+  }
 
-  
-    // this.toggleSlide = !this.toggleSlide;
-    // console.log(this.toggleSlide);
+  hideLoginForm($event) {
+      this.hideLoginParent = $event;
   }
 
   test(){
