@@ -20,7 +20,7 @@
             <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    {{ authService.currentUser?.username | titlecase}}
+                    {{ authService.currentUser?.User.username | titlecase}}
                 </span>
 
                 <div *ngIf="authService.currentUser?.isGravatarEnabled; else anonymousGravatar">
@@ -41,6 +41,12 @@
 
         <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
             <a style="color:inherit" (click)="slideLogin()" class="slide-login">
+                <i class="fas fa-sign-in-alt mt-3" aria-hidden="true" style="font-size: 1.5rem;"></i><br> Login
+            </a>
+        </li>
+
+        <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
+            <a style="color:inherit" (click)="test()" class="slide-login">
                 <i class="fas fa-sign-in-alt mt-3" aria-hidden="true" style="font-size: 1.5rem;"></i><br> Login
             </a>
         </li>

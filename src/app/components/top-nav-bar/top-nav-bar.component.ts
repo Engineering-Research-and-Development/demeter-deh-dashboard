@@ -27,7 +27,12 @@ export class TopNavBarComponent implements OnInit {
   slideLogin() {
     this.loginComp.animateMe();
 
+  
     // this.toggleSlide = !this.toggleSlide;
     // console.log(this.toggleSlide);
+  }
+
+  test(){
+    console.log(this.authService.currentUser);
   }
 }

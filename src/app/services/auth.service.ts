@@ -3,120 +3,64 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { JwtModel } from './../models/jwt.model';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
-import { map, mergeMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { UserInfo } from './../models/userInfo.model'
+import { map, mergeMap, shareReplay, tap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: Account;
   constructor(private _http: HttpClient) {
-    this.user = new Account();
   }
-  get currentUser(): JwtModel {
+
+  get currentUser(): UserInfo {
     const token = this.getToken();
+    console.log ('prviConsole u get', token);
 
     if (!token) {
       return null;
     }
+    console.log(JSON.parse(atob(token)));
+    return JSON.parse(atob(token));
 
-    return new JwtHelperService().decodeToken(token);
   }
 
-  login(email: string, password: string) {
-    const url = `${environment.KEYROCK_URL}/v1/auth/tokens`;
-    const apiUrl = `${environment.DYMER_URL}/api/auth/login`;
-    this._http
-      .post(
-        apiUrl,
-        {
-          name: email,
-          password: password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
+  login(name: string, password: string) {
+
+    console.log('AuthService', 'logincalled')
+    const url = `${environment.DYMER_URL}/api/xauth/login`;
+    console.log('URL', url)
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    return this._http.post<Response>(url, { name, password }, { headers }).pipe(
+
+      map((resp) => {
+        console.log('response', resp)
+        if (!resp.success) {
+          console.log('err', resp.message)
+          return resp;
+        } else {
+          sessionStorage.setItem('token', resp.data.token);
+
+          console.log(sessionStorage.getItem('token'))
         }
-      )
-      .pipe(
-        map((resp) => {
-          console.log(`${email} --- ${password}`);
-          console.log('resp', resp);
 
-          // user.tokenExpiration = resp.body.token.expires_at;
-          // this.user.token = 'a777da3c-4e80-4ffb-9de2-ef5ee0f34c74';
 
-          // }
-          return this.user;
-        }),
-        mergeMap((user) =>
-          this._http.get(url, {
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-              'X-Auth-Token': user.token,
-              'X-Subject-Token': user.token,
-            },
-          })
-        )
-      )
-      .pipe(
-        map((result: UserInfo) => {
-          console.log('fddfsaffd', result);
-
-          this.user.id = result.User.id;
-          this.user.email = result.User.email;
-          this.user.username = result.User.username;
-          console.log('dd', this.user);
-        }),
-        mergeMap((user) =>
-          this._http.get(
-            `http://localhost:3000/v1/applications/${environment.ID}/users/${this.user.id}/roles`,
-            {
-              headers: {
-                'X-Auth-Token': this.user.token,
-              },
-            }
-          )
-        )
-      )
-      .pipe(
-        mergeMap((userInfo) =>
-          this._http
-            .get(url, {
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'X-Auth-Token': user.token,
-                'X-Subject-Token': user.token,
-              },
-            })
-            .pipe(
-              // / const roleUrl = `http://localhost:3000/v1/applications/${environment.ID}/users/${this.user.id}/roles`;
-
-              mergeMap((userRolesInfo) =>
-                this._http.get(
-                  `${environment.KEYROCK_URL}/v1/applications/${
-                    environment.ID
-                  }/users/${userInfo.get('User.id')}/roles`
-                )
-              )
-            )
-        )
-      )
-      .subscribe((data) => console.log('datareceived', data));
+      }
+      ))
   }
+
 
   setToken(token: string) {
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
 
   isLoggedIn() {
@@ -126,8 +70,9 @@ export class AuthService {
     if (!token) {
       return false;
     }
-    const isExpired = helper.isTokenExpired(token);
-    return !isExpired;
+    return true;
+    // const isExpired = helper.isTokenExpired(token);
+    // return !isExpired;
   }
 
   isExpired() {
@@ -136,12 +81,12 @@ export class AuthService {
       return true;
     }
 
-    return new JwtHelperService().isTokenExpired(token);
+    return false;
   }
 
   removeToken(): void {
-    if (localStorage.getItem('token')) {
-      localStorage.removeItem('token');
+    if (sessionStorage.getItem('token')) {
+      sessionStorage.removeItem('token');
     }
   }
 
@@ -154,16 +99,16 @@ export class AuthService {
     this.removeToken();
   }
 
-  //   doLogin(userForAuthentication: UserForAuthentication): Observable<Authentication> {
+  //   doLogin(email: string, password: string): Observable<any> {
 
-  //     const url: string = `${environment.KEYROCK_URL}/v1/auth/tokens`;
+  //     const url = `${environment.DYMER_URL}/api/xauth/login`;
 
   //     const headers = {
   //         'Content-Type': 'application/json',
   //         'Accept': 'application/json',
   //     };
 
-  //     return this._http.post<Authentication>(url, userForAuthentication, { headers })
+  //     return this._http.post(url, {email, password}, { headers })
   //         .pipe(
   //             shareReplay(),
   //             catchError((err: HttpErrorResponse) => {
@@ -212,25 +157,21 @@ export class AuthService {
   //         );
   // }
 
-  // private setSession(authResult: Account) {
-  //   sessionStorage.setItem('token', authResult.token);
-  //   sessionStorage.setItem("expires_at", JSON.stringify(authResult.tokenExpiration));
-  //   sessionStorage.setItem('refresh_token', authResult.refreshToken);
+  //   private setSession(authResult: Account) {
+  //     sessionStorage.setItem('token', authResult.token);
+  //     sessionStorage.setItem("expires_at", JSON.stringify(authResult.tokenExpiration));
+  //     sessionStorage.setItem('refresh_token', authResult.refreshToken);
+  //   }
   // }
+
+
 }
 
-export interface UserInfo {
-  access_token: string;
-  expires: string;
-  valid: boolean;
-
-  User: {
-    admin: boolean;
-    date_password: string;
-    email: string;
-    enabled: boolean;
-    id: string;
-    scrope: string[];
-    username: string;
-  };
+export interface Response {
+  data: {
+    token: string
+  },
+  extraData: string[]
+  message: string,
+  success: boolean
 }
