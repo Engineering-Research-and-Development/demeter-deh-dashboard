@@ -16,7 +16,6 @@ import {
 } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',

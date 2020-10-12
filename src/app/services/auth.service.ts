@@ -16,7 +16,7 @@ export class AuthService {
 
   get currentUser(): UserInfo {
     const token = this.getToken();
-    console.log ('prviConsole u get', token);
+    console.log('prviConsole u get', token);
 
     if (!token) {
       return null;
@@ -42,18 +42,38 @@ export class AuthService {
         console.log('response', resp)
         if (!resp.success) {
           console.log('err', resp.message)
-          return resp;
         } else {
           sessionStorage.setItem('token', resp.data.token);
-
           console.log(sessionStorage.getItem('token'))
         }
+        return resp;
 
 
       }
       ))
   }
 
+  logout() {
+
+    console.log('Logout called');
+    let accessToken = this.currentUser.access_token;
+    console.log('accessToken', accessToken)
+
+    const url = `${environment.DYMER_URL}/api/xauth/logout`;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-Auth-Token': accessToken,
+    }
+
+    return this._http.delete<Response>(url, { headers }).pipe(
+      map((resp) => {
+        console.log('RESPONSEDATA', resp);
+        this.removeToken();
+        return resp;
+      }
+    ))
+  }
 
   setToken(token: string) {
     sessionStorage.setItem('token', token);
@@ -62,6 +82,7 @@ export class AuthService {
   getToken() {
     return sessionStorage.getItem('token');
   }
+
 
   isLoggedIn() {
     const helper = new JwtHelperService();
@@ -81,7 +102,7 @@ export class AuthService {
       return true;
     }
 
-    return false;
+    return this.checkTokenExpiration();
   }
 
   removeToken(): void {
@@ -90,6 +111,23 @@ export class AuthService {
     }
   }
 
+  checkTokenExpiration(): boolean{
+    let currentUser = this.currentUser;
+    let currentTime = new Date();
+    let expirationDate = new Date(currentUser.expires);
+    
+    if (currentTime > expirationDate){
+      console.log('EXPIRATIONDATE', expirationDate)
+      console.log('CURRENTTIME', currentTime)
+      console.log('isteklo vreme');
+      return true;
+    }
+    console.log('EXPIRATIONDATE', expirationDate)
+    console.log('CURRENTTIME', currentTime)
+    console.log('tokenValidan')
+    return false;
+
+  }
   authorize() {
     window.location.href = `${environment.KEYROCK_URL}/oauth2/authorize?response_type=token&client_id=${environment.ID}&state=xyz&redirect_uri=${environment.DEH_DASHBOARD_URL}/&scope=jwt`;
   }

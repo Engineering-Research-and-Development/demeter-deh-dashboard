@@ -34,4 +34,18 @@ export class TopNavBarComponent implements OnInit {
   test(){
     console.log(this.authService.currentUser);
   }
+
+  logoutClient(){
+    console.log('logout client called')
+    this.authService.logout().subscribe(
+      data => {
+        console.log(data);
+        window.location.reload();
+      }
+    );
+  }
+
+  checkDate(){
+    this.authService.checkTokenExpiration();
+  }
 }

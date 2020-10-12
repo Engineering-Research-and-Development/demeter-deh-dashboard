@@ -15,6 +15,8 @@ export class MainContentComponent implements OnInit {
 
   }
 
+  
+
   jsonConfig = {
 
     query: {

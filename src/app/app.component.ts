@@ -11,11 +11,11 @@ export class AppComponent implements OnInit {
 
   constructor(private _activatedRoute: ActivatedRoute, public authService: AuthService) { }
   ngOnInit(): void {
-  //   console.log('ex', this.authService.isExpired());
+    console.log('ex', this.authService.isExpired());
 
-  //   if (this.authService.isExpired()) {
-  //   this.authService.removeToken();
-  // }
+    if (this.authService.isExpired()) {
+    this.authService.removeToken();
+  }
 
 
     if (!localStorage.getItem('token') && localStorage.getItem('token') !== undefined) {
