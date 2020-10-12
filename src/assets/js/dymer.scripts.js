@@ -1,7 +1,15 @@
 let dTagFilter;
 let d_uid = 0;
 let d_gid = 0;
-d_uid = "10198";
+
+let token = localStorage.getItem('token')
+
+if(token!=undefined){
+    let userInfo = JSON.parse(atob(token));
+    d_uid = userInfo.User.id
+    console.log('dddddddd', d_uid)
+};
+// d_uid = "10198";
 d_gid = "10154";
 
 dymerOauthConfig = {
