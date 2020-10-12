@@ -1,14 +1,19 @@
 let dTagFilter;
 let d_uid = 0;
 let d_gid = 0;
-
+let userInfo;
+let demeterProvider = false;
 let token = localStorage.getItem('token')
 
-if(token!=undefined){
-    let userInfo = JSON.parse(atob(token));
+if (token != undefined) {
+    userInfo = JSON.parse(atob(token));
     d_uid = userInfo.User.id
     console.log('dddddddd', d_uid)
-};
+}
+
+
+
+
 // d_uid = "10198";
 d_gid = "10154";
 
@@ -67,10 +72,21 @@ script.src = window["env"]["DYMER_URL"] + "/public/cdn/js/dymer.viewer.js";
 script.id = "dymerurl";
 document.getElementsByTagName('head')[0].appendChild(script);
 
+function checkRoles() {
+    if (userInfo) {
+        userInfo.User.roles.forEach((item) => {
+            if (item == "DEMETER Provider") {
+                demeterProvider = true;
+            }
+        });
+    }
+
+    return demeterProvider;
+}
 
 
 function mainDymerView() {
-    setTimeout(function() {
+    setTimeout(function () {
         dTagFilter = $('#dTagFilter');
         dTagFilter.dymertagsinput({
             //indexmodelfilter:"hubcapmodel",
@@ -88,12 +104,17 @@ function mainDymerView() {
             itemValue: 'id', // this will be used to set id of tag
             itemText: 'label' // this will be used to set text of tag	 
         });
-        dTagFilter.on('beforeItemRemove', function(event) {
+        dTagFilter.on('beforeItemRemove', function (event) {
             $('#d_entityfilter [filter-rel="' + event.item.id + '"').prop("checked", false);
         });
     }, 3000);
+
     let index = 'dymerservicecomponent';
-    loadModelListToModal($('#cont-addentity'), index);
+    if (checkRoles()) {
+        loadModelListToModal($('#cont-addentity'), index);
+
+    }
+
 
     let obj = getAllUrlParams(); //recupera i parametri presenti nell'url (passati in get)
     let elId = obj["d_eid"]; //d_eid : lo scegli tu da portlet
