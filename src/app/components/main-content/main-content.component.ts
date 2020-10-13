@@ -53,7 +53,6 @@ export class MainContentComponent implements OnInit {
     var confbase = this.jsonConfig;
     resetDymerStart();
     drawEntities(jj);
-    window.location.reload();
   }
 
   cambia2(jj: any) {
