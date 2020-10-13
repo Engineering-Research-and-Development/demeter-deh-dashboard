@@ -1,3 +1,8 @@
-#content {
-  height: 100vh;
+app-footer {
+  margin-top: auto;
+}
+
+div#content {
+  display: flex;
+  flex-direction: column;
 }

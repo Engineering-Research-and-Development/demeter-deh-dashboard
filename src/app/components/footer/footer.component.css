@@ -1,0 +1,10 @@
+footer {
+    background:#fff;
+    box-shadow: 0 -.5rem 1rem rgba(0,0,0,.15)!important;
+    width: 100%;
+}
+
+.footer-logo {
+    height: 45px;
+    margin-left: auto;
+}

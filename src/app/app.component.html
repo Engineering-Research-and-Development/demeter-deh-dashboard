@@ -13,8 +13,8 @@
             <div *ngIf="!authService.isLoggedIn()" class="image-container">
                 <img [src]="'/assets/img/demeter_logo.png'" alt="Demeter">
             </div>
+            <app-footer></app-footer>
         </div>
     </div>
-    <app-footer></app-footer>
 </div>
 <router-outlet></router-outlet>
