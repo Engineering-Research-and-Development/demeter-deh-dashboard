@@ -14,7 +14,9 @@ export class SidebarComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.roles = this.authService.currentUser.User.roles;
+    if  (this.authService.currentUser) {
+      this.roles = this.authService.currentUser.User.roles;
+    }
   }
 
 
