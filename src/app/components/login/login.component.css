@@ -41,3 +41,46 @@
 input.form-control {
     flex: 1;
 }
+
+
+  
+@media only screen and (max-width: 600px) {
+    .wrap{
+    top:0px!important;
+    display: flex;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+    }
+
+@media only screen and (max-width: 600px) {
+      .mx-auto{
+      width:205px;
+      margin-left: auto!important;}
+      }
+
+@media only screen and (max-width: 600px) {
+        .mb-2, .my-2 {
+        font-size: 12px;
+            text-align: center;
+            width: 180px;
+            margin-bottom: .4rem!important;
+        }
+            }
+
+@media only screen and (max-width: 600px) {
+              .form-control-sm{
+              height: calc(1.4125rem + 2px);
+                  padding: 0.15rem .4rem;
+                  font-size: 0.725rem;
+                  line-height: 1.5;
+                  border-radius: .2rem;
+              }
+              }
+.customButtonClass{
+              }
+              @media only screen and (max-width: 600px) {
+                .customButtonClass{
+                margin-left: 15px;}
+                }

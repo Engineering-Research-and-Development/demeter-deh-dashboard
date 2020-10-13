@@ -381,3 +381,8 @@ i.fas.fa-sitemap {
         text-align: center;
     }
 }
+
+@media only screen and (max-width: 600px) {
+	.sidebar{
+	width:4.5rem;}
+	}

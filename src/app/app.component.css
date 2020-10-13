@@ -6,3 +6,8 @@ div#content {
   display: flex;
   flex-direction: column;
 }
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
