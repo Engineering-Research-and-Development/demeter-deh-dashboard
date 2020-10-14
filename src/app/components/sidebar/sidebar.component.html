@@ -33,13 +33,15 @@
     <hr class="sidebar-divider d-none d-md-block" *ngIf="authService.isLoggedIn()">
     
     <div *ngIf="authService.isLoggedIn()" class="text-center d-none d-md-inline small" style="color: #fffc;">
-        Roles: <br>
-        [
-        <span *ngFor="let role of roles; let idx = index;">
-            {{role | lowercase }}
-            <em *ngIf="idx != roles.length-1">,</em>
-        </span>
-        ]
+        <h5 class="roles">User roles:</h5>
+        
+        {{getRoles()}}
+        
+        <p class="role" *ngFor="let role of roles; let idx = index;">
+            {{role | titlecase }}
+        </p>
+        
+        <!-- <em *ngIf="idx != roles.length-1">,</em>  -->
     </div>
 
 </ul>

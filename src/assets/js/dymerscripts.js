@@ -1,15 +1,20 @@
+// document.addEventListener("DOMContentLoaded", function (event) {
+
+
+
+
 let dTagFilter;
 let d_uid = 0;
 let d_gid = 0;
 let userInfo;
 let demeterProvider = false;
-let token = localStorage.getItem('token')
+// let token = localStorage.getItem('token')
 
-if (token != undefined) {
-    userInfo = JSON.parse(atob(token));
-    d_uid = userInfo.User.id
-    console.log('dddddddd', d_uid)
-}
+// if (token != undefined) {
+//     userInfo = JSON.parse(atob(token));
+//     d_uid = userInfo.User.id
+//     console.log('dddddddd', d_uid)
+// }
 
 
 
@@ -86,6 +91,15 @@ function checkRoles() {
 
 
 function mainDymerView() {
+
+    let token = localStorage.getItem('token')
+
+    if (token != undefined) {
+        userInfo = JSON.parse(atob(token));
+        d_uid = userInfo.User.id
+        console.log('dddddddd', d_uid)
+    }
+
     setTimeout(function () {
         dTagFilter = $('#dTagFilter');
         dTagFilter.dymertagsinput({
@@ -126,3 +140,5 @@ function mainDymerView() {
     loadFilterModel(index, dTagFilter);
 
 }
+
+// });
