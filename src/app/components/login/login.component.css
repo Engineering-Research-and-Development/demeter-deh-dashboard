@@ -39,13 +39,26 @@
 }
 
 input.form-control {
-    flex: 1;
+  flex: 1;
 }
 
-
-  
 @media only screen and (max-width: 600px) {
-    .wrap{
+  .row.col-11.mx-auto {
+    justify-content: center;
+  }
+
+  .mx-auto {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tablet-login-layout {
+    flex-wrap: nowrap !important;
+  }
+
+  /*     .wrap{
     top:0px!important;
     display: flex;
         overflow: hidden;
@@ -82,5 +95,5 @@ input.form-control {
               }
               @media only screen and (max-width: 600px) {
                 .customButtonClass{
-                margin-left: 15px;}
-                }
+                margin-left: 15px;}*/
+}

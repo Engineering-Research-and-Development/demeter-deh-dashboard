@@ -27,6 +27,11 @@ import { AuthService } from 'src/app/services/auth.service';
       state('large', style({ top: '14px' })),
       transition('small <=> large', animate('200ms ease-in')),
     ]),
+    trigger('slideLoginMobile', [
+      state('small', style({ top: '-175px' })),
+      state('large', style({ top: '190px' })),
+      transition('small <=> large', animate('100ms ease-in')),
+    ]),
   ],
 })
 export class LoginComponent implements OnInit {
@@ -35,6 +40,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   success: boolean;
   errorMessage: string;
+  isMobile: boolean = false;
 
   animateMe() {
     this.state = this.state === 'small' ? 'large' : 'small';
@@ -43,6 +49,11 @@ export class LoginComponent implements OnInit {
   constructor(private _fb: FormBuilder, private _authService: AuthService) { }
 
   ngOnInit(): void {
+
+    if(window.innerWidth <= 600) {
+      this.isMobile = true;
+    }
+    
     this.initForm();
   }
 

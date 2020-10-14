@@ -7,7 +7,14 @@ div#content {
   flex-direction: column;
 }
 
-.responsive {
-  width: 100%;
-  height: auto;
+@media only screen and (max-width: 600px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .responsive {
+    width: 100%;
+  }
 }

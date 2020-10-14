@@ -15,3 +15,24 @@ i.fas.fa-th-large:hover {
     color: #5a6268;
     font-size: 1.5rem;
 }
+
+@media only screen and (max-width: 600px) {
+    .list {
+        padding-right: 3px;
+        padding-left: 3px;
+    }
+
+    .card-body {
+        padding: .25rem;
+    }
+
+    .fas.fa-list {
+        display: none;
+    }
+
+    .view-btns {
+        padding-left: 0;
+    }
+   
+}
+
