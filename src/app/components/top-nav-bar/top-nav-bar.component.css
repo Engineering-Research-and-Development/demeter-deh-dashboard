@@ -128,29 +128,17 @@
   cursor: pointer;
 }
 
-.topbar .auth-icon:hover {
+.topbar .auth-icon {
   color: #66c045;
 }
+/* .topbar .auth-icon:hover {
+  color: #66c045;
+  transform: scale(1.1);
+} */
 
 .hide-element {
   display: none;
 }
-
-/* @media (min-width: 576px) {
-  .topbar .dropdown {
-    position: relative;
-  }
-  .topbar .dropdown .dropdown-menu {
-    width: auto;
-    right: 0;
-  }
-  .topbar .dropdown-list {
-    width: 20rem !important;
-  }
-  .topbar .dropdown-list .dropdown-item .text-truncate {
-    max-width: 13.375rem;
-  }
-} */
 
 .navbar {
   display: flex;
@@ -166,21 +154,4 @@
         z-index: 999;
     }
 
-    /* .py-1 {
-        padding-bottom: .25rem!important;
-    } */
-  
-  /* .appLogin {
-    margin-left: -30px;
-    margin-right: 15px;
-  }
-
-  .topbar {
-    height: 150px;
-  }
-
-  .mr-2,
-  .mx-2 {
-    margin-right: 0.9rem !important;
-  } */
 }
