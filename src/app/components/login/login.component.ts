@@ -28,7 +28,7 @@ import { AuthService } from 'src/app/services/auth.service';
       transition('small <=> large', animate('200ms ease-in')),
     ]),
     trigger('slideLoginMobile', [
-      state('small', style({ top: '-175px' })),
+      state('small', style({ top: '-210px' })),
       state('large', style({ top: '190px' })),
       transition('small <=> large', animate('100ms ease-in')),
     ]),
@@ -46,14 +46,13 @@ export class LoginComponent implements OnInit {
     this.state = this.state === 'small' ? 'large' : 'small';
   }
 
-  constructor(private _fb: FormBuilder, private _authService: AuthService) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService) {}
 
   ngOnInit(): void {
-
-    if(window.innerWidth <= 600) {
+    if (window.innerWidth <= 768) {
       this.isMobile = true;
     }
-    
+
     this.initForm();
   }
 

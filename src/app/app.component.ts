@@ -8,12 +8,13 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
+  isTablet:boolean;
   constructor(
     private _activatedRoute: ActivatedRoute,
     public authService: AuthService
   ) {}
   ngOnInit(): void {
-
     if (this.authService.isExpired()) {
       this.authService.removeToken();
     }
@@ -32,5 +33,4 @@ export class AppComponent implements OnInit {
       });
     }
   }
-
 }

@@ -4,14 +4,14 @@
 
     <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
-            <app-top-nav-bar></app-top-nav-bar>
+            <app-top-nav-bar (isTablet)="isTablet = $event"></app-top-nav-bar>
 
             <div class="container-fluid" *ngIf="authService.isLoggedIn()">
                 <app-filter-bar></app-filter-bar>
                 <app-main-content></app-main-content>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="image-container">
-                <img class="responsive" [src]="'/assets/img/demeter_logo.png'" alt="Demeter">
+                <img class="responsive" [ngClass]="{'blur-image' : isTablet}" [src]="'/assets/img/demeter_logo.png'" alt="Demeter">
             </div>
             <app-footer></app-footer>
         </div>

@@ -4,7 +4,7 @@
 
             <form class="form-inline w-100" [formGroup]="loginForm">
 
-                <div class="row col-11 mx-auto tablet-login-layout">
+                <div class="row col-12 tablet-login-layout">
                     <div class="col-md-5">
                         <div class="form-group mb-2">
                             <label class="mr-2" for="email">Email</label>
@@ -18,8 +18,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group mx-sm-3 mb-2">
+                    <div class="col-md-5">
+                        <div class="form-group mx-0 mb-2">
                             <label class="mr-2" for=" password">Password</label>
                             <input type="password" class="form-control form-control-sm" formControlName="password"
                                 [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-md-2">
                         <button type="submit" [disabled]="loginForm.invalid" class="btn btn-secondary btn-sm mb-2 customButtonClass"
                             (click)="login()">
                             Login <i class="fas fa-sign-in-alt"></i>
@@ -110,3 +110,4 @@
         </div>
     </div>
     </ng-template>
+    
