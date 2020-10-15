@@ -131,10 +131,11 @@
 .topbar .auth-icon {
   color: #66c045;
 }
-/* .topbar .auth-icon:hover {
-  color: #66c045;
-  transform: scale(1.1);
-} */
+.topbar .auth-icon:hover,
+i.fas.fa-sign-in-alt:hover {
+  color: #939598 !important;
+  /* transform: scale(1.1); */
+}
 
 .hide-element {
   display: none;
@@ -149,9 +150,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-
-    .auth-icon {
-        z-index: 999;
-    }
-
+  .auth-icon {
+    z-index: 999;
+  }
 }
