@@ -12,6 +12,16 @@
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="image-container">
                 <img class="responsive" [ngClass]="{'blur-image' : isTablet}" [src]="'/assets/img/demeter_logo.png'" alt="Demeter">
+                
+                </div>
+                <div *ngIf="!authService.isLoggedIn()" class="description my-4">
+                    <p class="project-desc">
+                        <strong>DEMETER Enabler HUB </strong>(DEH) is one of the most crucial components of the DEMETER
+                        project; it
+                        represents the digital space dedicated to end users of DEMETER where they will be able to create and
+                        register their
+                        own resources
+                    </p>
             </div>
             <app-footer></app-footer>
         </div>

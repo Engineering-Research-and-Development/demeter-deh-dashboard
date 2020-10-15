@@ -7,13 +7,25 @@ div#content {
   flex-direction: column;
 }
 
+.description {
+  display: flex;
+  justify-content: center;
+}
+
+.project-desc {
+  flex-basis: 55%;
+  color: #939598;
+  text-align: center;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
 @media only screen and (max-width: 600px) {
   .responsive {
     width: 100%;
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
   .responsive {
     width: 100%;
   }
