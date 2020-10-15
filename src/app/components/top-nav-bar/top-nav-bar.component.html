@@ -23,7 +23,7 @@
                     {{ authService.currentUser?.User.username | titlecase}}
                 </span>
     
-                <div *ngIf="authService.currentUser?.isGravatarEnabled; else anonymousGravatar">
+                <div *ngIf="authService.currentUser; else anonymousGravatar">
                     <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
                 </div>
                 <ng-template #anonymousGravatar>
@@ -45,16 +45,6 @@
                 <span class="text-muted">Login</span>
             </a>
         </li>
-    
-    
-    
-    
-        <!-- <li class="nav-item mr-2 auth-icon" *ngIf="authService.isLoggedIn()">
-            <a style="color:inherit" (click)="authService.logout()">
-                <i class="fas fa-sign-out-alt mt-3" aria-hidden="true" style="font-size: 1.5rem;"></i><br> Logout
-            </a>
-        </li> -->
-    
     
     </ul>
 </div>

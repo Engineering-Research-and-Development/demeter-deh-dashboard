@@ -279,11 +279,11 @@ label.kms-title-label {
 }
 
 .border-left-primary {
-  border-left: 0.25rem solid #4e73df !important;
+  border-left: 0.25rem solid #66C045 !important;
 }
 
 .border-bottom-primary {
-  border-bottom: 0.25rem solid #4e73df !important;
+  border-bottom: 0.25rem solid #66C045 !important;
 }
 
 .border-left-secondary {
@@ -1040,9 +1040,27 @@ app-sidebar {
   .py-1 {
     padding-bottom: 0.25rem !important;
   }
+
+  .input-group {
+    flex-flow: column;
+    align-items: center !important;
+  }
+
+  div#d_entityfilter {
+    width: 243px !important;
+    left: -82px !important;
+  }
+
+  app-main-content > .row > .col-12 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 
 /* tablet styles below */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
+  .blur-image {
+    filter: blur(7px);
+  }
 }

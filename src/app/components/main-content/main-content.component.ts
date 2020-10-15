@@ -13,17 +13,11 @@ export class MainContentComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('dyerm', );
     this.callDymer();
-    // this.cambia(this.jsonConfig);
-    // this.callDymer();
   }
-
-  
 
   callDymer() {
     mainDymerView();
-    
   }
 
   jsonConfig = {
