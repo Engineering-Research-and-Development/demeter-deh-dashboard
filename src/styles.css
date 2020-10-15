@@ -661,6 +661,19 @@ form.user .btn-user {
   width: 12.5rem;
 }
 
+.subtitle {
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.modal-title {
+  color: #117a8b;
+}
+
+h1.text-center {
+  color: #6c757d!important;
+}
+
 @-webkit-keyframes noise-anim {
   0% {
     clip: rect(18px, 9999px, 13px, 0);
