@@ -1,57 +1,57 @@
 <div class="wrap" *ngIf="!isMobile; else mobile" [@slideLogin]='state'>
 
-        <div class="container">
+    <div class="container">
 
-            <form class="form-inline w-100" [formGroup]="loginForm">
+        <form class="form-inline w-100" [formGroup]="loginForm">
 
-                <div class="row col-12 tablet-login-layout">
-                    <div class="col-md-5">
-                        <div class="form-group mb-2">
-                            <label class="mr-2" for="email">Email</label>
-                            <input type="text" class="form-control form-control-sm" formControlName="email"
-                                [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }">
-                            <div *ngIf="f.email.errors && f.email.touched" class="invalid-feedback text-center">
-                                <div *ngIf="f.email.errors.required">Email is required</div>
-                                <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
-                            </div>
-
+            <div class="row col-12 tablet-login-layout">
+                <div class="col-md-5">
+                    <div class="form-group mb-2">
+                        <label class="mr-2" for="email">Email</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="email"
+                            [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }">
+                        <div *ngIf="f.email.errors && f.email.touched" class="invalid-feedback text-center">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
                         </div>
-                    </div>
 
-                    <div class="col-md-5">
-                        <div class="form-group mx-0 mb-2">
-                            <label class="mr-2" for=" password">Password</label>
-                            <input type="password" class="form-control form-control-sm" formControlName="password"
-                                [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }">
-
-                            <div *ngIf="f.password.errors && f.password.touched" class="invalid-feedback text-center">
-                                <div *ngIf="f.password.errors.required">Password is required</div>
-                                <div *ngIf="f.password.errors.minlength">Password must be at least 3 characters</div>
-                                <div *ngIf="f.password.errors?.pattern">Passwords must have at least one non
-                                    alphanumeric
-                                    character.</div>
-                                <div *ngIf="f.password.errors?.pattern">Passwords must have at least one digit
-                                    ('0'-'9').</div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-secondary btn-sm mb-2 customButtonClass"
-                            (click)="login()">
-                            Login <i class="fas fa-sign-in-alt"></i>
-                        </button>
-                    </div>
-
                 </div>
 
-                <div class="col-md-12 ">
-                    <div *ngIf="success==false">{{errorMessage}}</div>
+                <div class="col-md-5">
+                    <div class="form-group mx-0 mb-2">
+                        <label class="mr-2" for=" password">Password</label>
+                        <input type="password" class="form-control form-control-sm" formControlName="password"
+                            [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }">
+
+                        <div *ngIf="f.password.errors && f.password.touched" class="invalid-feedback text-center">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.minlength">Password must be at least 3 characters</div>
+                            <div *ngIf="f.password.errors?.pattern">Passwords must have at least one non
+                                alphanumeric
+                                character.</div>
+                            <div *ngIf="f.password.errors?.pattern">Passwords must have at least one digit
+                                ('0'-'9').</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" [disabled]="loginForm.invalid"
+                        class="btn btn-secondary btn-sm mb-2 customButtonClass" (click)="login()">
+                        Login <i class="fas fa-sign-in-alt"></i>
+                    </button>
                 </div>
 
-            </form>
+            </div>
 
-        </div>
-        </div>
+            <div class="col-md-12 ">
+                <div *ngIf="success==false">{{errorMessage}}</div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
 
 
 
@@ -73,12 +73,12 @@
                             </div>
 
                         </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="form-group mx-sm-3 mb-2">
-                                <label class="mr-2" for=" password">Password</label>
-                                <input type="password" class="form-control form-control-sm" formControlName="password"
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label class="mr-2" for=" password">Password</label>
+                            <input type="password" class="form-control form-control-sm" formControlName="password"
                                 [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }">
 
                             <div *ngIf="f.password.errors && f.password.touched" class="invalid-feedback text-center">
@@ -89,12 +89,12 @@
                                     character.</div>
                                 <div *ngIf="f.password.errors?.pattern">Passwords must have at least one digit
                                     ('0'-'9').</div>
-                                </div>
-                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-secondary btn-sm mb-2 customButtonClass"
-                            (click)="login()">
+                        <button type="submit" [disabled]="loginForm.invalid"
+                            class="btn btn-secondary btn-sm mb-2 customButtonClass" (click)="login()">
                             Login <i class="fas fa-sign-in-alt"></i>
                         </button>
                     </div>
@@ -109,5 +109,4 @@
 
         </div>
     </div>
-    </ng-template>
-    
+</ng-template>

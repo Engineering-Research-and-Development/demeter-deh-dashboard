@@ -11,9 +11,6 @@ declare let mainDymerView: any;
 })
 export class MainContentComponent implements OnInit {
   constructor() { }
-  currentLat: any;
-  currentLong: any;
-
 
   ngOnInit(): void {
     this.callDymer();
@@ -85,10 +82,5 @@ export class MainContentComponent implements OnInit {
     resetDymerStart();
     drawEntities(jj);
     // window.location.reload();
-  }
-  cambia2(jj: any) {
-    var confbase = this.jsonConfig;
-    resetDymerStart();
-    drawEntities(jj);
   }
 }

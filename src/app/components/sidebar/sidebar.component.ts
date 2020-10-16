@@ -11,7 +11,7 @@ export class SidebarComponent implements OnInit {
   toggleClass: boolean;
   public roles: string[];
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     if (this.authService.currentUser) {
