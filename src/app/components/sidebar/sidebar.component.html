@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" [ngClass]="{toggled: toggleClass}" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/']">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/kurac']">
         <div class="sidebar-brand-icon">
             <i class="fas fa-seedling"></i>
         </div>
@@ -14,7 +14,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item" *ngIf="authService.isLoggedIn()">
-        <a class="nav-link" [routerLink]="['/']">
+        <a class="nav-link" [routerLink]="['/kurac']">
             <i class="fas fa-sitemap"></i>
             <span>List</span>
         </a>

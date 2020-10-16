@@ -16,12 +16,12 @@ export class AuthService {
 
   get currentUser(): UserInfo {
     const token = this.getToken();
-    console.log('prviConsole u get', token);
+    // console.log('prviConsole u get', token);
 
     if (!token) {
       return null;
     }
-    console.log(JSON.parse(atob(token)));
+    // console.log(JSON.parse(atob(token)));
     return JSON.parse(atob(token));
 
   }

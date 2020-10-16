@@ -10,14 +10,42 @@ declare let mainDymerView: any;
   styleUrls: ['./main-content.component.css'],
 })
 export class MainContentComponent implements OnInit {
-  constructor() {}
+  constructor() { }
+  currentLat: any;
+  currentLong: any;
+
 
   ngOnInit(): void {
     this.callDymer();
+
+    this.showLocation();
   }
 
   callDymer() {
     mainDymerView();
+  }
+
+  showLocation() {
+
+    let options = {
+      enableHighAccuracy: true,
+    };
+
+    function success(position) {
+      let crd = position.coords;
+
+      console.log('Your current position is:');
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+    }
+
+    function error(err) {
+      alert('Please allow Geolocation to use Search by distance');
+    }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    }
   }
 
   jsonConfig = {
