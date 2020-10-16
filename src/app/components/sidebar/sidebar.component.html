@@ -15,7 +15,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item" *ngIf="authService.isLoggedIn()">
-        <a class="nav-link" [routerLink]="['/']">
+        <a class="nav-link" style="cursor: pointer;" (click)="cambia(jsonConfig)">
             <i class="fas fa-sitemap"></i>
             <span>List</span>
         </a>
