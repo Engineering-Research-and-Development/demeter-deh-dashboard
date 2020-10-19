@@ -32,14 +32,19 @@
 
 .container {
   justify-content: center;
-  /* height: 0;
-  overflow: hidden;
-  margin: 0 auto;
-  border: 1px solid rgba(0, 0, 0, 0.55); */
 }
 
 input.form-control {
   flex: 1;
+}
+
+.error-msg {
+  font-size: 80%;
+  color: #dc3545;
+  text-align: center;
+  position: relative;
+  bottom: 4px;
+  font-weight: 700;
 }
 
 @media only screen and (max-width: 600px) {

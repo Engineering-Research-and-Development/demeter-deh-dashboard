@@ -15,7 +15,7 @@
                 
                 </div>
                 <div *ngIf="!authService.isLoggedIn()" class="description my-4">
-                    <p class="project-desc">
+                    <p class="project-desc" [ngClass]="{'blur-image' : isTablet}">
                         <strong>DEMETER Enabler HUB </strong>(DEH) is one of the most crucial components of the DEMETER
                         project; it
                         represents the digital space dedicated to end users of DEMETER where they will be able to create and
