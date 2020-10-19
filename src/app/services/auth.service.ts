@@ -11,53 +11,37 @@ import { from, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private _http: HttpClient) {
-  }
+  constructor(private _http: HttpClient) {}
 
   get currentUser(): UserInfo {
     const token = this.getToken();
-    // console.log('prviConsole u get', token);
 
     if (!token) {
       return null;
     }
-    // console.log(JSON.parse(atob(token)));
     return JSON.parse(atob(token));
-
   }
 
   login(name: string, password: string) {
-
-    console.log('AuthService', 'logincalled');
     const url = `${environment.DYMER_URL}/api/xauth/login`;
-    console.log('URL', url);
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     };
 
     return this._http.post<Response>(url, { name, password }, { headers }).pipe(
-
       map((resp) => {
-        console.log('response', resp);
         if (!resp.success) {
-          console.log('err', resp.message);
         } else {
           localStorage.setItem('token', resp.data.token);
-          console.log(localStorage.getItem('token'));
         }
         return resp;
-
-
-      }
-      ));
+      })
+    );
   }
 
   logout() {
-
-    console.log('Logout called');
     let accessToken = this.currentUser.access_token;
-    console.log('accessToken', accessToken);
 
     const url = `${environment.DYMER_URL}/api/xauth/logout`;
     const headers = {
@@ -66,13 +50,14 @@ export class AuthService {
       'X-Auth-Token': accessToken,
     };
 
-    return this._http.delete<Response>(url, { headers }).pipe(
-      map((resp) => {
-        console.log('RESPONSEDATA', resp);
-        this.removeToken();
-        return resp;
-      }
-      ));
+    return this._http
+      .delete<Response>(url, { headers })
+      .pipe(
+        map((resp) => {
+          this.removeToken();
+          return resp;
+        })
+      );
   }
 
   setToken(token: string) {
@@ -82,7 +67,6 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
-
 
   isLoggedIn() {
     const helper = new JwtHelperService();
@@ -117,18 +101,10 @@ export class AuthService {
     let expirationDate = new Date(currentUser.expires);
 
     if (currentTime > expirationDate) {
-      console.log('EXPIRATIONDATE', expirationDate);
-      console.log('CURRENTTIME', currentTime);
-      console.log('isteklo vreme');
       return true;
     }
-    console.log('EXPIRATIONDATE', expirationDate);
-    console.log('CURRENTTIME', currentTime);
-    console.log('tokenValidan');
     return false;
-
   }
-
 }
 
 export interface Response {

@@ -97,7 +97,6 @@ function mainDymerView() {
     if (token != undefined) {
         userInfo = JSON.parse(atob(token));
         d_uid = userInfo.User.id
-        console.log('dddddddd', d_uid)
     }
     
     setTimeout(function () {
