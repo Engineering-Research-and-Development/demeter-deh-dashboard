@@ -23,11 +23,13 @@ DEH Dashboard functional module is in charge for User Interaction & Data Visuali
 
 ## Screenshots
 
+### Home page
+![](screenshots/home.png)
+
 ### List of resources
 ![](screenshots/list.png)
 
 ### Resource details
-
 ![](screenshots/details.png)
 
 ### Add new resource
