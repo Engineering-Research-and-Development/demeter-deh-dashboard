@@ -23,7 +23,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css'],
   animations: [
     trigger('slideLogin', [
-      state('small', style({ top: '-42px' })),
+      state('small', style({ top: '-60px' })),
       state('large', style({ top: '14px' })),
       transition('small <=> large', animate('200ms ease-in')),
     ]),
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.state = this.state === 'small' ? 'large' : 'small';
   }
 
-  constructor(private _fb: FormBuilder, private _authService: AuthService) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthService) {}
 
   ngOnInit(): void {
     if (window.innerWidth <= 768) {
