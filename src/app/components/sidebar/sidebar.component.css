@@ -279,13 +279,30 @@ i.fas.fa-sitemap {
 }
 
 .roles {
-    font-size: 1rem;
-    font-weight: 700;
-    text-decoration: underline;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 .role {
-    margin-bottom: 0;
+  margin-bottom: 0;
+}
+
+.textwidget.bottom-devider {
+  margin-top: auto;
+  padding: 1rem 1rem 0;
+  font-size: 0.8rem;
+  flex-flow: column;
+  text-align: center;
+}
+
+p.project-desc {
+  color: #fffc;
+}
+
+.bottom-devider {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 0 1rem 1rem;
 }
 
 @media (min-width: 768px) {
@@ -417,10 +434,8 @@ i.fas.fa-sitemap {
   }
 
   .sidebar .nav-item .nav-link {
-      width: initial;      
+    width: initial;
   }
-
-  
 
   /* .sidebar.toggled {
     overflow: visible;
