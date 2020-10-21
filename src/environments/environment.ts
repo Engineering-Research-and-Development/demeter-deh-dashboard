@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  ID: window["env"]["ID"] || "",
-  KEYROCK_URL: window["env"]["KEYROCK_URL"] || "",
-  DEH_DASHBOARD_URL: window["env"]["DEH_DASHBOARD_URL"] || "",
+
   DYMER_URL: window["env"]["DYMER_URL"] || "http:localhost:8080"
 
 };

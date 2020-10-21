@@ -6,13 +6,10 @@ services:
         restart: always
         # build: .
         ports:
-            - "8085:80"
-            - "433:443"
+            - ${DEH_EXTERNAL_PORT}:${DEH_INTERNAL_PORT}            
+            - ${DEH_EXTERNAL_SSH_PORT}:${DEH_INTERNAL_SSH_PORT}
         environment:
-            - ID=ccf08bf1-08b3-473a-a1cb-c9f3e3d0237d
-            - KEYROCK_URL=http://localhost:3000
-            - DEH_DASHBOARD_URL=http://localhost:8085
-            - DYMER_URL=http://localhost:8080
+            - DYMER_URL=${DYMER_URL}
         volumes:
         - "/app/node_modules"
         - ".:/app"

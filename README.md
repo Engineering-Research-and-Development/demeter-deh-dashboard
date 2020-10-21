@@ -4,7 +4,7 @@
  
 
 DEH Dashboard represents the DEH front-end application, which will be used by end-users or DEMETER Stakeholders for resource creation or discovery. The DEH resources are represented by a set of entities such as Component, Device, Service, Dataset, Platform which can be added via the DEH Dashboard or web-based UI (User Interface). 
-DEH Dashboard functional module is in charge for User Interaction & Data Visualisation. It will allow users to login to DEH, discover, register and manage DEMETER Enablers.
+DEH Dashboard functional module is in charge of User Interaction & Data Visualisation. It will allow users to log in to DEH, discover, register, and manage DEMETER Enablers.
 
  
 
@@ -68,15 +68,15 @@ DEH Dashboard functional module is in charge for User Interaction & Data Visuali
 * Resource discovery through search API
 * New resources creation and editing
 * Resource compatibility checking
-* Resource rating visualisation
+* Resource rating visualization
 
  
 
 ## Requirements
 
- 
-
-This procedure assumes that you have Node.js (version >= 12) and Docker (version >= 18) installed in your environment.
+* Installed Docker (version >= 18) 
+* Installed Docker Compose
+* Installed Node.js (version >= 12) - **_only for local development_**
 
  
 
@@ -84,19 +84,19 @@ This procedure assumes that you have Node.js (version >= 12) and Docker (version
 
  
 
-After pulling the source code, go to root folder and follow next steps:
+After pulling the source code, go to root folder and follow the next steps:
 
  
 
-### Run application using docker
+### Run application using docker-compose
 ------
 
  
-
-* go to root folder where docker file (Dockerfile) is, type comand `docker build -t demeter/deh-dashboard .` to create docker image.
-* in terminal type `docker run -p 8080:80 demeter/deh-dashboard` to start docker image.  
-
- 
+* _Run_ `docker-compose up` _in order to start DYMER services_
+* _If you want to run containers in the background run the next command_ `docker-compose up -d`
+* _Change_ `DYMER_URL` _in_ `.env` _if you want to run DYMER on a specific port. The default value is_ `DYMER_URL=https://deh-demeter.eng.it/dymer/
+`
+* _All docker variables related to DEH Dashboard can be changed in_ `.env` _file_
 
 ### Local development
 ------
