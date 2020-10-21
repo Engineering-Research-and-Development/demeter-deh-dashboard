@@ -1054,6 +1054,16 @@ app-sidebar {
   height: 100%;
 }
 
+ngb-popover-window.popover {
+  width: 171px;
+}
+
+.popover-header {
+  background-color: #4ac2c1 !important;
+  color: #fff !important;
+
+}
+
 /* mobile phone styles below */
 
 @media only screen and (max-width: 600px) {

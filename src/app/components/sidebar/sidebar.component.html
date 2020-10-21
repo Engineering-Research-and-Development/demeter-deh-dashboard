@@ -21,6 +21,24 @@
         </a>
     </li>
 
+    <li class="nav-item" *ngIf="authService.isLoggedIn()">
+        <ng-template #popContent>
+            {{getRoles()}}
+    
+            <p class="role" *ngFor="let role of roles; let idx = index;">
+                {{role}}
+            </p>
+        </ng-template>
+    
+        <a class="nav-link" style="cursor: pointer;" [ngbPopover]="popContent" popoverTitle="Assigned user roles:"
+            placement="right">
+            <i class="fas fa-user-tag"></i>
+            <span>Roles</span>
+        </a>
+    
+    
+    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block" *ngIf="authService.isLoggedIn()">
@@ -29,20 +47,6 @@
         <button class="rounded-circle border-0" id="sidebarToggle" (click)=toggleSidebar()>
             <i [ngClass]="(toggleClass)?'fas fa-angle-right':'fas fa-angle-left'"></i>
         </button>
-    </div>
-
-    <hr class="sidebar-divider d-none d-md-block" *ngIf="authService.isLoggedIn()">
-
-    <div *ngIf="authService.isLoggedIn()" class="text-center d-none d-md-inline small" style="color: #fffc;">
-        <h5 class="roles">User roles:</h5>
-
-        {{getRoles()}}
-
-        <p class="role" *ngFor="let role of roles; let idx = index;">
-            {{role | titlecase }}
-        </p>
-
-        <!-- <em *ngIf="idx != roles.length-1">,</em>  -->
     </div>
 
     <div class="textwidget bottom-devider">

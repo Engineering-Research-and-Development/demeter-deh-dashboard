@@ -274,7 +274,7 @@ app-sidebar {
   color: rgba(255, 255, 255, 0.5);
 }
 
-i.fas.fa-sitemap {
+i.fas.fa-sitemap, i.fas.fa-user-tag {
   margin-right: 5px;
 }
 
@@ -286,11 +286,13 @@ i.fas.fa-sitemap {
 
 .role {
   margin-bottom: 0;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .textwidget.bottom-devider {
   margin-top: auto;
-  padding: 1rem 1rem 0;
+  padding: 1rem 0 0;
   font-size: 0.8rem;
   flex-flow: column;
   text-align: center;
@@ -302,7 +304,7 @@ p.project-desc {
 
 .bottom-devider {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  margin: 0 1rem 1rem;
+  margin: 0 1rem;
 }
 
 @media (min-width: 768px) {
@@ -334,7 +336,7 @@ p.project-desc {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 1rem;
+    padding: .5rem 1rem;
     width: 14rem;
     text-align: center;
   }
