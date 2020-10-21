@@ -3,52 +3,59 @@
 
     <!-- Sidebar Toggle (Topbar) -->
 
-<div class="login">
-    <app-login class="appLogin" (hideLogin)="hideLoginForm($event)" [ngClass]="{'hide-element':hideLoginParent}">
-    </app-login>
-</div>
-<!-- slide down Login -->
-    
-<div class="login-icon">
+    <div class="login">
+        <app-login class="appLogin" (hideLogin)="hideLoginForm($event)" [ngClass]="{'hide-element':hideLoginParent}">
+        </app-login>
+    </div>
+    <!-- slide down Login -->
 
-    <ul class="nav navbar-nav ml-auto">
-    
-        <div class="topbar-divider d-none d-sm-block"></div>
-    
-        <!-- Nav Item - User Information -->
-        <li ngbDropdown class="nav-item dropdown no-arrow" style="display: block;" *ngIf="authService.isLoggedIn()">
-            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    {{ authService.currentUser?.User.username | titlecase}}
-                </span>
-    
-                <div *ngIf="authService.currentUser; else anonymousGravatar">
-                    <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
+    <div class="login-icon">
+
+        <ul class="nav navbar-nav ml-auto">
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li ngbDropdown class="nav-item dropdown no-arrow" style="display: block;" *ngIf="authService.isLoggedIn()">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                        {{ authService.currentUser?.User.username | titlecase}}
+                    </span>
+
+                    <div *ngIf="authService.currentUser; else anonymousGravatar">
+                        <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
+                    </div>
+                    <ng-template #anonymousGravatar>
+                        <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
+                    </ng-template>
+                </a>
+
+                <div *ngIf="authService.isLoggedIn()" class="dropdown-menu dropdown-menu-right"
+                    aria-labelledby="dFilterDropdown" ngbDropdownMenu>
+                    <button ngbDropdownItem (click)="logoutClient()">
+                        <i class="fas fa-sign-out-alt mt-3" aria-hidden="true"></i> Logout
+                    </button>
                 </div>
-                <ng-template #anonymousGravatar>
-                    <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
-                </ng-template>
-            </a>
-    
-            <div *ngIf="authService.isLoggedIn()" class="dropdown-menu dropdown-menu-right"
-                aria-labelledby="dFilterDropdown" ngbDropdownMenu>
-                <button ngbDropdownItem (click)="logoutClient()">
-                    <i class="fas fa-sign-out-alt mt-3" aria-hidden="true"></i> Logout
-                </button>
-            </div>
-        </li>
-    
-        <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
-            <a style="color:inherit" (click)="slideLogin()" class="slide-login">
-                <i class="fas fa-sign-in-alt mt-3 fa-2x" aria-hidden="true"></i><br>
-                <span class="text-muted">Login</span>
-            </a>
-        </li>
-    
-    </ul>
-</div>
-<!-- Topbar Navbar -->
+            </li>
+
+            <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
+                <a style="color:inherit" (click)="slideLogin()" class="slide-login">
+                    <i class="fas fa-sign-in-alt mt-3 fa-2x" aria-hidden="true"></i><br>
+                    <span class="text-muted">Sign In</span>
+                    </a>
+                    </li>
+                    
+                    <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
+                        <a style="color:inherit" href="https://acs.bse.h2020-demeter-cloud.eu:5443/sign_up/">
+                            <i class="fas fa-user-circle mt-3 fa-2x" aria-hidden="true"></i><br>
+                            <span class="text-muted">Sign Up</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- Topbar Navbar -->
 
 </nav>
 <!-- End of Topbar -->
