@@ -1056,6 +1056,7 @@ app-sidebar {
 
 ngb-popover-window.popover {
   width: 171px;
+  left: -67px !important;
 }
 
 .popover-header {
