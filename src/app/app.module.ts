@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,8 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { TopNavBarComponent } from './components/top-nav-bar/top-nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerInterceptorService } from './services/spinner-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { LoginComponent } from './components/login/login.component';
     TopNavBarComponent,
     FooterComponent,
     LoginComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,13 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
