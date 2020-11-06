@@ -17,6 +17,11 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
+declare let mainDymerView: any;
+declare let resetDymerStart: any;
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -88,7 +93,12 @@ export class LoginComponent implements OnInit {
       } else {
         this.success = true;
         this.hideLogin.emit(true);
+        resetDymerStart();
       }
     });
+  }
+
+  callDymer() {
+    mainDymerView();
   }
 }
