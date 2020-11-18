@@ -97,47 +97,51 @@ function mainDymerView() {
     if (token != undefined) {
         userInfo = JSON.parse(atob(token));
         d_uid = userInfo.User.id
+
+
+        setTimeout(function () {
+            dTagFilter = $('#dTagFilter');
+            dTagFilter.dymertagsinput({
+                //indexmodelfilter:"hubcapmodel",
+                indexterms: {
+                    "bool": {
+                        "must": [{
+                            "term": {
+                                "_index": "dymerservicecomponent"
+                            }
+                        }]
+                    }
+                },
+                allowDuplicates: false,
+                freeInput: false,
+                itemValue: 'id', // this will be used to set id of tag
+                itemText: 'label' // this will be used to set text of tag	 
+            });
+            dTagFilter.on('beforeItemRemove', function (event) {
+                $('#d_entityfilter [filter-rel="' + event.item.id + '"').prop("checked", false);
+            });
+        }, 3000);
+    
+        let index = 'dymerservicecomponent';
+        if (checkRoles()) {
+            loadModelListToModal($('#cont-addentity'), index);
+    
+        }
+    
+    
+        let obj = getAllUrlParams(); //recupera i parametri presenti nell'url (passati in get)
+        let elId = obj["d_eid"]; //d_eid : lo scegli tu da portlet
+        if (elId != undefined)
+            drawEntityByIdUrl("#cont-MyList", "d_eid"); //d_eid : lo scegli tu da portlet , "#cont-MyList": è il contenitore dove renderizzare 
+        else
+            drawEntities(jsonConfig); //rimane tale
+    
+        loadFilterModel(index, dTagFilter);
+    
+
     }
     
-    setTimeout(function () {
-        dTagFilter = $('#dTagFilter');
-        dTagFilter.dymertagsinput({
-            //indexmodelfilter:"hubcapmodel",
-            indexterms: {
-                "bool": {
-                    "must": [{
-                        "term": {
-                            "_index": "dymerservicecomponent"
-                        }
-                    }]
-                }
-            },
-            allowDuplicates: false,
-            freeInput: false,
-            itemValue: 'id', // this will be used to set id of tag
-            itemText: 'label' // this will be used to set text of tag	 
-        });
-        dTagFilter.on('beforeItemRemove', function (event) {
-            $('#d_entityfilter [filter-rel="' + event.item.id + '"').prop("checked", false);
-        });
-    }, 3000);
-
-    let index = 'dymerservicecomponent';
-    if (checkRoles()) {
-        loadModelListToModal($('#cont-addentity'), index);
-
-    }
-
-
-    let obj = getAllUrlParams(); //recupera i parametri presenti nell'url (passati in get)
-    let elId = obj["d_eid"]; //d_eid : lo scegli tu da portlet
-    if (elId != undefined)
-        drawEntityByIdUrl("#cont-MyList", "d_eid"); //d_eid : lo scegli tu da portlet , "#cont-MyList": è il contenitore dove renderizzare 
-    else
-        drawEntities(jsonConfig); //rimane tale
-
-    loadFilterModel(index, dTagFilter);
-
+  
 }
 
 // });

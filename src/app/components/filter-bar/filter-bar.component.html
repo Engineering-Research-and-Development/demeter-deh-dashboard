@@ -1,17 +1,139 @@
 <div class="row">
     <div class="col-12">
         <div class="input-group" id="adv-search">
-            <input id="dTagFilter" type="text" data-role="tagsinput" placeholder="Search for snippets, click on caret" class="col-6">
+            <input id="dTagFilter" type="text" data-role="tagsinput" placeholder="Search for snippets, click on caret"
+                class="col-6">
             <div class="input-group-btn">
                 <div class="btn-group" role="group">
                     <div ngbDropdown>
-                        <button type="button" id="dFilterClearAll" class="btn "><i class="fas fa-eraser" onclick="clearDFilter()"></i></button>
-                        <button type="button" id="dFilterDropdown" class="btn btn-default" ngbDropdownToggle><span class="caret"></span></button>
+                        <button type="button" id="dFilterClearAll" class="btn "><i class="fas fa-eraser"
+                                onclick="clearDFilter()"></i></button>
+                        <button type="button" id="dFilterDropdown" class="btn btn-default" ngbDropdownToggle><span
+                                class="caret"></span></button>
+                        <div id="d_entityfilter" class="dropdown-menu dropdown-menu-right"
+                            aria-labelledby="dFilterDropdown" ngbDropdownMenu style="height: 875px;overflow: auto;">
 
-                        <div id="d_entityfilter" class="dropdown-menu dropdown-menu-right" aria-labelledby="dFilterDropdown" ngbDropdownMenu>
+                            <div class="grpfilter">
+                                <div><label class="kms-title-label">Rating</label></div>
+                                <div style="display: inline-flex;">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 40px 0px 0px; text-align: center;">
+                                        From:</p>
+                                    <input type="text" class="form-control col-5 span12" style="display: inline;"
+                                        name="data[rating]" searchable-label="Rating" required="">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 0px 0px 0px; text-align: center;">To:
+                                    </p>
+                                    <input type="text" class="form-control col-5 span12" name="data[rating]"
+                                        searchable-label="Rating" required="">
+                                </div>
+
+                                <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
+                                        aria-hidden="true" title="refresh filter value" filter-rel="data[rating]"
+                                        filter-labeltext="" filter-label="Rating" filter-multiple="false"
+                                        onclick="refreshDTagFilter( $(this))"></i> <label class="switch switchfilter "
+                                        title="active filter"><input type="checkbox" filter-rel="data[rating]"
+                                            filter-label="Rating" filter-labeltext="" filter-multiple="false"
+                                            onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
+                                    </label> </div>
+                            </div>
+
+                            <div class="grpfilter">
+                                <div><label class="kms-title-label">Maturity Level</label></div>
+                                <div style="display: inline-flex;">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 40px 0px 0px; text-align: center;">
+                                        From:</p>
+                                    <input type="text" class="form-control col-5 span12" style="display: inline;"
+                                        name="data[maturity-level]" searchable-label="Maturity Level" required="">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 0px 0px 0px; text-align: center;">To:
+                                    </p>
+                                    <input type="text" class="form-control col-5 span12" name="data[maturity-level]"
+                                        searchable-label="Maturity Level" required="">
+                                </div>
+
+                                <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
+                                        aria-hidden="true" title="refresh filter value"
+                                        filter-rel="data[maturity-level]" filter-labeltext=""
+                                        filter-label="Maturity level" filter-multiple="false"
+                                        onclick="refreshDTagFilter( $(this))"></i> <label class="switch switchfilter "
+                                        title="active filter"><input type="checkbox" filter-rel="data[maturity-level]"
+                                            filter-label="Matuirty level" filter-labeltext="" filter-multiple="false"
+                                            onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
+                                    </label> </div>
+                            </div>
+
+                            <div class="grpfilter">
+                                <div><label class="kms-title-label">Nearby Resources (in meters)</label></div> <input type="text"
+                                    class="form-control col-12 span12" name="data[distance]" searchable-label="distance"
+                                    required="" filter-id="distance">
+                                <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
+                                        aria-hidden="true" title="refresh filter value" filter-relid="distance"
+                                        filter-rel="data[distance]" filter-labeltext="" filter-label="distance"
+                                        filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
+                                        class="switch switchfilter " title="active filter"><input type="checkbox"
+                                            filter-relid="distance" filter-rel="data[distance]" filter-label="distance"
+                                            filter-labeltext="" filter-multiple="false"
+                                            onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
+                                    </label> </div>
+                            </div>
+
+                            <div class="grpfilter">
+                                <div><label class="kms-title-label">Created</label></div>
+                                <div style="display: inline-flex;">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 38px 0px 0px; text-align: center;">
+                                        From:</p>
+                                    <input type="date" class="form-control col-5 span12" name="data[createAt]"
+                                        searchable-label="Created" required="">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 0px 0px 0px; text-align: center;margin-right: -3px;">To:
+                                    </p>
+                                    <input type="date" class="form-control col-5 span12" name="data[createAt]"
+                                        searchable-label="Created" required="">
+                                </div>
+
+                                <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
+                                        aria-hidden="true" title="refresh filter value" filter-rel="data[createAt]"
+                                        filter-labeltext="" filter-label="Created" filter-multiple="false"
+                                        onclick="refreshDTagFilter( $(this))"></i> <label class="switch switchfilter "
+                                        title="active filter"><input type="checkbox" filter-rel="data[createAt]"
+                                            filter-label="Created" filter-labeltext="" filter-multiple="false"
+                                            onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
+                                    </label> </div>
+                            </div>
+
+                            <div class="grpfilter">
+                                <div><label class="kms-title-label">Last update</label></div>
+                                <div style="display: inline-flex;">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 38px 0px 0px; text-align: center;">
+                                        From:</p>
+                                    <input type="date" class="form-control col-5 span12" style="display: inline;"
+                                        name="data[updated]" searchable-label="Updated" required="">
+                                    <p class="col-1 kms-title-label"
+                                        style="padding: 9px 0px 0px 0px; text-align: center;margin-right: -3px;">To:
+                                    </p>
+                                    <input type="date" class="form-control col-5 span12" name="data[updated]"
+                                        searchable-label="Updated" required="">
+                                </div>
+
+                                <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
+                                        aria-hidden="true" title="refresh filter value" filter-rel="data[updated]"
+                                        filter-labeltext="" filter-label="Updated" filter-multiple="false"
+                                        onclick="refreshDTagFilter( $(this))"></i> <label class="switch switchfilter "
+                                        title="active filter"><input type="checkbox" filter-rel="data[updated]"
+                                            filter-label="Updated" filter-labeltext="" filter-multiple="false"
+                                            onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
+                                    </label> </div>
+                            </div>
+
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="switchByFilter(dTagFilter)"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="switchByFilter(dTagFilter)"><i
+                            class="fa fa-search" aria-hidden="true"></i></button>
+
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../services/auth.service';
 declare let drawEntities: any;
 declare let resetDymerStart: any;
 declare let dymerscript: any;
@@ -10,11 +11,12 @@ declare let mainDymerView: any;
   styleUrls: ['./main-content.component.css'],
 })
 export class MainContentComponent implements OnInit {
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.currentUser){ 
     this.callDymer();
-
+    }
     this.showLocation();
   }
 
