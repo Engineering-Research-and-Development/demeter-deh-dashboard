@@ -6,10 +6,46 @@
     <title>Demeter DEH Dashboard</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="src/assets/img/favicon-32x32.ico">
     <!-- Load environment variables -->
     <script src="assets/env.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        function refreshDTagFilterComposed(el,grpid){
+                    manageDTagFilterComposed($(el).closest('.switch_container').find('input[type="checkbox"]'),grpid);
+                  }
+                  function manageDTagFilterComposed(el,grpid){
+                  var c=0;
+                  var tot=0;
+                   $('.'+grpid+' .switch_container input[filter-rel]').each(function(index, value) {
+                   tot++;
+                        var rel=$(this).attr('filter-rel');
+                        var elTr=$('[name="'+rel+'"]');
+                        if ($(elTr).val()=='')
+                            c++;
+                        if ($(el).is(':checked')){
+                            if ($(elTr).val()==''){
+                                if ($(this).is(':checked')){
+                                    $(this).click();
+                                }
+                                
+                            }else{
+                                if ($(this).is(':checked')){
+                                $(this).click();
+                            }
+                                $(this).click();
+                            }
+                        }else{
+                            if ($(this).is(':checked')){
+                                $(this).click();
+                            }
+                        } 
+                    }); 
+                  if(c==tot)
+                  $(el).prop('checked', false);
+                  }
+                  
+                   </script>
     <!-- Load leaflet style and script -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>

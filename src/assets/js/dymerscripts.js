@@ -109,6 +109,7 @@ function mainDymerView() {
                             "term": {
                                 "_index": "dymerservicecomponent"
                             }
+                            
                         }]
                     }
                 },
