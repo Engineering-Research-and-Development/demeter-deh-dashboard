@@ -1,0 +1,32 @@
+.fixed-dropdown{
+    transform: translate(-462px, 38px)!important;
+    
+}
+
+@media only screen and (max-width: 600px) {
+	.fixed-dropdown{
+	   transform: translate(-1px, 38px)!important;
+	}
+}
+@media only screen and (max-width: 600px){
+    #d_entityfilter{
+       width: 267px !important;
+    left: -94px !important;
+}
+}
+
+
+@media only screen and (max-width: 600px) {
+	.mobile-input{
+	       
+    		max-width: 100%;
+	}
+}
+.display-position{
+    display:inline-flex;
+}
+@media only screen and (max-width: 600px) {
+    .display-position{
+        display:inline;
+    }
+}
