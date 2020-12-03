@@ -14,6 +14,12 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+        <a class="nav-link" [routerLink]="['about']" style="cursor: pointer;">           
+            <span>About</span>
+        </a>
+    </li>
+
     <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" style="cursor: pointer;" (click)="cambia(jsonConfig)">
             <i class="fas fa-sitemap"></i>
@@ -24,19 +30,19 @@
     <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <ng-template #popContent>
             {{getRoles()}}
-    
+
             <p class="role" *ngFor="let role of roles; let idx = index;">
                 {{role}}
             </p>
         </ng-template>
-    
+
         <a class="nav-link" style="cursor: pointer;" [ngbPopover]="popContent" popoverTitle="Assigned user roles:"
             placement="right">
             <i class="fas fa-user-tag"></i>
             <span>Roles</span>
         </a>
-    
-    
+
+
     </li>
 
 
@@ -50,10 +56,11 @@
     </div>
 
     <div class="textwidget bottom-devider">
-        <p><img class="size-full wp-image-1008 img-fluid mx-auto"
-            [src]="'/assets/img/european-commission.png'" alt="europian-commision" width="120">
+        <p><img class="size-full wp-image-1008 img-fluid mx-auto" [src]="'/assets/img/european-commission.png'"
+                alt="europian-commision" width="120">
         </p>
-        <p class="project-desc" [ngClass]="{'hide': toggleClass}">Demeter is a Horizon 2020 project (857202) supported by the
+        <p class="project-desc" [ngClass]="{'hide': toggleClass}">Demeter is a Horizon 2020 project (857202) supported
+            by the
             European
             Union.</p>
     </div>
