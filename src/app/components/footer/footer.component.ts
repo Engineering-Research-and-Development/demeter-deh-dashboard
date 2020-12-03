@@ -1,18 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  constructor() { }
-  ngOnInit(): void {
-  }
-  // openDymerLoginModal() {
-  //   this._modalService.open(LoginModalComponent, { windowClass: 'modal-holder', centered: true });
-  // }
-
-  
-
+  constructor() {}
+  ngOnInit(): void {}
 }
