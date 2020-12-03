@@ -36,11 +36,6 @@ export class TopNavBarComponent implements OnInit {
   hideLoginForm($event) {
     this.hideLoginParent = $event;
   }
-
-  test() {
-    // console.log(this.authService.currentUser);
-  }
-
   logoutClient() {
     this.authService.logout().subscribe((data) => {
       window.location.reload();

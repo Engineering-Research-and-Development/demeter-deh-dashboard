@@ -1,12 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   trigger,
   state,
@@ -16,11 +8,10 @@ import {
 } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 declare let mainDymerView: any;
 declare let resetDymerStart: any;
-
-
 
 @Component({
   selector: 'app-login',
@@ -51,7 +42,11 @@ export class LoginComponent implements OnInit {
     this.state = this.state === 'small' ? 'large' : 'small';
   }
 
-  constructor(private _fb: FormBuilder, private _authService: AuthService) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _authService: AuthService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     if (window.innerWidth <= 768) {
@@ -94,6 +89,7 @@ export class LoginComponent implements OnInit {
         this.success = true;
         this.hideLogin.emit(true);
         resetDymerStart();
+        this._router.navigateByUrl('/');
       }
     });
   }
