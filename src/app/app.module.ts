@@ -15,7 +15,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerInterceptorService } from './services/spinner-interceptor.service';
+import { AboutComponent } from './components/about/about.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'about', component: AboutComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +34,8 @@ import { SpinnerInterceptorService } from './services/spinner-interceptor.servic
     FooterComponent,
     LoginComponent,
     SpinnerComponent,
+    AboutComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +45,7 @@ import { SpinnerInterceptorService } from './services/spinner-interceptor.servic
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     {

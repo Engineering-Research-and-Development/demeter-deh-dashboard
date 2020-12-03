@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div *ngIf="authService.isLoggedIn()">
+        <app-filter-bar></app-filter-bar>
+        <app-main-content></app-main-content>
+    </div>
+</div>
+<div *ngIf="!authService.isLoggedIn()" class="image-container">
+    <img class="responsive" [ngClass]="{'blur-image' : isTablet}" [src]="'/assets/img/demeter_logo.png'" alt="Demeter">
+
+</div>
+<div *ngIf="!authService.isLoggedIn()" class="description my-4">
+    <p class="project-desc" [ngClass]="{'blur-image' : isTablet}">
+        <strong>DEMETER Enabler HUB </strong>(DEH) allow to discover and manage DEMETER Enabled Entities (DEE) that are
+        accessible for exploitation. This Resource Catalogue exposes user interfaces and an APIs framework for full and
+        complete usage integrating access control module to provide the rights access control for viewing and discovery
+        entities.
+    </p>
+</div>
