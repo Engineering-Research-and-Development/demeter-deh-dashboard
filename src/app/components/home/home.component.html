@@ -9,10 +9,11 @@
 
 </div>
 <div *ngIf="!authService.isLoggedIn()" class="description my-4">
-    <p class="project-desc" [ngClass]="{'blur-image' : isTablet}">
-        <strong>DEMETER Enabler HUB </strong>(DEH) allow to discover and manage DEMETER Enabled Entities (DEE) that are
-        accessible for exploitation. This Resource Catalogue exposes user interfaces and an APIs framework for full and
-        complete usage integrating access control module to provide the rights access control for viewing and discovery
-        entities.
+    <p class="project-desc" [ngClass]="{'blur-image' : isTablet}" style="text-align: justify;">
+        <strong>The DEMETER Enabler HUB (DEH) </strong>s the digital space dedicated to end users of DEMETER where they will be able to create and register their own
+        resources. Users will have two roles and they will act as <strong>DEMETER Provider</strong> and <strong>DEMETER Consumer</strong>. A DEMETER Providers will be able to offer their
+        resources (components, services, data sources, devices, platforms, etc), while DEMETER Consumers will be able to browse it, and find suitable
+        resources matching their requirements. Data entities from any Platform, Thing, Application, Service will be managed through these APIs, but
+        for the sole purpose of discovery and management of the resource registry maintained by the DEH.
     </p>
 </div>

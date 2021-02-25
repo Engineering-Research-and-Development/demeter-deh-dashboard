@@ -14,6 +14,24 @@
                             <div id="d_entityfilter" class="dropdown-menu dropdown-menu-right fixed-dropdown "
                                 aria-labelledby="dFilterDropdown" ngbDropdownMenu style="height: 875px;overflow: auto;">
 
+                                <div class="grpfilter">
+                                    <div><label class="kms-title-label">Resource id</label></div>
+                                    <input type="text" class="form-control col-12 span12" name="data[uid]"
+                                        searchable-label="Resource id" required="" filter-id="resource_id">
+                                    <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
+                                            aria-hidden="true" title="refresh filter value" filter-relid="resource_id"
+                                            filter-rel="data[uid]" filter-labeltext="" filter-label="Resource id"
+                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
+                                            class="switch switchfilter " title="active filter"><input type="checkbox"
+                                                filter-relid="resource_id" filter-rel="data[uid]"
+                                                filter-label="Resource id" filter-labeltext="" filter-multiple="false"
+                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
+                                        </label> </div>
+                                </div>
+
+
+                      
+                                
                                 <div class="grpfilter gprating">
                                     <div><label class="kms-title-label">Rating</label></div>
                                     <div  class="display-position">
