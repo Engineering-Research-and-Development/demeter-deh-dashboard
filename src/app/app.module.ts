@@ -18,10 +18,12 @@ import { SpinnerInterceptorService } from './services/spinner-interceptor.servic
 import { AboutComponent } from './components/about/about.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { MetricsComponent } from './metrics/metrics.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
+  { path: 'metrics', component: MetricsComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 @NgModule({
@@ -36,6 +38,7 @@ const appRoutes: Routes = [
     SpinnerComponent,
     AboutComponent,
     HomeComponent,
+    MetricsComponent,
   ],
   imports: [
     BrowserModule,
