@@ -40,6 +40,36 @@ export class AuthService {
     );
   }
 
+  getAttachmentCapToken() {
+    console.log('attacment called')
+    const url = `${environment.DYMER_URL}/api/attachment/getCapToken`;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    let accessToken = `${this.currentUser.access_token}`;
+
+    const body = `"accessToken":"${this.currentUser.access_token}"`;
+    console.log('URL', url);
+
+    console.log('BODY', body);
+
+    return this._http.post<Response>(url, {accessToken}, { headers }).pipe(
+      map((resp) => {
+        console.log('responsic', resp)
+
+        if (!resp) {
+          console.log(resp.message);
+        } else {
+          localStorage.setItem('capToken', resp.data.token);
+        }
+        return resp;
+      })
+    );
+  }
+
+
   logout() {
     let accessToken = this.currentUser.access_token;
 
@@ -92,6 +122,13 @@ export class AuthService {
   removeToken(): void {
     if (localStorage.getItem('token')) {
       localStorage.removeItem('token');
+      this.removeCapToken();
+    }
+  }
+
+  removeCapToken(): void {
+    if (localStorage.getItem('capToken')) {
+      localStorage.removeItem('capToken');
     }
   }
 
