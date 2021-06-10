@@ -18,9 +18,11 @@ import { SpinnerInterceptorService } from './services/spinner-interceptor.servic
 import { AboutComponent } from './components/about/about.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { MetricsComponent } from './components/metrics/metrics.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'metrics', component: MetricsComponent },
   { path: 'about', component: AboutComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
@@ -36,6 +38,7 @@ const appRoutes: Routes = [
     SpinnerComponent,
     AboutComponent,
     HomeComponent,
+    MetricsComponent,
   ],
   imports: [
     BrowserModule,

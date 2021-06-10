@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isExpired()) {
       this.authService.removeToken();
+      this.authService.removeCapToken();
     }
 
     if (
