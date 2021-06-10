@@ -3,6 +3,11 @@
     
 }
 
+
+  .icon-position{
+      margin-left: 0.3rem;
+  }
+
 @media only screen and (max-width: 600px) {
 	.fixed-dropdown{
 	   transform: translate(-1px, 38px)!important;
@@ -30,3 +35,103 @@
         display:inline;
     }
 }
+
+.tooltip1 {
+    position: relative;
+  }
+  .tooltip1 span {
+      visibility: hidden;
+      max-width: 25em;
+      background-color: #8e8b8b;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px 10px;
+      position: absolute;
+      z-index: 9;
+      /* top: -11.3em; */
+      left: 100%;
+      margin-left: 1em;
+      opacity: 0;
+      transition: opacity 1s;
+      bottom: 0;
+      width: max-content;
+  }
+  .tooltip1 span::after {
+      content: "";
+      position: absolute;
+      /* top: 1.5em; */
+      right: 100%;
+      margin-top: 2.2em;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent #8e8b8b transparent transparent;
+      bottom: 8px;
+  }
+  @media only screen and (max-width: 1000px) {
+  .tooltip1 span {
+     visibility: hidden;
+      max-width: 14em;
+      background-color: #8e8b8b;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px 10px;
+      position: absolute;
+      z-index: 9;
+      /* top: -11.3em; */
+      left: 100%;
+      margin-left: 1em;
+      opacity: 0;
+      transition: opacity 1s;
+      bottom: 0;
+      font-size: 13px;
+      width: max-content;
+  }
+  }
+  .tooltip1 input {
+    display:none;
+  }
+  .tooltip1 input:checked+span {
+    visibility: visible;
+    opacity: 1;
+  }
+ @media only screen and (max-width: 600px) {
+    .tooltip1 {
+        position: absolute;
+        display: inherit;
+        margin-top: -8px;
+    }
+    .mob-in{
+        margin-top: 10px;
+    }
+    .tooltip1 span{
+        visibility: hidden;
+    max-width: 18.7em;
+    background-color: #8e8b8b;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px 10px;
+    position: absolute;
+    z-index: 9;
+    left: 100%;
+    margin-left: 1em;
+    opacity: 0;
+    transition: opacity 1s;
+    bottom: -10px;
+    font-size: 12px;
+    width: -webkit-max-content;
+    width: max-content;
+    }
+    .tooltip1 span::after {
+        content: "";
+        position: absolute;
+        right: 100%;
+        margin-top: 2.2em;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent #8e8b8b transparent transparent;
+        bottom: 15px;
+    }
+ }
