@@ -154,3 +154,16 @@ i.fas.fa-sign-in-alt:hover {
     z-index: 999;
   }
 }
+
+.username{
+  display: grid;
+}
+.mob-username{
+
+}
+
+@media only screen and (max-width: 992px) {
+  .mob-username{
+display: block!important;
+  }
+}

@@ -17,11 +17,19 @@
 
             <!-- Nav Item - User Information -->
             <li ngbDropdown class="nav-item dropdown no-arrow" style="display: block;" *ngIf="authService.isLoggedIn()">
-                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                        {{ authService.currentUser?.User.username | titlecase}}
-                    </span>
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="username">
+                        {{getRoles()}}
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small mob-username"
+                            style="text-align: center;">
+                            {{ authService.currentUser?.User.username | titlecase}}
+                        </span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small mob-username"
+                            *ngFor="let role of roles; let idx = index;">
+                            ({{role}})
+                        </span>
+                    </div>
 
                     <div *ngIf="authService.currentUser; else anonymousGravatar">
                         <img class="img-profile rounded-circle" src="/assets/img/logo-small.png">
@@ -43,13 +51,13 @@
                 <a style="color:inherit" (click)="slideLogin()" class="slide-login">
                     <i class="fas fa-sign-in-alt mt-3 fa-2x" aria-hidden="true"></i><br>
                     <span class="text-muted">Sign In</span>
-                    </a>
-                    </li>
-                    
-                    <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
-                        <a style="color:inherit" href="https://acs.bse.h2020-demeter-cloud.eu:5443/sign_up/">
-                            <i class="fas fa-user-circle mt-3 fa-2x" aria-hidden="true"></i><br>
-                            <span class="text-muted">Sign Up</span>
+                </a>
+            </li>
+
+            <li class="nav-item mr-2 auth-icon" *ngIf="!authService.isLoggedIn()">
+                <a style="color:inherit" href="https://acs.bse.h2020-demeter-cloud.eu:5443/sign_up/">
+                    <i class="fas fa-user-circle mt-3 fa-2x" aria-hidden="true"></i><br>
+                    <span class="text-muted">Sign Up</span>
                 </a>
             </li>
 

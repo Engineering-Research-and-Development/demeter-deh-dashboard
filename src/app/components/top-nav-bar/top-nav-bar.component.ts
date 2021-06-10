@@ -19,10 +19,18 @@ export class TopNavBarComponent implements OnInit {
   @Output() isTablet = new EventEmitter<boolean>();
   clicked: boolean;
 
+
+  public roles: string[];
+
   constructor(public authService: AuthService) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.authService.currentUser) {
+      this.roles = this.authService.currentUser.User.roles;
+    }
+  }
 
   slideLogin() {
+    console.log("PARENT", this.loginComp)
     this.loginComp.animateMe();
     this.emitLoginClick();
   }
@@ -44,5 +52,10 @@ export class TopNavBarComponent implements OnInit {
 
   checkDate() {
     this.authService.checkTokenExpiration();
+  }
+
+  getRoles() {
+    this.roles = this.authService.currentUser.User.roles;
+  
   }
 }
