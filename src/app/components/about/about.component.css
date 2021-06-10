@@ -4,6 +4,18 @@
   background-color: #fff;
 }
 
+.description {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.project-desc {
+  flex-basis: 55%;
+  color: #939598;
+  text-align: center;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
 .clearfix:after,
 .clearfix:before {
   content: "";
@@ -802,6 +814,9 @@
 .smls-overlay-effect .smls-link-style:hover span {
   background-color: rgba(255, 0, 0, 1);
 }
+
+
+
 /*==========transitions-effects===========*/
 /*left-to-right*/
 @-moz-keyframes LeftToRight {
