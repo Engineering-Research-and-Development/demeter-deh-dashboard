@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MetricsService } from '../../services/metrics.service'
-import { metricsContainer } from '../../models/metricsContainer'
-import { metricsData } from '../../models/metricsData'
+import { MetricsService } from '../../../services/metrics.service'
+import { metricsContainer } from '../../../models/metricsContainer'
+import { metricsData } from '../../../models/metricsData'
 
 @Component({
   selector: 'app-metrics',

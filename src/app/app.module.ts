@@ -18,11 +18,16 @@ import { SpinnerInterceptorService } from './services/spinner-interceptor.servic
 import { AboutComponent } from './components/about/about.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { MetricsComponent } from './components/metrics/metrics.component';
+import { MetricsComponent } from './components/metricsDashboard/metrics/metrics.component';
+import { ContainerMetricsComponent } from './components/metricsDashboard/container-metrics/container-metrics.component';
+import { ResourcesViewComponent } from './components/metricsDashboard/resources-view/resources-view.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'metrics', component: MetricsComponent },
+  { path: 'metrics-container', component:  ContainerMetricsComponent},
+  { path: 'user-metrics', component: ResourcesViewComponent },
+
   { path: 'about', component: AboutComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
