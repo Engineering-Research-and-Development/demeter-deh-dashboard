@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { ActivatedRoute, Router } from "@angular/router";
+import { rrm_multiple, rrm_single, multi } from '../../data_rrm';
+
 
 @Component({
   selector: 'app-resources-view',
@@ -7,9 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResourcesViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  public members: any = rrm_multiple
+
+  navigate() {
+    this.router.navigateByUrl("/metrics");
+  }
+  gotoDynamic() {
+    //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
+    this.router.navigateByUrl("/metrics");
+  }
 
   ngOnInit(): void {
+    console.log(this.router);
   }
 
 }

@@ -37,7 +37,7 @@
             <span class="add "> My Resource </span>
         </a>
     </li>
-    <li class="nav-item" *ngIf="authService.isLoggedIn()">
+    <li class="nav-item" *ngIf="!authService.isLoggedIn()">
         <a class="nav-link about" style="cursor: pointer;" [routerLink]="['user-metrics']" 
             >
             <i class="fa fa-line-chart" aria-hidden="true"></i>

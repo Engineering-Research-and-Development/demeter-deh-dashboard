@@ -1,3 +1,41 @@
-<p>resources-view works!</p>
+<style>
 
-here put the cards with the data about owners resources which has metrcis
+.mat-card>:last-child:not(.mat-card-footer), .mat-card-content>:last-child:not(.mat-card-footer) {
+  border: 1px solid;
+}
+
+.div-class {
+  margin: 10px;
+  display: inline-grid;
+  color: #B3B6B7;
+  background-color: #37474F;
+}
+</style>
+
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+  <mat-card *ngFor="let member of members" class="col-sm-4 div-class">
+    <!-- <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{member.title}}</mat-card-title>
+      <mat-card-subtitle>{{member.subtitle}}</mat-card-subtitle>
+    </mat-card-header> -->
+    <mat-card fxFlex class="mat-elevation-z8">{{member.name}}
+      <!-- <mat-list class="scroll-v150"> -->
+      <mat-list>
+        <mat-list-item>
+          <!-- <a matLine class="ellipsis">RRM ID : </a> <a [routerLink] = "['/metrics','member.rrmId']">{{member.rrmId}}</a> -->
+          <a matLine class="ellipsis">RRM ID : {{member.rrmId}}</a>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item>
+          <a matLine class="ellipsis">No. Of Instances : {{member.numberOfInstances}}</a>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+      <mat-card-actions style="border: none;"> 
+        <!-- <button mat-button>ViewMore</button> -->
+        <button (click)="navigate()">View More</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-card>
+</div>

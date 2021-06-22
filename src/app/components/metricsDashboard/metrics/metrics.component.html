@@ -1,13 +1,177 @@
+<style>
+
+.mat-card-title {
+	font-weight: 700;
+	font-size: 25px;
+	color: #F0F3F4;
+}
+</style>
+
+
 <div>
 
-    <button (click)="getAllMetrics()">GetAllMetrics</button>
+  <button (click)="getAllMetrics()">GetAllMetrics</button>
 
-    <button (click)="getMetricsByRrmId('60bfb454b9cd4e7f9f1e8e1e')">Get Metrics by rrm id</button>
+  <button (click)="getMetricsByRrmId('60bfb454b9cd4e7f9f1e8e1e')">Get Metrics by rrm id</button>
 
-    <button (click)="getMetricsByContainerId('6c84b82b1e3f2a4517161b39710275be2dffecd74e934171f090e2c10ce103188')">Get metrics by container id</button>
+  <button (click)="getMetricsByContainerId('6c84b82b1e3f2a4517161b39710275be2dffecd74e934171f090e2c10ce103188')">Get metrics by container id</button>
+</div>
 
+<br>
 
+<div>
+<section class="dash-row" style="padding: 10px; color: #B3B6B7;">
+    <mat-card>
+      <mat-card-title>
+        <div>Resource Information</div>
+      </mat-card-title>
+      <section id="customers-card">
+		<!-- <table mat-table [dataSource]="dataSource" matSort>
+
+			<ng-container matColumnDef="name">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> name </th>
+				<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="ipv4">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> ipv4 </th>
+				<td mat-cell *matCellDef="let element"> {{element.ipv4}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="uptime">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> uptime </th>
+				<td mat-cell *matCellDef="let element"> {{element.uptime}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="host">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> host </th>
+				<td mat-cell *matCellDef="let element"> {{element.host}} </td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+		 -->
+		 <mat-card *ngIf="dataSource?.filteredData.length <= 0" style="margin-bottom: 5px">
+			<div><span>No Match Found</span></div>
+		</mat-card>
+
+		<mat-card *ngIf="dataSource?.filteredData">
+			<table mat-table [dataSource]="dataSource" matSort>
+
+				<ng-container matColumnDef="name">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> name </th>
+					<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="ipv4">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> ipv4 </th>
+					<td mat-cell *matCellDef="let element"> {{element.ipv4}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="uptime">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> uptime </th>
+					<td mat-cell *matCellDef="let element"> {{element.uptime}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="host">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> host </th>
+					<td mat-cell *matCellDef="let element"> {{element.host}} </td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+			<mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+		</mat-card>
+      </section>
+    </mat-card>
+  </section>
+
+  <br>
+
+  <section class="dash-row" style="padding: 2px;  color: #B3B6B7;  margin-right: 8px;  margin-left: 8px;  margin-top: -30px;">
+	
+        <mat-card>
+          <mat-card-title>Resource- CPU Usage Stats</mat-card-title>
+          
+          
+			<div class="col-sm-3" style="display: inline-block;top: 55px;height: 226px;overflow: auto;">
+				
+              <div *ngFor="let arr of cpu_res ">
+                
+                  <mat-list dense>
+                    <mat-list-item>
+                      <!-- <mat-icon mat-list-icon><span class="tc-cyan-500 text-xl">assessment</span></mat-icon> -->
+                      <h3 mat-line><span class="mat-display-1 tc-cyan-500">{{arr.name}}</span></h3>
+                      <p mat-line><span class="tc-white">Category: Container</span></p>
+                    </mat-list-item>
+                  </mat-list>
+                  <div [style.height.px]="50">
+                    <ngx-charts-bar-vertical [scheme]="{ domain: [ '#78909C' ] }" [results]="arr.series"
+                      [barPadding]="2" [gradient]="gradient" [xAxis]="false" [yAxis]="true" [legend]="false"
+                      [showXAxisLabel]="false" [showYAxisLabel]="false" [xAxisLabel]="false" [yAxisLabel]="true"
+                      (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-9" style="display: inline-block; top: -200px; padding-left: 40px;">
+              <div [style.height.px]="400">
+                <ngx-charts-line-chart [scheme]="{ domain: [ '#4DD0E1', '#BA68C8', '#FF7043' ] }" [results]="cpu_res"
+                  [gradient]="gradient" [autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true"
+                  [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+                  [xAxisTickFormatting]="axisDate">
+                </ngx-charts-line-chart>
+              </div>
+            </div>
+        </mat-card>
+  </section>
+
+  <br>
+  
+  <section class="dash-row" style="padding: 2px;  color: #B3B6B7;  margin-right: 8px;  margin-left: 8px;  margin-top: -30px;">
+	
+	<mat-card>
+	  <mat-card-title>Resource- Memory Usage Stats</mat-card-title>
+	  
+	  
+		<div class="col-sm-3" style="display: inline-block;top: 55px;height: 226px;overflow: auto;">
+			
+		  <div *ngFor="let arr of mem_res ">
+			
+			  <mat-list dense>
+				<mat-list-item>
+				  <!-- <mat-icon mat-list-icon><span class="tc-cyan-500 text-xl">assessment</span></mat-icon> -->
+				  <h3 mat-line><span class="mat-display-1 tc-cyan-500">{{arr.name}}</span></h3>
+				  <p mat-line><span class="tc-white">Category: Container</span></p>
+				</mat-list-item>
+			  </mat-list>
+			  <div [style.height.px]="50">
+				<ngx-charts-bar-vertical [scheme]="{ domain: [ '#78909C' ] }" [results]="arr.series"
+				  [barPadding]="2" [gradient]="gradient" [xAxis]="false" [yAxis]="true" [legend]="false"
+				  [showXAxisLabel]="false" [showYAxisLabel]="false" [xAxisLabel]="false" [yAxisLabel]="true"
+				  (select)="onSelect($event)">
+				</ngx-charts-bar-vertical>
+			  
+			</div>
+		  </div>
+		</div>
+		<div class="col-sm-9" style="display: inline-block; top: -200px; padding-left: 40px;">
+		  <div [style.height.px]="400">
+			<ngx-charts-line-chart [scheme]="{ domain: [ '#4DD0E1', '#BA68C8', '#FF7043' ] }" [results]="mem_res"
+			  [gradient]="gradient" [autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true"
+			  [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+			  [xAxisTickFormatting]="axisDate">
+			</ngx-charts-line-chart>
+		  </div>
+		</div>
+	</mat-card>
+  
+</section>
+  
 </div>
 
 
-Here put the main dashboard that you have on stackblitz
+

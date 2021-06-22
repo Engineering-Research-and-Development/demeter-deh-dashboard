@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+  }
+
+::ng-deep .mat-card {
+    background-color: #37474F;
+  }
+
+  
+  /* NGX Charts */
+  ::ng-deep ngx-charts-area-chart ::ng-deep ngx-charts-line-chart,
+  ::ng-deep .ngx-charts .gridline-path.gridline-path-vertical {
+      display: none;
+  }
+  ::ng-deep ngx-charts-line-chart .line-series .line {
+      stroke-width: 3;
+  }
+  ::ng-deep .ngx-charts .gridline-path.gridline-path-horizontal,
+  ::ng-deep .ngx-charts .gridline-path.gridline-path-vertical {
+      stroke: rgba(255,255,255, 0.10);
+  }
+  ::ng-deep .ngx-charts .area {
+      stroke: rgba(255,255,255, 0.05);
+  }
+  ::ng-deep .tick text,
+  ::ng-deep .chart-legend .legend-label {
+      fill: rgba(255,255,255, 0.75);
+  }
+  ::ng-deep [ngx-charts-axis-label] text {
+      fill: rgba(255,255,255, 0.5);
+  }
+  ::ng-deep ngx-charts-linear-gauge .linear-gauge .background-bar path {
+      fill: rgba(0, 0, 0, 0.5);
+  }
+  ::ng-deep ngx-charts-linear-gauge .linear-gauge .value,
+  ::ng-deep ngx-charts-linear-gauge .linear-gauge .units {
+      display: none;
+  }
+  

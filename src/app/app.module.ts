@@ -21,6 +21,9 @@ import { HomeComponent } from './components/home/home.component';
 import { MetricsComponent } from './components/metricsDashboard/metrics/metrics.component';
 import { ContainerMetricsComponent } from './components/metricsDashboard/container-metrics/container-metrics.component';
 import { ResourcesViewComponent } from './components/metricsDashboard/resources-view/resources-view.component';
+import { MaterialModule } from './material.module'
+import { Http, HttpModule, JsonpModule } from '@angular/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -44,16 +47,22 @@ const appRoutes: Routes = [
     AboutComponent,
     HomeComponent,
     MetricsComponent,
+    ResourcesViewComponent,
+    ContainerMetricsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpModule,
+    JsonpModule,
     NgbModule,
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgxChartsModule
   ],
   providers: [
     {
