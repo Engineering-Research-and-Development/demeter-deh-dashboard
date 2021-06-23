@@ -81,8 +81,6 @@ export class MetricsComponent implements OnInit {
 
     cpu_res: any;
     mem_res: any;
-    res: any;
-    res_cards: any;
     CONTAINERS_DATA: any;
 
     public state = '';
@@ -91,16 +89,19 @@ export class MetricsComponent implements OnInit {
     ngOnInit(): void {
       
       // rrmId
-      this.state = window.history.state;
-      console.log(this.state)
+      this.state = window.history.state.rrmId;
+      console.log("STATE", this.state)
       console.log(JSON.stringify(this.state));
+    
+      this.getMetricsByRrmId(this.state);
 
-      this.CONTAINERS_DATA = this.getContainerInfo(rrm_single)
+      console.log("Metrics by RRM", this.metrcisByRrm)
+      
 
-      // Simulate api call - real world
-      of(this.CONTAINERS_DATA).pipe(delay(1250)).subscribe(x => {
-      this.dataSource.data = this.CONTAINERS_DATA
-      })
+      // // Simulate api call - real world
+      // of(this.CONTAINERS_DATA).pipe(delay(1250)).subscribe(x => {
+      // this.dataSource.data = this.CONTAINERS_DATA
+      // })
 
       //  this.cpu_res = rrm_single.containers.map(container => {
       //   return {
@@ -124,8 +125,7 @@ export class MetricsComponent implements OnInit {
       //   };
       // });
 
-      this.cpu_res = this.getCpuChartSeries(rrm_single)
-      this.mem_res = this.getCpuChartSeries(rrm_single)
+    
     }
 
 
@@ -137,20 +137,7 @@ export class MetricsComponent implements OnInit {
       return new DatePipe('en').transform(val);
     }
 
-  getAllMetrics() {
-
-    this.metricsService.getAllMetrics().subscribe(result => {
-
-      this.metricsService.getAllMetrics().subscribe(result => {
-        this.allMetricsData = result
-
-        console.log("All metrics: ", this.allMetricsData)
-
-      })
-    }
-    )
-
-  }
+  
 
   getMetricsByRrmId(rrmId: string) {
     this.metricsService.getMetricsByRrmId(rrmId).subscribe(result => {
@@ -160,6 +147,10 @@ export class MetricsComponent implements OnInit {
       console.log("Series by rrm CPU", this.getCpuChartSeries(this.metrcisByRrm))
       console.log("Series by rrm memory", this.getMemoryChartSeries(this.metrcisByRrm))
 
+      this.CONTAINERS_DATA = this.getContainerInfo(this.metrcisByRrm)
+      this.dataSource.data = this.CONTAINERS_DATA
+      this.cpu_res = this.getCpuChartSeries(this.metrcisByRrm)
+      this.mem_res = this.getMemoryChartSeries(this.metrcisByRrm)
     })
   }
 

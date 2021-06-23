@@ -2,6 +2,12 @@ table {
     width: 100%;
   }
 
+  .mat-card-title {
+	font-weight: 700;
+	font-size: 25px;
+	color: #F0F3F4;
+}
+
 ::ng-deep .mat-card {
     background-color: #37474F;
   }

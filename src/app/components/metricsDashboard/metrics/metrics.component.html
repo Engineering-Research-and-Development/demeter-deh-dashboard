@@ -1,24 +1,3 @@
-<style>
-
-.mat-card-title {
-	font-weight: 700;
-	font-size: 25px;
-	color: #F0F3F4;
-}
-</style>
-
-
-<div>
-
-  <button (click)="getAllMetrics()">GetAllMetrics</button>
-
-  <button (click)="getMetricsByRrmId('60bfb454b9cd4e7f9f1e8e1e')">Get Metrics by rrm id</button>
-
-  <button (click)="getMetricsByContainerId('6c84b82b1e3f2a4517161b39710275be2dffecd74e934171f090e2c10ce103188')">Get metrics by container id</button>
-</div>
-
-<br>
-
 <div>
 <section class="dash-row" style="padding: 10px; color: #B3B6B7;">
     <mat-card>
@@ -119,7 +98,7 @@
             </div>
             <div class="col-sm-9" style="display: inline-block; top: -200px; padding-left: 40px;">
               <div [style.height.px]="400">
-                <ngx-charts-line-chart [scheme]="{ domain: colorscheme }" [results]="cpu_res"
+                <ngx-charts-line-chart [scheme]="{ domain: [ '#4DD0E1', '#BA68C8', '#FF7043' ] }" [results]="cpu_res"
                   [gradient]="gradient" [autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true"
                   [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
                   [xAxisTickFormatting]="axisDate">
@@ -160,7 +139,7 @@
 		</div>
 		<div class="col-sm-9" style="display: inline-block; top: -200px; padding-left: 40px;">
 		  <div [style.height.px]="400">
-			<ngx-charts-line-chart [scheme]="{ domain: colorscheme }" [results]="mem_res"
+			<ngx-charts-line-chart [scheme]="{ domain: [ '#4DD0E1', '#BA68C8', '#FF7043' ] }" [results]="mem_res"
 			  [gradient]="gradient" [autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true"
 			  [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
 			  [xAxisTickFormatting]="axisDate">
