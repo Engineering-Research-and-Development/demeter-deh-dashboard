@@ -15,16 +15,18 @@ export class ResourcesViewComponent implements OnInit {
 
   public members: any = rrm_multiple
 
-  navigate() {
-    this.router.navigateByUrl("/metrics");
-  }
-  gotoDynamic() {
-    //this.router.navigateByUrl('/dynamic', { state: { id:1 , name:'Angular' } });
-    this.router.navigateByUrl("/metrics");
+  public state = '';
+
+  navigate(data) {
+    console.log(JSON.stringify(data));
+    // this.router.navigateByUrl('/123', { state: { hello: 'world' } });
+    this.router.navigateByUrl("/metrics", { state: { rrmId: data } });
   }
 
   ngOnInit(): void {
-    console.log(this.router);
+    // console.log(this.router);
+    this.state = window.history.state.alarm;
+    console.log(this.state);
   }
 
 }

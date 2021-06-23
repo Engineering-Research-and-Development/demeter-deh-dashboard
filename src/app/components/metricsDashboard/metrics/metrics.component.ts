@@ -9,6 +9,7 @@ import { rrm_multiple, rrm_single, multi } from '../../data_rrm';
 import { DatePipe } from '@angular/common';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-metrics',
@@ -24,6 +25,9 @@ export class MetricsComponent implements OnInit {
 
   multi: any[];
   view: any[] = [700, 400];
+
+  // Color scheme to be used for cpu & memory utilization monitoring graphs.
+  colorscheme = [ '#4DD0E1', '#BA68C8', '#FF7043', '#0dfcd8', '#daa70a', '#e81e74', '#ab81c3', '#95f3f5','#4be39a','#0d439b', '#8fa618' ]
 
   displayedColumns: string[] = ['name', 'ipv4', 'uptime', 'host'];
   dataSource = new MatTableDataSource<ContainerData>();
@@ -56,11 +60,11 @@ export class MetricsComponent implements OnInit {
   yAxisLabel: string = 'Utilization';
   legendTitle: string = 'Years';
 
-  colorScheme = {
-    domain: ['#5AA454', '#C7B42C', '#AAAAAA']
-  };
 
-  constructor(private metricsService: MetricsService) {
+  constructor(private metricsService: MetricsService,
+    private router: Router,
+    public activatedRoute: ActivatedRoute,
+    ) {
    }
 
    onSelect(data): void {
@@ -81,12 +85,19 @@ export class MetricsComponent implements OnInit {
     res_cards: any;
     CONTAINERS_DATA: any;
 
+    public state = '';
+
 
     ngOnInit(): void {
-      this.CONTAINERS_DATA = this.getContainerInfo(rrm_single)
-      console.log(this.CONTAINERS_DATA);
+      
+      // rrmId
+      this.state = window.history.state;
+      console.log(this.state)
+      console.log(JSON.stringify(this.state));
 
-      // Simulate api call
+      this.CONTAINERS_DATA = this.getContainerInfo(rrm_single)
+
+      // Simulate api call - real world
       of(this.CONTAINERS_DATA).pipe(delay(1250)).subscribe(x => {
       this.dataSource.data = this.CONTAINERS_DATA
       })
@@ -115,23 +126,6 @@ export class MetricsComponent implements OnInit {
 
       this.cpu_res = this.getCpuChartSeries(rrm_single)
       this.mem_res = this.getCpuChartSeries(rrm_single)
-
-      
-
-      this.res_cards = rrm_single.containers.map(container => {
-        return {
-          // Return the new object structure
-          name: container._id,
-          series: container.cpu_percent.map(item => ({
-            name: item.time_stamp,
-            value: item.percent
-          }))
-        };
-      });
-  
-  
-      console.log(this.cpu_res);
-      console.log(this.mem_res);
     }
 
 

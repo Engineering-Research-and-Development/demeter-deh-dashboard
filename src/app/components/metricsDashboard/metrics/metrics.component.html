@@ -119,7 +119,7 @@
             </div>
             <div class="col-sm-9" style="display: inline-block; top: -200px; padding-left: 40px;">
               <div [style.height.px]="400">
-                <ngx-charts-line-chart [scheme]="{ domain: [ '#4DD0E1', '#BA68C8', '#FF7043' ] }" [results]="cpu_res"
+                <ngx-charts-line-chart [scheme]="{ domain: colorscheme }" [results]="cpu_res"
                   [gradient]="gradient" [autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true"
                   [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
                   [xAxisTickFormatting]="axisDate">
@@ -160,7 +160,7 @@
 		</div>
 		<div class="col-sm-9" style="display: inline-block; top: -200px; padding-left: 40px;">
 		  <div [style.height.px]="400">
-			<ngx-charts-line-chart [scheme]="{ domain: [ '#4DD0E1', '#BA68C8', '#FF7043' ] }" [results]="mem_res"
+			<ngx-charts-line-chart [scheme]="{ domain: colorscheme }" [results]="mem_res"
 			  [gradient]="gradient" [autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true"
 			  [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
 			  [xAxisTickFormatting]="axisDate">

@@ -34,7 +34,8 @@
       </mat-list>
       <mat-card-actions style="border: none;"> 
         <!-- <button mat-button>ViewMore</button> -->
-        <button (click)="navigate()">View More</button>
+        <button (click)="navigate(member.rrmId)">View More</button>
+        <!-- <a routerLink="/metrics" [state]="{ rrmId:  member.rrmId}">View More</a> -->
       </mat-card-actions>
     </mat-card>
   </mat-card>
