@@ -34,7 +34,9 @@ table {
     display: inline-block;  padding-left: 40px; top: -35px;
 }
 
-
+.fl-r{
+    float: right;
+}
 @media only screen and (max-width: 992px) {
     ::ng-deep .mat-card{
         overflow-y: auto;
@@ -91,6 +93,9 @@ table {
         overflow-x: auto;
   
         
+    }
+    .fl-r{
+        float: left;
     }
 }
 ::ng-deep .mat-sort-header-button{

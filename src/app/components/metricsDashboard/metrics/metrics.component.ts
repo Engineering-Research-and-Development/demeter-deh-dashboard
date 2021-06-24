@@ -106,10 +106,6 @@ export class MetricsComponent implements OnInit {
     this.metricsService.getMetricsByRrmId(rrmId).subscribe(result => {
       this.metrcisByRrm = result;
 
-      console.log("Metrics by rrm: ", this.metrcisByRrm)
-      console.log("Series by rrm CPU", this.getCpuChartSeries(this.metrcisByRrm))
-      console.log("Series by rrm memory", this.getMemoryChartSeries(this.metrcisByRrm))
-
       this.CONTAINERS_DATA = this.getContainerInfo(this.metrcisByRrm)
       this.dataSource.data = this.CONTAINERS_DATA
       this.cpu_res = this.getCpuChartSeries(this.metrcisByRrm)
