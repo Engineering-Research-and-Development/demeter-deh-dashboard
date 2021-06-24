@@ -1,42 +1,63 @@
-<style>
-
-.mat-card>:last-child:not(.mat-card-footer), .mat-card-content>:last-child:not(.mat-card-footer) {
-  border: 1px solid;
-}
-
+ <style>
 .div-class {
   margin: 10px;
   display: inline-grid;
-  color: #B3B6B7;
-  background-color: #37474F;
+  flex: 0 0 31.333333%;
+  max-width: 32.33%;
 }
 </style>
 
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
-  <mat-card *ngFor="let member of members" class="col-sm-4 div-class">
-    <!-- <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{member.title}}</mat-card-title>
-      <mat-card-subtitle>{{member.subtitle}}</mat-card-subtitle>
-    </mat-card-header> -->
-    <mat-card fxFlex class="mat-elevation-z8">{{member.name}}
-      <!-- <mat-list class="scroll-v150"> -->
-      <mat-list>
-        <mat-list-item>
-          <!-- <a matLine class="ellipsis">RRM ID : </a> <a [routerLink] = "['/metrics','member.rrmId']">{{member.rrmId}}</a> -->
-          <a matLine class="ellipsis">RRM ID : {{member.rrmId}}</a>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-        <mat-list-item>
-          <a matLine class="ellipsis">No. Of Instances : {{member.numberOfInstances}}</a>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </mat-list>
-      <mat-card-actions style="border: none;"> 
-        <!-- <button mat-button>ViewMore</button> -->
-        <button (click)="navigate(member.rrmId)">View More</button>
-        <!-- <a routerLink="/metrics" [state]="{ rrmId:  member.rrmId}">View More</a> -->
-      </mat-card-actions>
-    </mat-card>
-  </mat-card>
+<div _ngcontent-ggk-c109="" class="card-body">
+  <div _ngcontent-ggk-c109="" class="row pull-right">
+   <div _ngcontent-ggk-c109="" class="col-sm-12">
+    <div _ngcontent-ggk-c109="" id="cont-addentity">
+     <ul>
+       Registered DEMETER Resources
+     </ul>
+    </div>
+   </div>
+  </div>
+  <br _ngcontent-ggk-c109="" />
+  <div _ngcontent-ggk-c109="" id="cont-MyList" class="col-12 list">
+   <span id="d_pagination_prop"></span>
+
+   <div id="products" class="row view-group">
+    <div class="item col-sm-3 div-class" d-pagegroup="1" *ngFor="let member of members" >
+     <div class="thumbnail card">
+      <!-- <div class="img-event">
+                     <img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
+                 </div> -->
+      <div class="caption card-body">
+       <h4 style="margin-bottom: 2px;"
+        class="card-title
+         group
+         font-weight-bold
+         inner
+         list-group-item-heading
+         resource-title
+        ">
+        {{member.name}}
+       </h4>
+       <div class="col-12 p0 mb-2">
+        <!-- <small class="text-muted">type</small> -->
+        <span class="pull-right"></span>
+       </div>
+       <p id="desc-0" class="card-text group inner list-group-item-text resourse-card" >
+        RRM ID : {{member.rrmId}} <br>
+        No. Of Instances : {{member.numberOfInstances}} <br>
+       </p>
+       <!--  <hr class="my-4"> -->
+       <hr />
+       <div class="row">
+        <div class="col-12">
+          <button class="btn btn-secondary btn-sm pull-right" (click)="navigate(member.rrmId)">View More</button>
+         <!-- <span
+          class="btn btn-secondary btn-sm pull-right"
+          onclick="navigate(member.rrmId)">View more</span
+         > -->
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
 </div>
