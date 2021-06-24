@@ -1,0 +1,17 @@
+.mr-border{
+    margin: 0 2%;
+}
+.view-w{
+    width: 100%;
+}
+.title-metr{
+    color: #117a8b;
+}
+@media only screen and (max-width: 992px) {
+    .mr-border{
+        margin: 0 5px;
+    }
+    .view-w{
+        width: unset;
+    }
+}
