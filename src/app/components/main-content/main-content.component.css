@@ -4,17 +4,18 @@ span#list {
 }
 
 i.fas.fa-list,
-i.fas.fa-th-large {
+i.fas.fa-th-large, i.fas.fa-arrow-left {
     font-size: 1.4rem;
     color: #6c757d;
     line-height: 15px;
 }
 
-i.fas.fa-list:hover,
+i.fas.fa-list:hover, i.fas.fa-arrow-left:hover,
 i.fas.fa-th-large:hover {
     color: #5a6268;
     font-size: 1.5rem;
 }
+
 
 @media only screen and (max-width: 600px) {
     .list {
