@@ -28,14 +28,12 @@ export class ResourcesViewComponent implements OnInit {
     // console.log(this.router);
     this.state = window.history.state.alarm;
     this.getAllMetrics();
-    console.log(this.state);
   }
 
 
   getAllMetrics() {
     this.metricsService.getAllMetrics().subscribe(result => {
       this.members = result
-      console.log("All metrics: ", this.members)
     })
   }
 }

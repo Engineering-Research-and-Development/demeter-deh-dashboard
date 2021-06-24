@@ -36,25 +36,27 @@
 		</mat-card>
 
 		<mat-card *ngIf="dataSource?.filteredData" class="no-sh"> 
+			<div><span>No Match Found</span></div>
+
 			<table mat-table [dataSource]="dataSource" matSort>
 
-				<ng-container matColumnDef="name">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> name </th>
+				<ng-container matColumnDef="containerName">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Container name </th>
 					<td mat-cell *matCellDef="let element" class="br-cell"> {{element.name}} </td>
 				</ng-container>
 
 				<ng-container matColumnDef="ipv4">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> ipv4 </th>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> IPv4 </th>
 					<td mat-cell *matCellDef="let element" class="br-cell"> {{element.ipv4}} </td>
 				</ng-container>
 
 				<ng-container matColumnDef="uptime">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> uptime </th>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Uptime </th>
 					<td mat-cell *matCellDef="let element" class="br-cell">  {{element.uptime}} </td>
 				</ng-container>
 
 				<ng-container matColumnDef="host">
-					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> host </th>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Host </th>
 					<td mat-cell *matCellDef="let element" class="br-cell"> {{element.host}} </td>
 				</ng-container>
 
