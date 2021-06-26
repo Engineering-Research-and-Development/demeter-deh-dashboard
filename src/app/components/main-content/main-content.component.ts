@@ -14,8 +14,8 @@ export class MainContentComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    if (this.authService.currentUser){ 
-    this.callDymer();
+    if (this.authService.currentUser) {
+      this.callDymer();
     }
     this.showLocation();
   }

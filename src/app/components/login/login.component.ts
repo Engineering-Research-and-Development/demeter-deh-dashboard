@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     private _fb: FormBuilder,
     private _authService: AuthService,
     private _router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (window.innerWidth <= 768) {

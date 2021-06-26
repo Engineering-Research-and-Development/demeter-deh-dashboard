@@ -5,7 +5,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center mob-logo" [routerLink]="['/']">
         <div class="sidebar-brand-icon">
-            <img  [src]="'/assets/img/demeter_logo_sm.png'" class="logo" alt="Demeter">
+            <img [src]="'/assets/img/demeter_logo_sm.png'" class="logo" alt="Demeter">
         </div>
         <!-- <div class="sidebar-brand-text mx-3">Demeter Enabler Hub</div> -->
     </a>
@@ -13,43 +13,43 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider" *ngIf="authService.isLoggedIn()">
-    <li class="nav-item" *ngIf="authService.isLoggedIn()">
+    <!-- <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" style="cursor: pointer;">
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
             <span class="d-resor"> Demeter Resoruce</span>
             <span class="add"> Add</span>
         </a>
-    </li>
+    </li> -->
 
     <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link about" [routerLink]="['']" style="cursor: pointer;">
             <i class="fa fa-files-o" aria-hidden="true"></i>
 
-            <span class="d-resor" > All Resources</span>
+            <span class="d-resor"> All Resources</span>
             <span class="add"> All Resources</span>
 
         </a>
     </li>
-    <li class="nav-item" *ngIf="authService.isLoggedIn()">
+    <!-- <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link about" style="cursor: pointer;" routerLinkActive="router-link-active">
             <i class="fa fa-file-o" aria-hidden="true"></i>
             <span class="d-resor"> My Resources</span>
             <span class="add "> My Resource </span>
         </a>
-    </li>
+    </li> -->
     <li class="nav-item" *ngIf="authService.isLoggedIn()">
-        <a class="nav-link about" style="cursor: pointer;" [routerLink]="['user-metrics']" 
-            >
+        <a class="nav-link about" style="cursor: pointer;" [routerLink]="['user-metrics']">
             <i class="fa fa-line-chart" aria-hidden="true"></i>
             <span class="d-resor"> Metrics</span>
             <span class="add "> Metrics </span>
         </a>
     </li>
- <hr class="sidebar-divider">
- <p class="demeterApplications d-resor" *ngIf="authService.isLoggedIn()">DEMETER Applications</p>
- <p class="demeterApplications add" *ngIf="authService.isLoggedIn()">App</p>
+    <hr class="sidebar-divider">
+    <p class="demeterApplications d-resor" *ngIf="authService.isLoggedIn()">DEMETER Applications</p>
+    <p class="demeterApplications add" *ngIf="authService.isLoggedIn()">App</p>
     <li class="nav-item" *ngIf="!authService.isLoggedIn()">
-        <a class="nav-link about" [routerLink]="['about']" routerLinkActive="router-link-active" style="cursor: pointer;">
+        <a class="nav-link about" [routerLink]="['about']" routerLinkActive="router-link-active"
+            style="cursor: pointer;">
             <span>About us</span>
         </a>
     </li>
@@ -62,7 +62,7 @@
             </span>
         </a>
     </li>
-   <!--  
+    <!--  
     <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" style="cursor: pointer;" href="https://acs.bse.h2020-demeter-cloud.eu:5443/"
             target="_blank">
@@ -80,7 +80,7 @@
     </li>
 
 
-    --> 
+    -->
     <!-- <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <a class="nav-link" style="cursor: pointer;" (click)="cambia(jsonConfig)">
             <i class="fas fa-sitemap"></i>
@@ -123,7 +123,8 @@
         <p><img class="size-full wp-image-1008 img-fluid mx-auto" [src]="'/assets/img/european-commission.png'"
                 alt="europian-commision" width="120">
         </p>
-        <p class="project-desc d-resor" [ngClass]="{'hide': toggleClass}">Demeter is a Horizon 2020 project (857202) supported
+        <p class="project-desc d-resor" [ngClass]="{'hide': toggleClass}">Demeter is a Horizon 2020 project (857202)
+            supported
             by the
             European
             Union.</p>

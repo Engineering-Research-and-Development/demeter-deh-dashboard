@@ -26,11 +26,9 @@ input.form-control {
   .row.col-11.mx-auto {
     justify-content: center;
   }
-
   .wrap {
     z-index: 999;
   }
-
   .mx-auto {
     padding-right: 0;
     padding-left: 0;
@@ -41,17 +39,14 @@ input.form-control {
   .tablet-login-layout {
     flex-wrap: nowrap !important;
   }
-
   .row.col-11.mx-auto {
     flex-direction: column;
     align-items: center;
   }
-
   button.btn.btn-secondary {
     position: relative;
     left: 15px;
   }
-
   .wrap {
     z-index: 999;
   }

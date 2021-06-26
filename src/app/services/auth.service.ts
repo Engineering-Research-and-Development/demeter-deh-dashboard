@@ -1,17 +1,15 @@
 import { environment } from './../../environments/environment';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { JwtModel } from './../models/jwt.model';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserInfo } from './../models/userInfo.model';
-import { map, mergeMap, shareReplay, tap } from 'rxjs/operators';
-import { from, Observable, of } from 'rxjs';
+import { map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   get currentUser(): UserInfo {
     const token = this.getToken();
@@ -33,42 +31,38 @@ export class AuthService {
       map((resp) => {
         if (!resp.success) {
         } else {
-          localStorage.setItem('token', resp.data.token);
+          this.getAttachmentCapToken(resp.data.token).subscribe();
         }
         return resp;
       })
     );
   }
 
-  getAttachmentCapToken() {
+  getAttachmentCapToken(accessToken: string) {
     console.log('attacment called')
-    const url = `${environment.DYMER_URL}/api/attachment/getCapToken`;
+    const url = `${environment.DYMER_URL}/api/metrics/getCapToken`;
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     };
 
-    let accessToken = `${this.currentUser.access_token}`;
+    let token = JSON.parse(atob(accessToken))
+    let accessTokenParsed = token.access_token;
 
-    const body = `"accessToken":"${this.currentUser.access_token}"`;
-    console.log('URL', url);
-
-    console.log('BODY', body);
-
-    return this._http.post<Response>(url, {accessToken}, { headers }).pipe(
+    return this._http.post<Response>(url, { accessToken: accessTokenParsed }, { headers }).pipe(
       map((resp) => {
-        console.log('responsic', resp)
 
         if (!resp) {
           console.log(resp.message);
+          localStorage.setItem('token', accessToken);
         } else {
+          localStorage.setItem('token', accessToken);
           localStorage.setItem('capToken', resp.data.token);
         }
         return resp;
       })
     );
   }
-
 
   logout() {
     let accessToken = this.currentUser.access_token;

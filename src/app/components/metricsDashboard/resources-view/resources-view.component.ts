@@ -28,6 +28,7 @@ export class ResourcesViewComponent implements OnInit {
     // console.log(this.router);
     this.state = window.history.state.alarm;
     this.getAllMetrics();
+    console.log(this.members)
   }
 
 

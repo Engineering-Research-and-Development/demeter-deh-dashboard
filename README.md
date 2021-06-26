@@ -168,11 +168,12 @@ After pulling the source code, go to root folder and follow the next steps:
 ## Status
 Project is: _in progress_
 
+
+## Release
+V1.0
+
  
 
 ## License
 <!--- If you're not sure which open license to use see https://choosealicense.com/--->
-
- 
-
-This project uses the following license: [<license_name>](<link>).
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)

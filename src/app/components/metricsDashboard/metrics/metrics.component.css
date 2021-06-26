@@ -1,12 +1,13 @@
 table {
     width: 100%;
-  }
-
-  .mat-card-title {
-	font-weight: 700;
-	font-size: 25px;
-	color: #117a8b;
 }
+
+.mat-card-title {
+    font-weight: 700;
+    font-size: 25px;
+    color: #117a8b;
+}
+
 ::ng-deep .mat-card {
     /* background-color: #37474F; */
     box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
@@ -15,127 +16,153 @@ table {
 .no-sh {
     box-shadow: unset;
 }
-.br-cell{
-    border-bottom: 1px solid rgba(0, 0, 0, 0.116); ;
-}
-.mr5{
-    margin-bottom: 5px
-}
-.card-des{
-    padding: 2px;    margin-right: 8px;  margin-left: 8px;  
-}
-.left-3{
-    display: inline-block;top: 55px;overflow: auto;word-break: break-all;
-}
-.card-des1{
-    padding: 2px;    margin-right: 8px;  margin-left: 8px;  margin-bottom: 30px;
-}
-.des-chart{
-    display: inline-block;  padding-left: 40px; top: -35px;
+
+.br-cell {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.116);
+    ;
 }
 
-.fl-r{
+.mr5 {
+    margin-bottom: 5px
+}
+
+.card-des {
+    padding: 2px;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.left-3 {
+    display: inline-block;
+    top: 55px;
+    overflow: auto;
+    word-break: break-all;
+}
+
+.card-des1 {
+    padding: 2px;
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-bottom: 30px;
+}
+
+.des-chart {
+    display: inline-block;
+    padding-left: 40px;
+    top: -35px;
+}
+
+.fl-r {
     float: right;
 }
+
 @media only screen and (max-width: 992px) {
-    ::ng-deep .mat-card{
+    ::ng-deep .mat-card {
         overflow-y: auto;
     }
-    ::ng-deep .mat-paginator-range-label{
+    ::ng-deep .mat-paginator-range-label {
         margin: unset!important;
         float: left!important;
-        
         padding-top: 10px!important;
     }
-    ::ng-deep .mat-paginator-range-actions{
+    ::ng-deep .mat-paginator-range-actions {
         display: block!important;
         align-items: unset;
         margin: unset;
     }
     ::ng-deep .mat-paginator-page-size-value {
         position: relative!important;
-    margin: unset!important;
-    text-align: left!important;
+        margin: unset!important;
+        text-align: left!important;
     }
-    ::ng-deep .mat-paginator-container{
+    ::ng-deep .mat-paginator-container {
         display: unset!important;
         align-items: unset!important;
         justify-content: unset!important;
-        padding:unset!important;
+        padding: unset!important;
         flex-wrap: unset!important;
-        width: 100%; 
+        width: 100%;
     }
-    ::ng-deep .mat-paginator-page-size-label{
-        margin:unset!important;
+    ::ng-deep .mat-paginator-page-size-label {
+        margin: unset!important;
     }
     .no-sh {
         box-shadow: unset;
     }
-    .br-cell{
-        border-bottom: 1px solid rgba(0, 0, 0, 0.116); padding-right: 20px;width: 100%;
+    .br-cell {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.116);
+        padding-right: 20px;
+        width: 100%;
     }
-    .mr5{
+    .mr5 {
         margin-bottom: 5px
     }
-    .card-des{
-        padding: 2px;    margin-right: 8px;  margin-left: 8px;  
+    .card-des {
+        padding: 2px;
+        margin-right: 8px;
+        margin-left: 8px;
     }
-    .left-3{
-        display: contents;top: 15px;overflow: auto;word-break: break-all;
+    .left-3 {
+        display: contents;
+        top: 15px;
+        overflow: auto;
+        word-break: break-all;
     }
-    .card-des1{
-        padding: 2px;    margin-right: 8px;  margin-left: 8px;  margin-bottom: 30px;
+    .card-des1 {
+        padding: 2px;
+        margin-right: 8px;
+        margin-left: 8px;
+        margin-bottom: 30px;
     }
-    .des-chart{
+    .des-chart {
         display: block;
         padding-left: 0px;
         top: 15px;
         overflow-x: auto;
-  
-        
     }
-    .fl-r{
+    .fl-r {
         float: left;
     }
 }
-::ng-deep .mat-sort-header-button{
-   
-    color: rgba(0,0,0,.8)!important;
+
+::ng-deep .mat-sort-header-button {
+    color: rgba(0, 0, 0, .8)!important;
 }
 
-
-::ng-deep td.mat-cell{
+::ng-deep td.mat-cell {
     color: #00000080 !important;
 }
 
-  
-  /* NGX Charts */
-  ::ng-deep ngx-charts-area-chart ::ng-deep ngx-charts-line-chart,
-  ::ng-deep .ngx-charts .gridline-path.gridline-path-vertical {
-      display: none;
-  }
-  ::ng-deep ngx-charts-line-chart .line-series .line {
-      stroke-width: 3;
-  }
-  ::ng-deep .ngx-charts .gridline-path.gridline-path-horizontal,
-  ::ng-deep .ngx-charts .gridline-path.gridline-path-vertical {
-      stroke: rgba(0, 0, 0, 0.116); 
-  }
-  ::ng-deep .ngx-charts .area {
-      stroke: #00000080 ;
-  }
-  ::ng-deep .tick text,
-  ::ng-deep .chart-legend .legend-label {
-      fill: rgba(0,0,0,.8); 
-  }
-  ::ng-deep [ngx-charts-axis-label] text {
-      fill: #00000080 ;
-  }
-  ::ng-deep ngx-charts-linear-gauge .linear-gauge .background-bar path {
-      fill: rgba(0, 0, 0, 0.5);
-  }
-  ::ng-deep ngx-charts-linear-gauge .linear-gauge .value,
-  ::ng-deep ngx-charts-linear-gauge .linear-gauge .units {
-      display: none;
-  }
-  
+/* NGX Charts */
+
+::ng-deep ngx-charts-area-chart ::ng-deep ngx-charts-line-chart, ::ng-deep .ngx-charts .gridline-path.gridline-path-vertical {
+    display: none;
+}
+
+::ng-deep ngx-charts-line-chart .line-series .line {
+    stroke-width: 3;
+}
+
+::ng-deep .ngx-charts .gridline-path.gridline-path-horizontal, ::ng-deep .ngx-charts .gridline-path.gridline-path-vertical {
+    stroke: rgba(0, 0, 0, 0.116);
+}
+
+::ng-deep .ngx-charts .area {
+    stroke: #00000080;
+}
+
+::ng-deep .tick text, ::ng-deep .chart-legend .legend-label {
+    fill: rgba(0, 0, 0, .8);
+}
+
+::ng-deep [ngx-charts-axis-label] text {
+    fill: #00000080;
+}
+
+::ng-deep ngx-charts-linear-gauge .linear-gauge .background-bar path {
+    fill: rgba(0, 0, 0, 0.5);
+}
+
+::ng-deep ngx-charts-linear-gauge .linear-gauge .value, ::ng-deep ngx-charts-linear-gauge .linear-gauge .units {
+    display: none;
+}

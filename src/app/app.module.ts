@@ -24,13 +24,13 @@ import { ResourcesViewComponent } from './components/metricsDashboard/resources-
 import { MaterialModule } from './material.module'
 import { Http, HttpModule, JsonpModule } from '@angular/http';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { AuthGuardService} from './services/auth-guard.service'
+import { AuthGuardService } from './services/auth-guard.service'
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'metrics', component: MetricsComponent, canActivate: [ AuthGuardService ]  },
-  { path: 'metrics-container', component:  ContainerMetricsComponent, canActivate: [ AuthGuardService ] },
-  { path: 'user-metrics', component: ResourcesViewComponent, canActivate: [ AuthGuardService ]  },
+  { path: 'metrics', component: MetricsComponent, canActivate: [AuthGuardService] },
+  { path: 'metrics-container', component: ContainerMetricsComponent, canActivate: [AuthGuardService] },
+  { path: 'user-metrics', component: ResourcesViewComponent, canActivate: [AuthGuardService] },
 
   { path: 'about', component: AboutComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
@@ -74,4 +74,4 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
