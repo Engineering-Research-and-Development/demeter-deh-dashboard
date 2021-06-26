@@ -33,7 +33,6 @@ export class MainContentComponent implements OnInit {
     function success(position) {
       let coordinates = position.coords.latitude + ',' + position.coords.longitude;
       localStorage.setItem('userLocation', coordinates);
-      console.log('Location coordinates', localStorage.getItem('userLocation'));
     }
 
     function error(err) {
