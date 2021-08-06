@@ -5,11 +5,10 @@ import { MatSort } from '@angular/material/sort';
 import { MetricsService } from '../../../services/metrics.service'
 import { metricsContainer } from '../../../models/metricsContainer'
 import { metricsData } from '../../../models/metricsData'
-import { rrm_multiple, rrm_single, multi } from '../../data_rrm';
 import { DatePipe } from '@angular/common';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from 'src/app/services/auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-metrics',
@@ -30,9 +29,11 @@ export class MetricsComponent implements OnInit {
   view: any[] = [700, 400];
 
   // Color scheme to be used for cpu & memory utilization monitoring graphs.
-  colorscheme = ['#4DD0E1', '#BA68C8', '#FF7043', '#0dfcd8', '#daa70a', '#e81e74', '#ab81c3', '#95f3f5', '#4be39a', '#0d439b', '#8fa618']
+  colorscheme = [
+    '#4DD0E1', '#A84DE1', '#E15E4D', '#86E14D', '#FFFD43', '#FF9F43', '#E81E74', '#AB81C3', '#95F3F5', '#4BE39A', '#0D439B', '#8FA618'
+  ]
 
-  displayedColumns: string[] = ['containerName', 'ipv4', 'uptime', 'host'];
+  displayedColumns: string[] = ['containerName', 'ipv4', 'uptime', 'host', 'consumer'];
   dataSource = new MatTableDataSource<ContainerData>();
 
   @ViewChild(MatSort) sortForDataSource: MatSort;
@@ -67,24 +68,24 @@ export class MetricsComponent implements OnInit {
   constructor(private metricsService: MetricsService,
     private router: Router,
     public activatedRoute: ActivatedRoute,
+    public authService: AuthService
   ) {
   }
 
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 
   ngOnInit(): void {
-
+    if (!this.authService.isLoggedIn) {
+      this.router.navigateByUrl('');
+    }
     // rrmId
     this.state = window.history.state.rrmId;
     this.getMetricsByRrmId(this.state);
@@ -95,7 +96,8 @@ export class MetricsComponent implements OnInit {
     return new DatePipe('en').transform(val);
   }
 
-  axisDate(val: string): string {
+  axisDate(val: any): any {
+
     return new DatePipe('en').transform(val);
   }
 
@@ -109,41 +111,54 @@ export class MetricsComponent implements OnInit {
       this.dataSource.data = this.CONTAINERS_DATA
       this.cpu_res = this.getCpuChartSeries(this.metrcisByRrm)
       this.mem_res = this.getMemoryChartSeries(this.metrcisByRrm)
+
     })
   }
 
-  getMetricsByContainerId(rrmId: string) {
-    this.metricsService.getMetricsByContainerId(rrmId).subscribe(result => {
+  getMetricsByContainerId(containerId: string) {
+    this.metricsService.getMetricsByContainerId(containerId).subscribe(result => {
       this.containerMetrics = result;
-
-      console.log("Metrics by container: ", this.containerMetrics)
-
-
     })
   }
+
 
   getCpuChartSeries(metricsData: metricsData) {
 
+
     return metricsData.containers.map(container => {
+
+
+      const sortedArray = container.cpu_percent.sort((a, b) => {
+        return moment(a.time_stamp).diff(b.time_stamp);
+      });
+
+
       return {
         // Return the new object structure
+
         name: container._id,
-        series: container.cpu_percent.map(item => ({
-          name: item.time_stamp,
+        series: sortedArray.map(item => ({
+          name: moment.utc(item.time_stamp).format('MMMM D, YYYY'),
           value: item.percent
         }))
       };
     });
   }
 
+
   getMemoryChartSeries(metricsData: metricsData) {
 
     return metricsData.containers.map(container => {
+
+      const sortedArray = container.mem_percent.sort((a, b) => {
+        return moment(a.time_stamp).diff(b.time_stamp);
+      });
+
       return {
         // Return the new object structure
         name: container._id,
-        series: container.mem_percent.map(item => ({
-          name: item.time_stamp,
+        series: sortedArray.map(item => ({
+          name: moment.utc(item.time_stamp).format('MMMM D, YYYY'),
           value: item.percent
         }))
       };
@@ -163,7 +178,10 @@ export class MetricsComponent implements OnInit {
         name: container.hostname,
         ipv4: container.ip,
         uptime: container.uptime,
-        host: "DockerHost"
+        host: "DockerHost",
+        consumerUsername: container.consumer.username,
+        consumerEmail: container.consumer.email
+
       };
     });
   }
@@ -174,4 +192,6 @@ export interface ContainerData {
   ipv4: string;
   uptime: number;
   host: string;
+  consumerUsername: string;
+  consumerEmail: string;
 }

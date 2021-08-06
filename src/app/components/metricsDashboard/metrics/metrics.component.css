@@ -33,10 +33,12 @@ table {
 }
 
 .left-3 {
-    display: inline-block;
+    display: inline-flex;
     top: 55px;
     overflow: auto;
     word-break: break-all;
+    flex-wrap: wrap;
+    height: 405px;
 }
 
 .card-des1 {
@@ -49,11 +51,15 @@ table {
 .des-chart {
     display: inline-block;
     padding-left: 40px;
-    top: -35px;
+    top: 60px;
 }
 
 .fl-r {
     float: right;
+}
+
+.mat-focus-indicator {
+    height: 587px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -165,4 +171,8 @@ table {
 
 ::ng-deep ngx-charts-linear-gauge .linear-gauge .value, ::ng-deep ngx-charts-linear-gauge .linear-gauge .units {
     display: none;
+}
+
+::ng-deep .mat-list-base[dense] {
+    padding-top: 10px!important;
 }
