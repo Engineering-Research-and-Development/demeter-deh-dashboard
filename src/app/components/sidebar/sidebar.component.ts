@@ -1,6 +1,5 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { UserInfo } from 'src/app/models/userInfo.model';
 declare let drawEntities: any;
 declare let resetDymerStart: any;
 
