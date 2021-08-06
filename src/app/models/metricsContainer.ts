@@ -1,8 +1,11 @@
 import { MetricsVolume } from "./metricsVolume";
+import { Consumer } from "./consumer";
 
 export interface metricsContainer {
 
     _id: string,
+    consumerId: string,
+    consumer: Consumer,
     uptime: number,
     hostname: string,
     ip: string,
