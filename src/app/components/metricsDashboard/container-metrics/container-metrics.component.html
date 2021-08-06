@@ -1,3 +1,133 @@
-<p>container-metrics works!</p>
+<div>
+	<section class="dash-row" style="padding: 10px;">
+		<mat-card>
+			<mat-card-title>
+				<div>Resource Information</div>
+			</mat-card-title>
+			<div class="fl-r"> Image name: {{state.image}} </div> <br>
+			<div class="fl-r"> RRM ID: {{state.RRM_ID}}</div> <br>
+			<section id="customers-card">
+				<mat-card *ngIf="dataSource?.filteredData.length <= 0" class="no-sh mr5" style="margin-bottom: 5px">
+					<div><span>No Match Found</span></div>
+				</mat-card>
 
-here put the dashboard with the metrics about specifc container (more detailed metrics, 24 readings per day)
+				<mat-card *ngIf="dataSource?.filteredData" class="no-sh">
+
+
+					<table mat-table [dataSource]="dataSource" matSort>
+
+						<ng-container matColumnDef="containerName">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Container hostname
+							</th>
+							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.name}} </td>
+						</ng-container>
+
+						<ng-container matColumnDef="ipv4">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> IPv4 </th>
+							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.ipv4}} </td>
+						</ng-container>
+
+						<ng-container matColumnDef="uptime">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Uptime </th>
+							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.uptime}} </td>
+						</ng-container>
+
+						<ng-container matColumnDef="host">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Host </th>
+							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.host}} </td>
+						</ng-container>
+
+						<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+						<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+					</table>
+					<mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+				</mat-card>
+			</section>
+		</mat-card>
+	</section>
+
+	<br>
+
+	<section class="dash-row card-des">
+
+		<mat-card>
+			<mat-card-title>Resource- CPU Usage Stats</mat-card-title>
+
+
+			<div class="col-sm-3 left-3">
+
+				<div *ngFor="let arr of cpu_res ">
+
+					<mat-list dense>
+						<mat-list-item>
+							<!-- <mat-icon mat-list-icon><span class="tc-cyan-500 text-xl">assessment</span></mat-icon> -->
+							<h3 mat-line><span class="mat-display-1 tc-cyan-500">{{arr.name}}</span></h3>
+							<p mat-line><span class="tc-white">Category: Container</span></p>
+						</mat-list-item>
+					</mat-list>
+					<div [style.height.px]="50">
+						<ngx-charts-bar-vertical [scheme]="{ domain: [ '#ed6384' ] }" [results]="arr.series"
+							[barPadding]="2" [gradient]="gradient" [xAxis]="false" [yAxis]="true" [legend]="false"
+							[showXAxisLabel]="false" [showYAxisLabel]="false" [xAxisLabel]="false" [yAxisLabel]="true"
+							(select)="onSelect($event)">
+						</ngx-charts-bar-vertical>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9 des-chart">
+				<div [style.height.px]="400">
+					<ngx-charts-line-chart [scheme]="{ domain: colorscheme }" [results]="cpu_res" [gradient]="gradient"
+						[autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true"
+						[showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+						[xAxisTickFormatting]="axisDate">
+					</ngx-charts-line-chart>
+				</div>
+			</div>
+
+		</mat-card>
+	</section>
+
+	<br>
+
+	<section class="dash-row card-des1">
+
+		<mat-card>
+			<mat-card-title>Resource- Memory Usage Stats</mat-card-title>
+
+
+			<div class="col-sm-3 left-3">
+
+				<div *ngFor="let arr of mem_res ">
+
+					<mat-list dense>
+						<mat-list-item>
+							<!-- <mat-icon mat-list-icon><span class="tc-cyan-500 text-xl">assessment</span></mat-icon> -->
+							<h3 mat-line><span class="mat-display-1 tc-cyan-500">{{arr.name}}</span></h3>
+							<p mat-line><span class="tc-white">Category: Container</span></p>
+						</mat-list-item>
+					</mat-list>
+					<div [style.height.px]="50">
+						<ngx-charts-bar-vertical [scheme]="{ domain: [ '#ed6384' ] }" [results]="arr.series"
+							[barPadding]="2" [gradient]="gradient" [xAxis]="false" [yAxis]="true" [legend]="false"
+							[showXAxisLabel]="false" [showYAxisLabel]="false" [xAxisLabel]="false" [yAxisLabel]="true"
+							(select)="onSelect($event)">
+						</ngx-charts-bar-vertical>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9 des-chart">
+				<div [style.height.px]="400">
+					<ngx-charts-line-chart [scheme]="{ domain: colorscheme }" [results]="mem_res" [gradient]="gradient"
+						[autoScale]="false" [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true"
+						[showYAxisLabel]="true" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+						[xAxisTickFormatting]="axisDate">
+					</ngx-charts-line-chart>
+				</div>
+			</div>
+		</mat-card>
+
+	</section>
+
+</div>
