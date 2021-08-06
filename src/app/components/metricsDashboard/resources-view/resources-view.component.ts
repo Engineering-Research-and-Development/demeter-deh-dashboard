@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
+import { AuthService } from 'src/app/services/auth.service';
 import { MetricsService } from 'src/app/services/metrics.service';
-import { rrm_multiple, rrm_single, multi } from '../../data_rrm';
 
 
 @Component({
@@ -12,19 +11,37 @@ import { rrm_multiple, rrm_single, multi } from '../../data_rrm';
 })
 export class ResourcesViewComponent implements OnInit {
 
-  constructor(private router: Router, private metricsService: MetricsService) { }
+  constructor(private router: Router, private metricsService: MetricsService, public authService: AuthService) { }
 
-  public members: any;
+  public ownedResources: any;
+  public consumedResoruces: any;
+  public hasOwnedResources = false;
+  public hasConsumedResources = false;
 
+  public kurac: any = undefined;
   public state = '';
 
   navigate(data) {
-    console.log("DATA TO PASS", JSON.stringify(data));
     // this.router.navigateByUrl('/123', { state: { hello: 'world' } });
     this.router.navigateByUrl("/metrics", { state: { rrmId: data } });
   }
 
+  navigateToContainer(data) {
+    // this.router.navigateByUrl('/123', { state: { hello: 'world' } });
+    this.router.navigateByUrl("/metrics-container", { state: { container: data } });
+  }
+
+
+  navigateToExample(data) {
+    // this.router.navigateByUrl('/123', { state: { hello: 'world' } });
+    this.router.navigateByUrl("/metrics", { state: { resource: data } });
+  }
+
+
   ngOnInit(): void {
+    if (!this.authService.isLoggedIn) {
+      this.router.navigateByUrl('');
+    }
     // console.log(this.router);
     this.state = window.history.state.alarm;
     this.getAllMetrics();
@@ -33,7 +50,15 @@ export class ResourcesViewComponent implements OnInit {
 
   getAllMetrics() {
     this.metricsService.getAllMetrics().subscribe(result => {
-      this.members = result
+      this.ownedResources = result.owned;
+      if (this.ownedResources.length > 0) {
+        this.hasOwnedResources = true;
+      }
+      this.consumedResoruces = result.consumed;
+      if (this.consumedResoruces.length > 0) {
+        this.hasConsumedResources = true;
+      }
+
     })
   }
 }
