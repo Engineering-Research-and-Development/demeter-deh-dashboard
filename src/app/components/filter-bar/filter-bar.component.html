@@ -12,7 +12,25 @@
                             <button type="button" id="dFilterDropdown" class="btn btn-default" ngbDropdownToggle><span
                                     class="caret"></span></button>
                             <div id="d_entityfilter" class="dropdown-menu dropdown-menu-right fixed-dropdown "
-                                aria-labelledby="dFilterDropdown" ngbDropdownMenu style="max-height: 875px!important;overflow: auto;">
+                                aria-labelledby="dFilterDropdown" ngbDropdownMenu
+                                style="max-height: 875px!important;overflow: auto;">
+
+
+                                <div class="grpname">
+                                    <div><label class="kms-title-label">Name</label>
+                                    </div>
+                                    <input type="text" class="form-control col-12 span12 mob-in" name="data[title]"
+                                        searchable-label="Name" required="" filter-id="name">
+                                    <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
+                                            aria-hidden="true" title="refresh filter value" filter-relid="name"
+                                            filter-rel="data[title]" filter-labeltext="" filter-label="Name"
+                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
+                                            class="switch switchfilter " title="active filter"><input type="checkbox"
+                                                filter-relid="name" filter-rel="data[title]" filter-label="Name"
+                                                filter-labeltext="" filter-multiple="false"
+                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
+                                        </label> </div>
+                                </div>
 
                                 <div class="grpfilter">
                                     <div><label class="kms-title-label">Resource ID </label>
@@ -45,9 +63,9 @@
                                             style="padding: 9px 40px 0px 0px; text-align: center;">
                                             From:</p>
                                         <input id="ratingFromInput" type="text"
-                                            class="form-control col-5 span12 mobile-input mob-in" style="display: inline;"
-                                            name="data[ratingFrom]" searchable-label="Rating From" required=""
-                                            filter-id="ratingFrom">
+                                            class="form-control col-5 span12 mobile-input mob-in"
+                                            style="display: inline;" name="data[ratingFrom]"
+                                            searchable-label="Rating From" required="" filter-id="ratingFrom">
                                         <p class="col-1 kms-title-label"
                                             style="padding: 9px 0px 0px 0px; text-align: center;">To:
                                         </p>
@@ -119,15 +137,17 @@
                                             style="padding: 9px 40px 0px 0px; text-align: center;">
                                             From:</p>
                                         <input id="maturityLevelFromInput" type="text"
-                                            class="form-control col-5 span12 mobile-input mob-in" style="display: inline;"
-                                            name="data[maturityLevelFrom]" searchable-label="Maturity Level From"
-                                            required="" filter-id="maturityLevelFrom">
+                                            class="form-control col-5 span12 mobile-input mob-in"
+                                            style="display: inline;" name="data[maturityLevelFrom]"
+                                            searchable-label="Maturity Level From" required=""
+                                            filter-id="maturityLevelFrom">
                                         <p class="col-1 kms-title-label"
                                             style="padding: 9px 0px 0px 0px; text-align: center;">To:
                                         </p>
                                         <input id="maturityLevelToInput" type="text"
-                                            class="form-control col-5 span12 mobile-input mob-in" name="data[maturityLevelTo]"
-                                            searchable-label="maturityLevelTo" required="" filter-id="maturityLevelTo">
+                                            class="form-control col-5 span12 mobile-input mob-in"
+                                            name="data[maturityLevelTo]" searchable-label="maturityLevelTo" required=""
+                                            filter-id="maturityLevelTo">
                                     </div>
 
                                     <div class="switch_container pull-right" style="display: none;"> <i
@@ -191,13 +211,15 @@
                                 <div class="grpfilter gpcreated">
                                     <div><label class="kms-title-label">Created</label>
                                         <label class="tooltip1"> <i
-                                            class="fa fa-info-circle icon-action icon-position"></i> <input
-                                            type="checkbox"><span>Filter by DEH Resource created date.</span></label></div>
+                                                class="fa fa-info-circle icon-action icon-position"></i> <input
+                                                type="checkbox"><span>Filter by DEH Resource created
+                                                date.</span></label>
+                                    </div>
                                     <div class="display-position">
                                         <p class="col-1 kms-title-label"
                                             style="padding: 9px 40px 0px 0px; text-align: center;">
                                             From:</p>
-                                        <input  id="createdFromInput" type="date"
+                                        <input id="createdFromInput" type="date"
                                             class="form-control col-5 span12 mobile-input" style="display: inline;"
                                             name="data[createdFrom]" searchable-label="Created From" required=""
                                             filter-id="createdFrom">
@@ -248,22 +270,25 @@
                                 <div class="grpfilter gplastupdate">
                                     <div><label class="kms-title-label">Last Updated</label>
                                         <label class="tooltip1"> <i
-                                            class="fa fa-info-circle icon-action icon-position"></i> <input
-                                            type="checkbox"><span>Filter by DEH Resrouce last updated date</span></label></div>
+                                                class="fa fa-info-circle icon-action icon-position"></i> <input
+                                                type="checkbox"><span>Filter by DEH Resrouce last updated
+                                                date</span></label>
+                                    </div>
                                     <div class="display-position">
                                         <p class="col-1 kms-title-label"
                                             style="padding: 9px 40px 0px 0px; text-align: center;">
                                             From:</p>
                                         <input id="lastUpdateFromInput" type="date"
-                                            class="form-control col-5 span12 mobile-input mob-in" style="display: inline;"
-                                            name="data[lastUpdateFrom]" searchable-label="Last Update From" required=""
-                                            filter-id="lastUpdateFrom">
+                                            class="form-control col-5 span12 mobile-input mob-in"
+                                            style="display: inline;" name="data[lastUpdateFrom]"
+                                            searchable-label="Last Update From" required="" filter-id="lastUpdateFrom">
                                         <p class="col-1 kms-title-label"
                                             style="padding: 9px 0px 0px 0px; text-align: center;">To:
                                         </p>
                                         <input id="lastUpdateToInput" type="date"
-                                            class="form-control col-5 span12 mobile-input mob-in" name="data[lastUpdateTo]"
-                                            searchable-label="lastUpdateTo" required="" filter-id="lastUpdateTo">
+                                            class="form-control col-5 span12 mobile-input mob-in"
+                                            name="data[lastUpdateTo]" searchable-label="lastUpdateTo" required=""
+                                            filter-id="lastUpdateTo">
                                     </div>
 
                                     <div class="switch_container pull-right" style="display: none;"> <i
