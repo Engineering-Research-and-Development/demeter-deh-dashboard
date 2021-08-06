@@ -20,13 +20,12 @@ export class HomeComponent implements OnInit {
   @ViewChild(LoginComponent) private loginComp: LoginComponent;
   @Output() isTablet = new EventEmitter<boolean>();
   clicked: boolean;
-  
-  constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {}
+  constructor(public authService: AuthService) { }
+
+  ngOnInit(): void { }
 
   slideLogin() {
-    console.log("PARENT", this.loginComp)
 
     this.loginComp.animateMe();
     this.emitLoginClick();

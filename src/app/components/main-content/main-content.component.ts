@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 declare let drawEntities: any;
 declare let resetDymerStart: any;
@@ -11,14 +12,21 @@ declare let mainDymerView: any;
   styleUrls: ['./main-content.component.css'],
 })
 export class MainContentComponent implements OnInit {
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.callDymer();
+      }
+    });
     if (this.authService.currentUser) {
       this.callDymer();
     }
     this.showLocation();
   }
+
 
   callDymer() {
     mainDymerView();
