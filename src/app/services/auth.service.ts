@@ -1,9 +1,9 @@
-import { environment } from './../../environments/environment';
-import { HttpClient} from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserInfo } from './../models/userInfo.model';
-import { map} from 'rxjs/operators';
+import { UserInfo } from '../models/userInfo.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,6 @@ export class AuthService {
   }
 
   getAttachmentCapToken(accessToken: string) {
-    console.log('attacment called')
     const url = `${environment.DYMER_URL}/api/metrics/getCapToken`;
     const headers = {
       'Content-Type': 'application/json',
@@ -53,7 +52,6 @@ export class AuthService {
       map((resp) => {
 
         if (!resp) {
-          console.log(resp.message);
           localStorage.setItem('token', accessToken);
         } else {
           localStorage.setItem('token', accessToken);

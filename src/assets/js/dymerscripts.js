@@ -125,7 +125,7 @@ function mainDymerView() {
     
         let index = 'dymerservicecomponent';
         if (checkRoles()) {
-            loadModelListToModal($('#cont-addentity'), index);
+            setTimeout(function(){loadModelListToModal($('#cont-addentity'), index);}, 1);
     
         }
     
