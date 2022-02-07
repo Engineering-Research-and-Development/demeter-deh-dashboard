@@ -8,9 +8,9 @@ describe('ResourcesViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourcesViewComponent ]
+      declarations: [ResourcesViewComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

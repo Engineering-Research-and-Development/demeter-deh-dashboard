@@ -10,17 +10,19 @@
     </div>
     <br />
 
+    <div class="row pull-right">
+      <div class="col-12  ">
+        <div id="cont-addentity"></div>
+      </div>
+    </div>
 
     <div *ngIf="hasOwnedResources; else noOwnedDehResources" id="cont-MyList" class="col-12 list">
       <span id="d_pagination_prop"></span>
 
-      <h3 class="title-metr">Your DEH Resrouces</h3>
+      <h3 class="title-metr">Your DEH Resources</h3>
       <div id="products" class="row view-group view-w">
         <div class="item col-lg-4 col-sm-12 col-md-4 " d-pagegroup="1" *ngFor="let ownedResource of ownedResources">
           <div class="thumbnail card">
-            <!-- <div class="img-event">
-                     <img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
-                 </div> -->
             <div class="caption card-body">
               <h4 style="margin-bottom: 2px;" class="card-title
          group
@@ -32,23 +34,17 @@
                 {{ownedResource.name}}
               </h4>
               <div class="col-12 p0 mb-2">
-                <!-- <small class="text-muted">type</small> -->
                 <span class="pull-right"></span>
               </div>
               <p id="desc-0" class="card-text group inner list-group-item-text resourse-card">
                 RRM ID : {{ownedResource.rrmId}} <br>
                 No. Of Instances : {{ownedResource.numberOfInstances}} <br>
               </p>
-              <!--  <hr class="my-4"> -->
               <hr />
               <div class="row">
                 <div class="col-12">
-                  <button class="btn btn-secondary btn-sm pull-right" (click)="navigate(ownedResource.rrmId)">View
+                  <button class="btn btn-secondary btn-sm pull-right" (click)="navigate(ownedResource)">View
                     More</button>
-                  <!-- <span
-          class="btn btn-secondary btn-sm pull-right"
-          onclick="navigate(member.rrmId)">View more</span
-         > -->
                 </div>
               </div>
             </div>
@@ -56,20 +52,24 @@
         </div>
       </div>
     </div>
-    <ng-template #noOwnedDehResources></ng-template>
+    <ng-template #noOwnedDehResources>
+      <div *ngIf="displayMessage" class="col-12 list">
+        <h3 class="title-metr">Your DEH Resources</h3>
+        <div>You have no resources which other users are consuming.</div>
+      </div>
+
+    </ng-template>
 
 
     <div *ngIf="hasConsumedResources; else noConsumedDehResources" id="cont-MyList" class="col-12 list">
       <span id="d_pagination_prop"></span>
 
-      <h3 class="title-metr">Consumed DEH Resrouces</h3>
+      <h3 class="title-metr">Consumed DEH Resources</h3>
       <div id="products" class="row view-group view-w">
         <div class="item col-lg-4 col-sm-12 col-md-4 " d-pagegroup="1"
           *ngFor="let consumedResoruce of consumedResoruces">
           <div class="thumbnail card">
-            <!-- <div class="img-event">
-                     <img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
-                 </div> -->
+
             <div class="caption card-body">
               <h4 style="margin-bottom: 2px;" class="card-title
          group
@@ -81,23 +81,17 @@
                 {{consumedResoruce.image}}
               </h4>
               <div class="col-12 p0 mb-2">
-                <!-- <small class="text-muted">type</small> -->
                 <span class="pull-right"></span>
               </div>
               <p id="desc-0" class="card-text group inner list-group-item-text resourse-card">
                 RRM ID : {{consumedResoruce.RRM_ID}} <br>
               </p>
-              <!--  <hr class="my-4"> -->
               <hr />
               <div class="row">
                 ​​​​​​​ <div class="col-12">
                   <button class="btn btn-secondary btn-sm pull-right"
                     (click)="navigateToContainer(consumedResoruce)">View
                     More</button>
-                  <!-- <span
-          class="btn btn-secondary btn-sm pull-right"
-          onclick="navigate(member.rrmId)">View more</span
-         > -->
                 </div>
               </div>
             </div>
@@ -106,4 +100,10 @@
       </div>
 
     </div>
-    <ng-template #noConsumedDehResources></ng-template>
+    <ng-template #noConsumedDehResources>
+      <div *ngIf="displayMessage" class="col-12 list">
+        <h3 class="title-metr">Consumed DEH Resources</h3>
+        <div>You aren't consuming any DEH resource.</div>
+      </div>
+
+    </ng-template>

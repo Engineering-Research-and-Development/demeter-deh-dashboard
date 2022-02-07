@@ -17,23 +17,19 @@ export class ResourcesViewComponent implements OnInit {
   public consumedResoruces: any;
   public hasOwnedResources = false;
   public hasConsumedResources = false;
-
-  public kurac: any = undefined;
+  public displayMessage = false;
   public state = '';
 
   navigate(data) {
-    // this.router.navigateByUrl('/123', { state: { hello: 'world' } });
-    this.router.navigateByUrl("/metrics", { state: { rrmId: data } });
+    this.router.navigateByUrl("/metrics", { state: { ownedResourceTest: data } });
   }
 
   navigateToContainer(data) {
-    // this.router.navigateByUrl('/123', { state: { hello: 'world' } });
     this.router.navigateByUrl("/metrics-container", { state: { container: data } });
   }
 
 
   navigateToExample(data) {
-    // this.router.navigateByUrl('/123', { state: { hello: 'world' } });
     this.router.navigateByUrl("/metrics", { state: { resource: data } });
   }
 
@@ -42,23 +38,24 @@ export class ResourcesViewComponent implements OnInit {
     if (!this.authService.isLoggedIn) {
       this.router.navigateByUrl('');
     }
-    // console.log(this.router);
     this.state = window.history.state.alarm;
     this.getAllMetrics();
   }
-
 
   getAllMetrics() {
     this.metricsService.getAllMetrics().subscribe(result => {
       this.ownedResources = result.owned;
       if (this.ownedResources.length > 0) {
         this.hasOwnedResources = true;
+      } else {
+        this.displayMessage = true;
       }
       this.consumedResoruces = result.consumed;
       if (this.consumedResoruces.length > 0) {
         this.hasConsumedResources = true;
+      } else {
+        this.displayMessage = true;
       }
-
     })
   }
 }
