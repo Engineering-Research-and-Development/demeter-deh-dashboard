@@ -1,5 +1,6 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 declare let drawEntities: any;
 declare let resetDymerStart: any;
 
@@ -12,7 +13,7 @@ export class SidebarComponent implements OnInit {
   toggleClass: boolean;
   public roles: string[];
 
-  constructor(public authService: AuthService) { }
+  constructor(private router: Router, public authService: AuthService) { }
 
   ngOnInit(): void {
     if (this.authService.currentUser) {
@@ -27,42 +28,110 @@ export class SidebarComponent implements OnInit {
     this.toggleClass = !this.toggleClass;
   }
 
-  //temp json config
-  jsonConfig = {
-    query: {
-      query: {
-        query: {
-          bool: {
-            must: [
-              {
-                term: {
-                  _index: 'dymerservicecomponent',
-                },
-              },
-            ],
-          },
+  getUserId(): string {
+    if (this.authService.currentUser) {
+      return this.authService.currentUser.User.id;
+    }
+    return "";
+  }
+
+  navigateToAllResources() {
+    this.router.navigateByUrl('', { state: { jsonConfig: this.showAllResources() } });
+  }
+
+  navigateToUserResources() {
+    this.router.navigateByUrl('', { state: { jsonConfig: this.showUserResources() } });
+  }
+
+  checkRoles() {
+    let demeterProvider = false;
+
+    if (this.authService.currentUser) {
+      this.authService.currentUser.User.roles.forEach((role) => {
+        if (role == "DEMETER Provider") {
+          demeterProvider = true;
+        }
+      });
+    }
+
+    return demeterProvider;
+  }
+  showUserResources() {
+    let userResources = {
+      "query": {
+        "query": {
+          "query": {
+            "bool": {
+              "should": [{
+                "term": {
+                  "_index": "dymerservicecomponent"
+                }
+              }, {
+                "term": {
+                  "owner": this.getUserId()
+                }
+              }]
+            }
+          }
+        }
+      },
+
+      endpoint: 'entity.search',
+      viewtype: 'teaserlist',
+      target: {
+        teaserlist: {
+          id: '#cont-MyList',
+          action: 'html',
+          reload: false,
+        },
+        fullcontent: {
+          id: '#cont-MyList',
+          action: 'html',
         },
       },
-    },
+    };
 
-    endpoint: 'entity.search',
-    viewtype: 'teaserlist',
-    target: {
-      teaserlist: {
-        id: '#cont-MyList',
-        action: 'html',
-        reload: false,
-      },
-      fullcontent: {
-        id: '#cont-MyList',
-        action: 'html',
-      },
-    },
-  };
-
-  cambia(jj: any) {
-    var confbase = this.jsonConfig;
     resetDymerStart();
-    drawEntities(jj);
+    drawEntities(userResources);
+
+    return userResources;
+  }
+
+  showAllResources() {
+    let allResources = {
+      "query": {
+        "query": {
+          "query": {
+            "bool": {
+              "should": [{
+                "term": {
+                  "_index": "dymerservicecomponent"
+                }
+              }
+              ]
+            }
+          }
+        }
+      },
+
+      endpoint: 'entity.search',
+      viewtype: 'teaserlist',
+      target: {
+        teaserlist: {
+          id: '#cont-MyList',
+          action: 'html',
+          reload: false,
+        },
+        fullcontent: {
+          id: '#cont-MyList',
+          action: 'html',
+        },
+      },
+    };
+
+    resetDymerStart();
+    drawEntities(allResources);
+
+    return allResources;
   }
 }
