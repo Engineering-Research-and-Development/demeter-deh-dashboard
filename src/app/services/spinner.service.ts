@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SpinnerService {
   private spinner$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
+  constructor() { }
 
   getSpinnerObservable(): Observable<boolean> {
     return this.spinner$.asObservable();

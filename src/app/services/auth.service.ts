@@ -31,12 +31,16 @@ export class AuthService {
       map((resp) => {
         if (!resp.success) {
         } else {
-          this.getAttachmentCapToken(resp.data.token).subscribe();
+          localStorage.setItem('DYM', resp.data.token);
+          localStorage.setItem("d_uid", JSON.parse(atob(resp.data.token)).User.id);
+
+          this.getAttachmentCapToken(resp.data.token);
         }
         return resp;
       })
     );
   }
+
 
   getAttachmentCapToken(accessToken: string) {
     const url = `${environment.DYMER_URL}/api/metrics/getCapToken`;
@@ -47,23 +51,17 @@ export class AuthService {
 
     let token = JSON.parse(atob(accessToken))
     let accessTokenParsed = token.access_token;
+    this._http.post<Response>(url, { accessToken: accessTokenParsed }, { headers }).subscribe(resp => {
 
-    return this._http.post<Response>(url, { accessToken: accessTokenParsed }, { headers }).pipe(
-      map((resp) => {
-
-        if (!resp) {
-          localStorage.setItem('token', accessToken);
-        } else {
-          localStorage.setItem('token', accessToken);
-          localStorage.setItem('capToken', resp.data.token);
-        }
-        return resp;
-      })
-    );
+      if (resp.success === true) {
+        localStorage.setItem('capToken', resp.data.token);
+      }
+    })
   }
 
   logout() {
     let accessToken = this.currentUser.access_token;
+
 
     const url = `${environment.DYMER_URL}/api/xauth/logout`;
     const headers = {
@@ -87,7 +85,7 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('DYM');
   }
 
   isLoggedIn() {
@@ -98,8 +96,6 @@ export class AuthService {
       return false;
     }
     return true;
-    // const isExpired = helper.isTokenExpired(token);
-    // return !isExpired;
   }
 
   isExpired() {
@@ -112,15 +108,22 @@ export class AuthService {
   }
 
   removeToken(): void {
-    if (localStorage.getItem('token')) {
-      localStorage.removeItem('token');
+    if (localStorage.getItem('DYM')) {
+      localStorage.removeItem('DYM');
       this.removeCapToken();
+      this.removeLoggedUser();
     }
   }
 
   removeCapToken(): void {
     if (localStorage.getItem('capToken')) {
       localStorage.removeItem('capToken');
+    }
+  }
+
+  removeLoggedUser(): void {
+    if (localStorage.getItem('logged')) {
+      localStorage.removeItem('logged');
     }
   }
 

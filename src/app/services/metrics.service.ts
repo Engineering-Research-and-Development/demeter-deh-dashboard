@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
-import { Response} from './../models/response'
+import { Response } from './../models/response'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class MetricsService {
   constructor(private _http: HttpClient, private authService: AuthService) { }
 
 
-  getAllMetrics(){
+  getAllMetrics() {
 
     let accessToken = this.authService.currentUser.access_token;
 
@@ -30,14 +30,14 @@ export class MetricsService {
         if (!resp.success) {
           return resp.message;
         }
-        
+
         return resp.data;
       })
     );
   }
-  
 
-  getMetricsByRrmId(rrmId: String){
+
+  getMetricsByRrmId(rrmId: String) {
 
     let accessToken = this.authService.currentUser.access_token;
 
@@ -57,8 +57,8 @@ export class MetricsService {
       })
     );
   }
-  
-  getMetricsByContainerId(containerId: String){
+
+  getMetricsByContainerId(containerId: String) {
 
     let accessToken = this.authService.currentUser.access_token;
 
@@ -78,5 +78,4 @@ export class MetricsService {
       })
     );
   }
-
 }
