@@ -8,10 +8,11 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     public authService: AuthService
-  ) {}
+  ) { }
   ngOnInit(): void {
     if (this.authService.isExpired()) {
       this.authService.removeToken();
@@ -19,11 +20,11 @@ export class AppComponent implements OnInit {
     }
 
     if (
-      !localStorage.getItem('token') &&
-      localStorage.getItem('token') !== undefined
+      !localStorage.getItem('DYM') &&
+      localStorage.getItem('DYM') !== undefined
     ) {
       this._activatedRoute.queryParams.subscribe((params) => {
-        const token = params['token'];
+        const token = params['DYM'];
         const tokenType = params.token_type;
 
         if (token) {
