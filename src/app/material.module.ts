@@ -1,5 +1,5 @@
-import { ModuleWithProviders, NgModule} from "@angular/core";
-import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { ModuleWithProviders, NgModule } from "@angular/core";
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -29,13 +29,11 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule,MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 
 @NgModule({
     imports: [
@@ -110,7 +108,7 @@ import { MatSort } from '@angular/material/sort';
         MatTreeModule,
         MatNativeDateModule
     ],
-    providers: [     
+    providers: [
     ]
 })
 export class MaterialModule {

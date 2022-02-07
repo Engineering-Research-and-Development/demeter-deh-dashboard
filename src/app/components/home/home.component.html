@@ -9,19 +9,15 @@
 
 </div>
 <div *ngIf="!authService.isLoggedIn()" class="description my-4">
-    <!-- <p class="project-desc" [ngClass]="{'blur-image' : isTablet}" style="text-align: justify;">
-        <strong>The DEMETER Enabler HUB (DEH) </strong>s the digital space dedicated to end users of DEMETER where they will be able to create and register their own
-        resources. Users will have two roles and they will act as <strong>DEMETER Provider</strong> and <strong>DEMETER Consumer</strong>. A DEMETER Providers will be able to offer their
-        resources (components, services, data sources, devices, platforms, etc), while DEMETER Consumers will be able to browse it, and find suitable
-        resources matching their requirements. Data entities from any Platform, Thing, Application, Service will be managed through these APIs, but
-        for the sole purpose of discovery and management of the resource registry maintained by the DEH.
-    </p>
-<br> -->
     <p class="project-desc" [ngClass]="{'blur-image' : isTablet}" style="text-align: justify;">
-        <strong> DEMETER Enabler HUB (DEH)</strong> is a platform dedicated to end-users (providers and consumers) of <strong>DEMETER</strong> for exchanging information about resources (components, services, data sources, devices, platforms, etc.). More information you can find 
+        <strong> DEMETER Enabler HUB (DEH)</strong> is a platform dedicated to end-users (providers and consumers) of
+        <strong>DEMETER</strong> for exchanging information about resources (components, services, data sources,
+        devices, platforms, etc.). More information you can find
         <a [routerLink]="['about']" style="cursor: pointer; color: #4ac2c1;">
-            here</a>. If you want to find or offer a resource, please <a (click)="slideLogin()" style="cursor: pointer; color: #4ac2c1;">
-                login</a> or <a href="https://acs.bse.h2020-demeter-cloud.eu:5443/sign_up/" target="_blank" style="cursor: pointer; color: #4ac2c1;">
-            register</a>.</p>
+            here</a>. If you want to find or offer a resource, please <a (click)="slideLogin()"
+            style="cursor: pointer; color: #4ac2c1;">
+            login</a> or <a href="https://acs.bse.h2020-demeter-cloud.eu:5443/sign_up/" target="_blank"
+            style="cursor: pointer; color: #4ac2c1;">
+            register</a>.
+    </p>
 </div>
-

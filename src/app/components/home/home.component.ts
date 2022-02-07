@@ -5,6 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from '../login/login.component';
 
@@ -21,12 +22,17 @@ export class HomeComponent implements OnInit {
   @Output() isTablet = new EventEmitter<boolean>();
   clicked: boolean;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.authService.isExpired()) {
+      this.authService.removeToken();
+      this.authService.removeCapToken();
+      this.router.navigateByUrl('');
+    }
+  }
 
   slideLogin() {
-
     this.loginComp.animateMe();
     this.emitLoginClick();
   }

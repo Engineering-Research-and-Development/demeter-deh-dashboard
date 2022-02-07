@@ -131,6 +131,7 @@
 .topbar .auth-icon {
   color: #4ac2c1;
 }
+
 .topbar .auth-icon:hover,
 i.fas.fa-sign-in-alt:hover {
   color: #939598 !important;
@@ -155,15 +156,14 @@ i.fas.fa-sign-in-alt:hover {
   }
 }
 
-.username{
+.username {
   display: grid;
 }
-.mob-username{
 
-}
+.mob-username {}
 
 @media only screen and (max-width: 992px) {
-  .mob-username{
-display: block!important;
+  .mob-username {
+    display: block !important;
   }
 }

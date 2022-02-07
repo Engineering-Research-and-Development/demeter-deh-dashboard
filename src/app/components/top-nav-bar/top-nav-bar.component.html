@@ -1,21 +1,11 @@
-<!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-    <!-- Sidebar Toggle (Topbar) -->
-
     <div class="login">
         <app-login class="appLogin" (hideLogin)="hideLoginForm($event)" [ngClass]="{'hide-element':hideLoginParent}">
         </app-login>
     </div>
-    <!-- slide down Login -->
-
     <div class="login-icon">
-
         <ul class="nav navbar-nav ml-auto">
-
             <div class="topbar-divider d-none d-sm-block"></div>
-
-            <!-- Nav Item - User Information -->
             <li ngbDropdown class="nav-item dropdown no-arrow" style="display: block;" *ngIf="authService.isLoggedIn()">
                 <a ngbDropdownToggle class="nav-link dropdown-toggle" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,7 +53,4 @@
 
         </ul>
     </div>
-    <!-- Topbar Navbar -->
-
 </nav>
-<!-- End of Topbar -->

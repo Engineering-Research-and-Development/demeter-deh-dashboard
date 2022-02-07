@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
-declare let mainDymerView: any;
 declare let resetDymerStart: any;
 
 @Component({
@@ -24,7 +23,7 @@ declare let resetDymerStart: any;
       transition('small <=> large', animate('200ms ease-in')),
     ]),
     trigger('slideLoginMobile', [
-      state('small', style({ top: '-210px' })),
+      state('small', style({ top: '-260px' })),
       state('large', style({ top: '190px' })),
       transition('small <=> large', animate('100ms ease-in')),
     ]),
@@ -92,9 +91,5 @@ export class LoginComponent implements OnInit {
         this._router.navigateByUrl('/');
       }
     });
-  }
-
-  callDymer() {
-    mainDymerView();
   }
 }
