@@ -1,343 +1,338 @@
-<div id="dymer_filtercontent">
-    <div class="row">
-        <div class="col-12">
-            <div class="input-group" id="adv-search">
-                <input id="dTagFilter" type="text" data-role="tagsinput"
-                    placeholder="Search for snippets, click on caret" class="col-6">
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div ngbDropdown>
-                            <button type="button" id="dFilterClearAll" class="btn "><i class="fas fa-eraser"
-                                    onclick="clearDFilter()"></i></button>
-                            <button type="button" id="dFilterDropdown" class="btn btn-default" ngbDropdownToggle><span
-                                    class="caret"></span></button>
-                            <div id="d_entityfilter" class="dropdown-menu dropdown-menu-right fixed-dropdown "
-                                aria-labelledby="dFilterDropdown" ngbDropdownMenu
-                                style="max-height: 875px!important;overflow: auto;">
+<div class="row">
+    <div class="col-12">
+        <form id="myfilter" class="dymerSearch custom-dymer-search">
+            <div id="contform" class="row"></div>
+
+            <div class="row margins-on-row">
+
+                <div class="grpfilter col-lg-3 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text"><label class="kms-title-label">Name</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by DEH Resource name.</span></label>
+                    </div>
+                    <input [(ngModel)]=name type="text" class="form-control col-12 span12 mob-in" name="data[title]"
+                        searchable-label="Name" required="" filter-id="name">
+                </div>
 
 
-                                <div class="grpname">
-                                    <div><label class="kms-title-label">Name</label>
-                                    </div>
-                                    <input type="text" class="form-control col-12 span12 mob-in" name="data[title]"
-                                        searchable-label="Name" required="" filter-id="name">
-                                    <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
-                                            aria-hidden="true" title="refresh filter value" filter-relid="name"
-                                            filter-rel="data[title]" filter-labeltext="" filter-label="Name"
-                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
-                                            class="switch switchfilter " title="active filter"><input type="checkbox"
-                                                filter-relid="name" filter-rel="data[title]" filter-label="Name"
-                                                filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
-                                        </label> </div>
-                                </div>
-
-                                <div class="grpfilter">
-                                    <div><label class="kms-title-label">Resource ID </label>
-                                        <label class="tooltip1"> <i
-                                                class="fa fa-info-circle icon-action icon-position"></i> <input
-                                                type="checkbox"><span>Filter by Resource ID got from BSE.</span></label>
-                                    </div>
-                                    <input type="text" class="form-control col-12 span12 mob-in" name="data[uid]"
-                                        searchable-label="Resource id" required="" filter-id="resource_id">
-                                    <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
-                                            aria-hidden="true" title="refresh filter value" filter-relid="resource_id"
-                                            filter-rel="data[uid]" filter-labeltext="" filter-label="Resource id"
-                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
-                                            class="switch switchfilter " title="active filter"><input type="checkbox"
-                                                filter-relid="resource_id" filter-rel="data[uid]"
-                                                filter-label="Resource id" filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
-                                        </label> </div>
-                                </div>
-
-                                <div class="grpfilter gprating">
-                                    <div><label class="kms-title-label">Rating</label>
-                                        <label class="tooltip1"> <i
-                                                class="fa fa-info-circle icon-action icon-position"></i> <input
-                                                type="checkbox"><span>Filter by average DEH Resource
-                                                Rating.</span></label>
-                                    </div>
-                                    <div class="display-position">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 40px 0px 0px; text-align: center;">
-                                            From:</p>
-                                        <input id="ratingFromInput" type="text"
-                                            class="form-control col-5 span12 mobile-input mob-in"
-                                            style="display: inline;" name="data[ratingFrom]"
-                                            searchable-label="Rating From" required="" filter-id="ratingFrom">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 0px 0px 0px; text-align: center;">To:
-                                        </p>
-                                        <input id="ratingToInput" type="text"
-                                            class="form-control col-5 span12 mobile-input mob-in" name="data[ratingTo]"
-                                            searchable-label="ratingTo" required="" filter-id="ratingTo">
-                                    </div>
-
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="ratingFrom"
-                                            filter-rel="data[ratingFrom]" filter-labeltext="" filter-label="Rating From"
-                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i>
-                                        <label class="switch switchfilter " title="active filter"><input type="checkbox"
-                                                filter-relid="ratingFrom" filter-rel="data[ratingFrom]"
-                                                filter-label="Rating From" filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="ratingTo"
-                                            filter-rel="data[ratingTo]" filter-labeltext="" filter-label="Rating To"
-                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
-                                            class="switch switchfilter " title="active filter"><input id="ratingTo"
-                                                type="checkbox" filter-relid="ratingTo" filter-rel="data[ratingTo]"
-                                                filter-label="Rating To" filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
-                                        </label> </div>
-
-                                    <div class="switch_container pull-right">
-                                        <i class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value"
-                                            onclick="refreshDTagFilterComposed($(this),'gprating')"></i> <label
-                                            class="switch switchfilter " title="active filter"><input id="ll"
-                                                type="checkbox" onclick="manageDTagFilterComposed($(this),'gprating')">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
+                <div class="grpfilter col-lg-3 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text"><label class="kms-title-label">Resource ID </label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by Resource ID got from BSE.</span></label>
+                    </div>
+                    <input [(ngModel)]=id type="text" class="form-control col-12 span12 mob-in" name="data[uid]"
+                        searchable-label="Resource id" required="" filter-id="resource_id">
+                </div>
 
 
-                                <div class="grpfilter gpmaturitylevel">
-                                    <div><label class="kms-title-label">Maturity Level</label>
-                                        <label class="tooltip1"> <i
-                                                class="fa fa-info-circle icon-action icon-position"></i> <input
-                                                type="checkbox"><span>Filter by Maturity level. <br>
-                                                1.Initial (chaotic, ad hoc, individual heroics) - the starting point for
-                                                use of a new or
-                                                undocumented repeat process.
-                                                <br>
-                                                2. Repeatable - the process is at least documented sufficiently such
-                                                that repeating the same
-                                                steps may be attempted.
-                                                <br>
-                                                3. Defined - the process is defined/confirmed as a standard business
-                                                process
-                                                <br>
-                                                4. Capable - the process is quantitatively managed in accordance with
-                                                agreed-upon metrics.
-                                                <br>
-                                                5. Efficient - process management includes deliberate process
-                                                optimization/improvement.</span></label>
-                                    </div>
-                                    <div class="display-position">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 40px 0px 0px; text-align: center;">
-                                            From:</p>
-                                        <input id="maturityLevelFromInput" type="text"
-                                            class="form-control col-5 span12 mobile-input mob-in"
-                                            style="display: inline;" name="data[maturityLevelFrom]"
-                                            searchable-label="Maturity Level From" required=""
-                                            filter-id="maturityLevelFrom">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 0px 0px 0px; text-align: center;">To:
-                                        </p>
-                                        <input id="maturityLevelToInput" type="text"
-                                            class="form-control col-5 span12 mobile-input mob-in"
-                                            name="data[maturityLevelTo]" searchable-label="maturityLevelTo" required=""
-                                            filter-id="maturityLevelTo">
-                                    </div>
+                <!-- Type -->
+                <div class="grpfilter col-lg-3 col-md-6 col-sm-12 margins-on-elements-advanced">
 
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="maturityLevelFrom"
-                                            filter-rel="data[maturityLevelFrom]" filter-labeltext=""
-                                            filter-label="Maturity Level From" filter-multiple="false"
-                                            onclick="refreshDTagFilter( $(this))"></i>
-                                        <label class="switch switchfilter " title="active filter"><input type="checkbox"
-                                                filter-relid="maturityLevelFrom" filter-rel="data[maturityLevelFrom]"
-                                                filter-label="Maturity Level From" filter-labeltext=""
-                                                filter-multiple="false" onclick="manageDTagFilter( $(this))">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
+                    <div class="search-fields-text">
+                        <label class="kms-title-label">Type</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by the
+                                type of "software" (SW) of DEH resource.</span></label>
 
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="maturityLevelTo"
-                                            filter-rel="data[maturityLevelTo]" filter-labeltext=""
-                                            filter-label="Maturity Level To" filter-multiple="false"
-                                            onclick="refreshDTagFilter( $(this))"></i> <label
-                                            class="switch switchfilter " title="active filter"><input
-                                                id="maturityLevelTo" type="checkbox" filter-relid="maturityLevelTo"
-                                                filter-rel="data[maturityLevelTo]" filter-label="Maturity Level To"
-                                                filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
-                                        </label> </div>
 
-                                    <div class="switch_container pull-right">
-                                        <i class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value"
-                                            onclick="refreshDTagFilterComposed($(this),'gpmaturitylevel')"></i> <label
-                                            class="switch switchfilter " title="active filter"><input id="ll"
-                                                type="checkbox"
-                                                onclick="manageDTagFilterComposed($(this),'gpmaturitylevel')"> <span
-                                                class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
+                    </div>
+                    <select id=kurac class="form-control selectpicker" name="data[deh_type]"
+                        searchable-override="data[deh_type]" data-live-search="true" searchable-element="true"
+                        searchable-text="Type" data-none-selected-text="Select type">
+                        <option class="text-muted" value="">Select type</option>
+                        <option value="component">Component</option>
+                        <option value="service">Service</option>
+                        <option value="device">Device</option>
+                        <option value="dataset">Dataset</option>
+                        <option value="platform">Platform</option>
+                    </select>
+                </div>
 
-                                <div class="grpfilter">
-                                    <div><label class="kms-title-label">Nearby Resources (in kilometers)</label>
-                                        <label class="tooltip1"> <i
-                                                class="fa fa-info-circle icon-action icon-position"></i> <input
-                                                type="checkbox"><span>Filter resources around you.</span></label>
-                                    </div>
-                                    <input type="text" class="form-control col-12 span12 mob-in" name="data[distance]"
-                                        searchable-label="Distance (m)" required="" filter-id="distance">
-                                    <div class="switch_container pull-right"> <i class="fa fa-refresh filterSingRefresh"
-                                            aria-hidden="true" title="refresh filter value" filter-relid="distance"
-                                            filter-rel="data[distance]" filter-labeltext="" filter-label="Distance (km)"
-                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
-                                            class="switch switchfilter " title="active filter"><input type="checkbox"
-                                                filter-relid="distance" filter-rel="data[distance]"
-                                                filter-label="Distance (km)" filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
-                                        </label> </div>
-                                </div>
 
-                                <div class="grpfilter gpcreated">
-                                    <div><label class="kms-title-label">Created</label>
-                                        <label class="tooltip1"> <i
-                                                class="fa fa-info-circle icon-action icon-position"></i> <input
-                                                type="checkbox"><span>Filter by DEH Resource created
-                                                date.</span></label>
-                                    </div>
-                                    <div class="display-position">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 40px 0px 0px; text-align: center;">
-                                            From:</p>
-                                        <input id="createdFromInput" type="date"
-                                            class="form-control col-5 span12 mobile-input" style="display: inline;"
-                                            name="data[createdFrom]" searchable-label="Created From" required=""
-                                            filter-id="createdFrom">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 0px 0px 0px; text-align: center;">To:
-                                        </p>
-                                        <input id="createdToInput" type="date"
-                                            class="form-control col-5 span12 mobile-input mob-in" name="data[createdTo]"
-                                            searchable-label="createdTo" required="" filter-id="createdTo">
-                                    </div>
+               
 
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="createdFrom"
-                                            filter-rel="data[createdFrom]" filter-labeltext=""
-                                            filter-label="Created From" filter-multiple="false"
-                                            onclick="refreshDTagFilter( $(this))"></i>
-                                        <label class="switch switchfilter " title="active filter"><input type="checkbox"
-                                                filter-relid="createdFrom" filter-rel="data[createdFrom]"
-                                                filter-label="Created From" filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
 
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="createdTo"
-                                            filter-rel="data[createdTo]" filter-labeltext="" filter-label="Created To"
-                                            filter-multiple="false" onclick="refreshDTagFilter( $(this))"></i> <label
-                                            class="switch switchfilter " title="active filter"><input id="createdTo"
-                                                type="checkbox" filter-relid="createdTo" filter-rel="data[createdTo]"
-                                                filter-label="Created To" filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
-                                        </label> </div>
 
-                                    <div class="switch_container pull-right">
-                                        <i class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value"
-                                            onclick="refreshDTagFilterComposed($(this),'gpcreated')"></i> <label
-                                            class="switch switchfilter " title="active filter"><input id="ll"
-                                                type="checkbox" onclick="manageDTagFilterComposed($(this),'gpcreated')">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
+                <div class="grpfilter col-lg-3 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text"><label class="kms-title-label">Distance (km)</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by resources around you.</span></label>
+                    </div>
+                    <input type="text" class="form-control col-12 span12 mob-in" name="data[distance]"
+                        searchable-label="Distance (m)" required="" filter-id="distance">
 
-                                <div class="grpfilter gplastupdate">
-                                    <div><label class="kms-title-label">Last Updated</label>
-                                        <label class="tooltip1"> <i
-                                                class="fa fa-info-circle icon-action icon-position"></i> <input
-                                                type="checkbox"><span>Filter by DEH Resrouce last updated
-                                                date</span></label>
-                                    </div>
-                                    <div class="display-position">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 40px 0px 0px; text-align: center;">
-                                            From:</p>
-                                        <input id="lastUpdateFromInput" type="date"
-                                            class="form-control col-5 span12 mobile-input mob-in"
-                                            style="display: inline;" name="data[lastUpdateFrom]"
-                                            searchable-label="Last Update From" required="" filter-id="lastUpdateFrom">
-                                        <p class="col-1 kms-title-label"
-                                            style="padding: 9px 0px 0px 0px; text-align: center;">To:
-                                        </p>
-                                        <input id="lastUpdateToInput" type="date"
-                                            class="form-control col-5 span12 mobile-input mob-in"
-                                            name="data[lastUpdateTo]" searchable-label="lastUpdateTo" required=""
-                                            filter-id="lastUpdateTo">
-                                    </div>
+                </div>
+                <div class="grpfilter col-lg-4 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text">
+                        <label class="kms-title-label">Category</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by the category of "software" (SW) feature in
+                                which the DEH resource is classified.</span></label>
+                    </div>
+                    <select [(ngModel)]=category class="form-control selectpicker" name="data[category]" multiple=""
+                        searchable-override="data[category]" searchable-label="" data-live-search="true"
+                        searchable-element="false" searchable-text="Category" data-none-selected-text="Select category">
+                        <option value="Agri Hub">Agri Hub</option>
+                        <option value="AI">AI</option>
+                        <option value="Algorithm">Algorithm</option>
+                        <option value="Business Applications">Business Applications</option>
+                        <option value="Computers">Computers</option>
+                        <option value="Computer Vision">Computer Vision</option>
+                        <option value="Database">Database</option>
+                        <option value="Data Products">Data Products</option>
+                        <option value="Hardware">Hardware</option>
+                        <option value="Industries">Industries</option>
+                        <option value="Infrastructure Software">Infrastructure Software</option>
+                        <option value="IoT">IoT</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="SaaS">SaaS</option>
+                        <option value="Software">Software</option>
+                    </select>
+                </div>
+                <div class="grpfilter col-lg-4 col-md-6 col-sm-12 margins-on-elements-advanced">
 
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="lastUpdateFrom"
-                                            filter-rel="data[lastUpdateFrom]" filter-labeltext=""
-                                            filter-label="Last Update From" filter-multiple="false"
-                                            onclick="refreshDTagFilter( $(this))"></i>
-                                        <label class="switch switchfilter " title="active filter"><input type="checkbox"
-                                                filter-relid="lastUpdateFrom" filter-rel="data[lastUpdateFrom]"
-                                                filter-label="Last Update From" filter-labeltext=""
-                                                filter-multiple="false" onclick="manageDTagFilter( $(this))">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
+                    <div class="search-fields-text"><label class="kms-title-label">Status</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by status of
+                                DEH
+                                Resource:
+                                <br>
+                                1. Published - DEH Resource available for use and can be seen by other users
+                                <br>
+                                2. Not published - DEH Resource ready for use but can't be seen by other users
+                                <br>
+                                3. Draft - DEH Resource still in develop phase</span></label>
+                    </div>
 
-                                    <div class="switch_container pull-right" style="display: none;"> <i
-                                            class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value" filter-relid="createdTo"
-                                            filter-rel="data[lastUpdateTo]" filter-labeltext=""
-                                            filter-label="Last Update To" filter-multiple="false"
-                                            onclick="refreshDTagFilter( $(this))"></i> <label
-                                            class="switch switchfilter " title="active filter"><input id="lastUpdateTo"
-                                                type="checkbox" filter-relid="lastUpdateTo"
-                                                filter-rel="data[lastUpdateTo]" filter-label="Last Update To"
-                                                filter-labeltext="" filter-multiple="false"
-                                                onclick="manageDTagFilter( $(this))"> <span class="slider round"></span>
-                                        </label> </div>
 
-                                    <div class="switch_container pull-right">
-                                        <i class="fa fa-refresh filterSingRefresh" aria-hidden="true"
-                                            title="refresh filter value"
-                                            onclick="refreshDTagFilterComposed($(this),'gplastupdate')"></i> <label
-                                            class="switch switchfilter " title="active filter"><input id="ll"
-                                                type="checkbox"
-                                                onclick="manageDTagFilterComposed($(this),'gplastupdate')"> <span
-                                                class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
+                    <select class="form-control selectpicker" name="data[properties][status]"
+                        searchable-override="data[properties][status]" searchable-label="" data-live-search="true"
+                        searchable-element="false" searchable-text="Status"
+                        data-live-search-placeholder="Please select the status of DEH Resource" required="">
+                        <option class="text-muted" value="">Select status</option>
+                        <option value="1">Published</option>
+                        <option value="2">Not Published</option>
+                        <option value="3">Draft</option>
+                    </select>
+                </div>
 
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="switchByFilter(dTagFilter)"><i
-                                class="fa fa-search" aria-hidden="true"></i></button>
+                <div class="grpfilter col-lg-4 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text">
 
+                        <label for="description" class="kms-title-label">Tags</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by common tags
+                                that describes DEH Resource</span></label>
+                    </div>
+                    <select class="form-control selectpicker" name="data[tags]" multiple=""
+                        searchable-override="data[tags]" searchable-label="" data-live-search="true"
+                        searchable-element="false" searchable-text="Tags" data-none-selected-text="Select tags">
+                        <option value="automatition">Automatition</option>
+                        <option value="agrifood">Agrifood</option>
+                        <option value="aws">AWS</option>
+                        <option value="bigdata">BigData</option>
+                        <option value="cloud-infrastructure">Cloud-Infrastructure</option>
+                        <option value="crops">Crops</option>
+                        <option value="csv">CSV</option>
+                        <option value="deeplearning">DeepLearning</option>
+                        <option value="json">JSON</option>
+                        <option value="json-ld">JSON-LD</option>
+                        <option value="nosql">NoSQL</option>
+                        <option value="sensors">Sensors</option>
+                        <option value="sql">SQL</option>
+                        <option value="testing">Testing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row margins-on-row">
+
+                <div class="grpfilter gprating col-lg-6 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text"><label class="kms-title-label">Rating</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by average DEH Resource
+                                Rating.</span></label>
+                    </div>
+                    <div class="display-position" style="width: 100%;">
+                        <p class="col-1 kms-title-label" style="padding: 9px 40px 0px 0px; text-align: center;">
+                            From:</p>
+                        <input id="ratingFromInput" type="text" class="form-control col-5 span12 mobile-input mob-in"
+                            style="display: inline;" name="data[ratingFrom]" searchable-label="Rating From" required=""
+                            filter-id="ratingFrom">
+                        <p class="col-1 kms-title-label" style="padding: 9px 0px 0px 0px; text-align: center;">To:
+                        </p>
+                        <input id="ratingToInput" type="text" class="form-control col-5 span12 mobile-input mob-in"
+                            name="data[ratingTo]" searchable-label="ratingTo" required="" filter-id="ratingTo">
+                    </div>
+
+                </div>
+                <div class="grpfilter gpmaturitylevel col-lg-6 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text"><label class="kms-title-label">Maturity Level</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by Maturity level. <br>
+                                1.Initial (chaotic, ad hoc, individual heroics) - the starting point for
+                                use of a new or
+                                undocumented repeat process.
+                                <br>
+                                2. Repeatable - the process is at least documented sufficiently such
+                                that repeating the same
+                                steps may be attempted.
+                                <br>
+                                3. Defined - the process is defined/confirmed as a standard business
+                                process
+                                <br>
+                                4. Capable - the process is quantitatively managed in accordance with
+                                agreed-upon metrics.
+                                <br>
+                                5. Efficient - process management includes deliberate process
+                                optimization/improvement.</span></label>
+                    </div>
+                    <div class="display-position" style="width: 100%;">
+                        <p class="col-1 kms-title-label" style="padding: 9px 40px 0px 0px; text-align: center;">
+                            From:</p>
+                        <input id="maturityLevelFromInput" type="text"
+                            class="form-control col-5 span12 mobile-input mob-in" style="display: inline;"
+                            name="data[maturityLevelFrom]" searchable-label="Maturity Level From" required=""
+                            filter-id="maturityLevelFrom">
+                        <p class="col-1 kms-title-label" style="padding: 9px 0px 0px 0px; text-align: center;">To:
+                        </p>
+                        <input id="maturityLevelToInput" type="text"
+                            class="form-control col-5 span12 mobile-input mob-in" name="data[maturityLevelTo]"
+                            searchable-label="maturityLevelTo" required="" filter-id="maturityLevelTo">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="row margins-on-row">
+                <div class="grpfilter gpcreated col-lg-6 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text"><label class="kms-title-label">Created</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by DEH Resource created
+                                date.</span></label>
+                    </div>
+                    <div class="display-position" style="width: 100%;">
+                        <p class="col-1 kms-title-label" style="padding: 9px 40px 0px 0px; text-align: center;">
+                            From:</p>
+                        <input id="createdFromInput" type="date" [(ngModel)]=createdFromInput
+                            class="form-control col-5 span12 mobile-input" style="display: inline;"
+                            name="data[createdFrom]" searchable-label="Created From" required="" filter-id="createdFrom"
+                            max="{{todaysDate}}">
+                        <p class="col-1 kms-title-label" style="padding: 9px 0px 0px 0px; text-align: center;">To:
+                        </p>
+                        <input id="createdToInput" type="date" min={{createdFromInput}} max="{{todaysDate}}"
+                            class="form-control col-5 span12 mobile-input mob-in" name="data[createdTo]"
+                            searchable-label="createdTo" required="" filter-id="createdTo">
+                    </div>
+
+                </div>
+
+                <div class="grpfilter gplastupdate col-lg-6 col-md-6 col-sm-12 margins-on-elements-advanced">
+                    <div class="search-fields-text"><label class="kms-title-label">Last Updated</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Filter by DEH Resrouce last updated
+                                date</span></label>
+                    </div>
+                    <div class="display-position" style="width: 100%;">
+                        <p class="col-1 kms-title-label" style="padding: 9px 40px 0px 0px; text-align: center;">
+                            From:</p>
+                        <input id="lastUpdateFromInput" type="date" [(ngModel)]=lastUpdateFromInput
+                            class="form-control col-5 span12 mobile-input mob-in" style="display: inline;"
+                            name="data[lastUpdateFrom]" searchable-label="Last Update From" required=""
+                            filter-id="lastUpdateFrom" max="{{todaysDate}}">
+                        <p class="col-1 kms-title-label" style="padding: 9px 0px 0px 0px; text-align: center;">To:
+                        </p>
+                        <input id="lastUpdateToInput" type="date" min={{lastUpdateFromInput}} max="{{todaysDate}}"
+                            class="form-control col-5 span12 mobile-input mob-in" name="data[lastUpdateTo]"
+                            searchable-label="lastUpdateTo" required="" filter-id="lastUpdateTo">
                     </div>
                 </div>
             </div>
-        </div>
+
+
+
+            <div class="row margins-on-row">
+
+
+                <!-- Status -->
+                
+
+                <!-- <div class="grpfilter col-lg-2 col-md-4 col-sm-12 margins-on-elements-advanced">
+
+                    <div class="search-fields-text"><label class="kms-title-label">Sort by</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Select by which criteria the DEH Resources will be sorted and
+                                displayed. <br> Default value is Name. </span></label>
+                    </div>
+
+
+                    <select class="form-control selectpicker" name="data[sortBy]" searchable-override="data[sortBy]"
+                        searchable-label="" data-live-search="true" searchable-element="false" searchable-text="Sort by"
+                        data-live-search-placeholder="Please select the status of DEH Resource" required="">
+                        <option class="text-muted" value="">Select sort criteria</option>
+                        <option value="name">Name</option>
+                        <option value="rating">Rating</option>
+                        <option value="type">Type</option>
+                    </select>
+                </div> -->
+                <!-- 
+
+                <div class="grpfilter col-lg-2 col-md-4 col-sm-12 margins-on-elements-advanced">
+
+                    <div class="search-fields-text"><label class="kms-title-label">Results per page</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Select how many DEH Resources will be dispayed per page. <br>
+                                Default value is All.</span></label>
+                    </div>
+
+
+                    <select class="form-control selectpicker" name="data[pageSize]" searchable-override="data[pageSize]"
+                        searchable-label="" data-live-search="true" searchable-element="false"
+                        searchable-text="Results per page"
+                        data-live-search-placeholder="Please select the status of DEH Resource" required="">
+                        <option class="text-muted" value="">Select results per page</option>
+                        <option value="1000">All</option>
+                        <option value="9">9</option>
+                        <option value="18">18</option>
+                        <option value="36">36</option>
+                        <option value="72">72</option>
+
+
+                    </select>
+                </div> -->
+                <!-- <div class="grpfilter col-lg-2 col-md-4 col-sm-12 margins-on-elements-advanced">
+
+                    <div class="search-fields-text"><label class="kms-title-label">Sorting order</label>
+                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                                type="checkbox"><span>Select sorting order (Ascending/Desceding) of how DEH Resources
+                                will be displayed. <br> Default value is Ascending. </span></label>
+                    </div>
+
+
+                    <select class="form-control selectpicker" name="data[sortingOrder]"
+                        searchable-override="data[sortingOrder]" searchable-label="" data-live-search="true"
+                        searchable-element="false" searchable-text="Results per page"
+                        data-live-search-placeholder="Please select the status of DEH Resource" required="">
+                        <option class="text-muted" value="">Select sorting order</option>
+                        <option value="ASC">Ascending</option>
+                        <option value="DESC">Descending</option>
+
+                    </select>
+                </div> -->
+              
+                <div class="grpfilter col-lg-12 col-md-12 col-sm-12 margins-on-elements-advanced">
+
+                    <button type="button" class="btn btn-outline-danger btn-100" (click)="clear()">Clear filters</button>
+                </div>
+
+
+            </div>
+
+        </form>
     </div>
-</div> <br>
+</div>
