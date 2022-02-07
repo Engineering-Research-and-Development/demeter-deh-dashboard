@@ -19,12 +19,15 @@ i.fas.fa-list:hover, i.fas.fa-arrow-left:hover, i.fas.fa-th-large:hover {
         padding-right: 3px;
         padding-left: 3px;
     }
+
     .card-body {
         padding: .25rem;
     }
+
     .fas.fa-list {
         display: none;
     }
+
     .view-btns {
         padding-left: 0;
     }

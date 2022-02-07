@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 declare let drawEntities: any;
 declare let resetDymerStart: any;
-declare let dymerscript: any;
 declare let mainDymerView: any;
+declare let getResourcesRefresh: any;
+
 
 @Component({
   selector: 'app-main-content',
@@ -12,17 +13,23 @@ declare let mainDymerView: any;
   styleUrls: ['./main-content.component.css'],
 })
 export class MainContentComponent implements OnInit {
+
   constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if (this.authService.isExpired()) {
+      this.authService.removeToken();
+      this.authService.removeCapToken();
+      this.router.navigateByUrl('');
+    }
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
+    if (this.authService.currentUser) {
+      if (!localStorage.getItem("logged")) {
         this.callDymer();
       }
-    });
-    if (this.authService.currentUser) {
-      this.callDymer();
+      if (window.history.state.jsonConfig != undefined) {
+        getResourcesRefresh(window.history.state.jsonConfig);
+      }
     }
     this.showLocation();
   }
@@ -30,6 +37,7 @@ export class MainContentComponent implements OnInit {
 
   callDymer() {
     mainDymerView();
+    localStorage.setItem("logged", "true");
   }
 
   showLocation() {
@@ -52,20 +60,18 @@ export class MainContentComponent implements OnInit {
   }
 
   jsonConfig = {
-    query: {
-      query: {
-        query: {
-          bool: {
-            must: [
-              {
-                term: {
-                  _index: 'dymerservicecomponent',
-                },
-              },
-            ],
-          },
-        },
-      },
+    "query": {
+      "query": {
+        "query": {
+          "bool": {
+            "should": [{
+              "term": {
+                "_index": "dymerservicecomponent"
+              }
+            }]
+          }
+        }
+      }
     },
 
     endpoint: 'entity.search',
@@ -84,9 +90,44 @@ export class MainContentComponent implements OnInit {
   };
 
   cambia(jj: any) {
-    var confbase = this.jsonConfig;
     resetDymerStart();
     drawEntities(jj);
-    // window.location.reload();
+  }
+
+  showAllResources() {
+    let test = {
+      "query": {
+        "query": {
+          "query": {
+            "bool": {
+              "should": [{
+                "term": {
+                  "_index": "dymerservicecomponent"
+                }
+              }
+              ]
+            }
+          }
+        }
+      },
+
+      endpoint: 'entity.search',
+      viewtype: 'teaserlist',
+      target: {
+        teaserlist: {
+          id: '#cont-MyList',
+          action: 'html',
+          reload: false,
+        },
+        fullcontent: {
+          id: '#cont-MyList',
+          action: 'html',
+        },
+      },
+    };
+
+    resetDymerStart();
+    drawEntities(test);
+
   }
 }
