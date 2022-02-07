@@ -4,8 +4,8 @@
 			<mat-card-title>
 				<div>Resource Information</div>
 			</mat-card-title>
-			<div class="fl-r"> Name: {{metrcisByRrm.name}} </div> <br>
-			<div class="fl-r"> RRM ID: {{metrcisByRrm.rrmId}}</div> <br>
+			<div class="fl-r"> Name: {{resourceName}} </div> <br>
+			<div class="fl-r"> RRM ID: {{resourceUid}}</div> <br>
 			<section id="customers-card">
 				<mat-card *ngIf="dataSource?.filteredData.length <= 0" class="no-sh mr5" style="margin-bottom: 5px">
 					<div><span>No Match Found</span></div>
@@ -29,7 +29,8 @@
 
 						<ng-container matColumnDef="uptime">
 							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Uptime </th>
-							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.uptime}} </td>
+							<td mat-cell *matCellDef="let element" class="br-cell"> {{secondsToDhms(element.uptime)}}
+							</td>
 						</ng-container>
 
 						<ng-container matColumnDef="host">
