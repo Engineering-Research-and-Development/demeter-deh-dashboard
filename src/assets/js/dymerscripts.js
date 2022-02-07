@@ -1,25 +1,9 @@
-// document.addEventListener("DOMContentLoaded", function (event) {
-
-
-
-
 let dTagFilter;
 let d_uid = 0;
 let d_gid = 0;
 let userInfo;
 let demeterProvider = false;
-// let token = localStorage.getItem('token')
-
-// if (token != undefined) {
-//     userInfo = JSON.parse(atob(token));
-//     d_uid = userInfo.User.id
-//     console.log('dddddddd', d_uid)
-// }
-
-
-
-
-// d_uid = "10198";
+let pageSize = 'setVariable "d_pagination_size" 3';
 d_gid = "10154";
 
 dymerOauthConfig = {
@@ -57,9 +41,6 @@ let jsonConfig = {
     }
 };
 
-
-
-
 let jsonfilter = {
     "bool": {
         "must": [{
@@ -69,8 +50,6 @@ let jsonfilter = {
         }]
     }
 };
-
-
 
 let script = document.createElement('script');
 script.src = window["env"]["DYMER_URL"] + "/public/cdn/js/dymer.viewer.js";
@@ -89,60 +68,72 @@ function checkRoles() {
     return demeterProvider;
 }
 
+var dymerconf = {
+    notImport: ["bootstrap", "jquery", "popper"]
+};
 
 function mainDymerView() {
 
-    let token = localStorage.getItem('token')
-
+    let token = localStorage.getItem('DYM')
     if (token != undefined) {
         userInfo = JSON.parse(atob(token));
-        d_uid = userInfo.User.id
-
-
         setTimeout(function () {
-            dTagFilter = $('#dTagFilter');
-            dTagFilter.dymertagsinput({
-                //indexmodelfilter:"hubcapmodel",
-                indexterms: {
+            dsearch = new dymerSearch({
+                "objname": "dsearch", //same object name -> Mandatory
+                "formid": "myfilter", //id of your form -> Mandatory
+                "filterModel": "dymerservicecomponent", // index model to load searchables elements -> Not Mandatory
+                "innerContainerid": "contform", // id div element indise form -> Mandatory
+                "groupfilterclass": "col-12", // class to add on filters -> Not Mandatory , default value = "span12 col-12"
+                "conditionQuery": "AND", // AND or OR  -> Not Mandatory, default value = "AND"
+                "addfreesearch": true, // will add global search input, true/false -> Not Mandatory, default value = false
+                "showFilterBtn": true, // will add button for advanced filter, true/false -> Not Mandatory, default value = false
+                "query": { // base query for search
                     "bool": {
                         "must": [{
-                            "term": {
-                                "_index": "dymerservicecomponent"
-                            }
-                            
+                            "terms": { "_index": ["dymerservicecomponent"] }
                         }]
                     }
-                },
-                allowDuplicates: false,
-                freeInput: false,
-                itemValue: 'id', // this will be used to set id of tag
-                itemText: 'label' // this will be used to set text of tag	 
+                }
             });
-            dTagFilter.on('beforeItemRemove', function (event) {
-                $('#d_entityfilter [filter-rel="' + event.item.id + '"').prop("checked", false);
-            });
-        }, 3000);
-    
+        }, 100);
+
         let index = 'dymerservicecomponent';
         if (checkRoles()) {
-            setTimeout(function(){loadModelListToModal($('#cont-addentity'), index);}, 1);
-    
+            setTimeout(function () { loadModelListToModal($('#cont-addentity'), index); }, 10);
         }
-    
-    
+
         let obj = getAllUrlParams(); //recupera i parametri presenti nell'url (passati in get)
         let elId = obj["d_eid"]; //d_eid : lo scegli tu da portlet
         if (elId != undefined)
             drawEntityByIdUrl("#cont-MyList", "d_eid"); //d_eid : lo scegli tu da portlet , "#cont-MyList": è il contenitore dove renderizzare 
         else
             drawEntities(jsonConfig); //rimane tale
-    
         loadFilterModel(index, dTagFilter);
-    
-
     }
-    
-  
 }
 
-// });
+function getResourcesRefresh(config) {
+
+    console.log("Function called")
+
+    dsearch = new dymerSearch({
+        "objname": "dsearch", //same object name -> Mandatory
+        "formid": "myfilter", //id of your form -> Mandatory
+        "filterModel": "dymerservicecomponent", // index model to load searchables elements -> Not Mandatory
+        "innerContainerid": "contform", // id div element indise form -> Mandatory
+        "groupfilterclass": "col-12", // class to add on filters -> Not Mandatory , default value = "span12 col-12"
+        "conditionQuery": "AND", // AND or OR  -> Not Mandatory, default value = "AND"
+        "addfreesearch": true, // will add global search input, true/false -> Not Mandatory, default value = false
+        "showFilterBtn": true, // will add button for advanced filter, true/false -> Not Mandatory, default value = false
+        "query": { // base query for search
+            "bool": {
+                "must": [{
+                    "terms": { "_index": ["dymerservicecomponent"] }
+                }]
+            }
+        }
+    });
+    resetDymerStart();
+    drawEntities(config); //rimane tale
+
+}
