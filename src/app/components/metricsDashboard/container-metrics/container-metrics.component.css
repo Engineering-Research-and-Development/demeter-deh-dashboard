@@ -60,73 +60,86 @@ table {
     ::ng-deep .mat-card {
         overflow-y: auto;
     }
+
     ::ng-deep .mat-paginator-range-label {
-        margin: unset!important;
-        float: left!important;
-        padding-top: 10px!important;
+        margin: unset !important;
+        float: left !important;
+        padding-top: 10px !important;
     }
+
     ::ng-deep .mat-paginator-range-actions {
-        display: block!important;
+        display: block !important;
         align-items: unset;
         margin: unset;
     }
+
     ::ng-deep .mat-paginator-page-size-value {
-        position: relative!important;
-        margin: unset!important;
-        text-align: left!important;
+        position: relative !important;
+        margin: unset !important;
+        text-align: left !important;
     }
+
     ::ng-deep .mat-paginator-container {
-        display: unset!important;
-        align-items: unset!important;
-        justify-content: unset!important;
-        padding: unset!important;
-        flex-wrap: unset!important;
+        display: unset !important;
+        align-items: unset !important;
+        justify-content: unset !important;
+        padding: unset !important;
+        flex-wrap: unset !important;
         width: 100%;
     }
+
     ::ng-deep .mat-paginator-page-size-label {
-        margin: unset!important;
+        margin: unset !important;
     }
+
     .no-sh {
         box-shadow: unset;
     }
+
     .br-cell {
         border-bottom: 1px solid rgba(0, 0, 0, 0.116);
         padding-right: 20px;
         width: 100%;
     }
+
     .mr5 {
         margin-bottom: 5px
     }
+
     .card-des {
         padding: 2px;
         margin-right: 8px;
         margin-left: 8px;
     }
+
     .left-3 {
         display: contents;
         top: 15px;
         overflow: auto;
         word-break: break-all;
     }
+
     .card-des1 {
         padding: 2px;
         margin-right: 8px;
         margin-left: 8px;
         margin-bottom: 30px;
     }
+
     .des-chart {
         display: block;
         padding-left: 0px;
         top: 15px;
         overflow-x: auto;
     }
+
     .fl-r {
         float: left;
     }
 }
 
 ::ng-deep .mat-sort-header-button {
-    color: rgba(0, 0, 0, .8)!important;
+    color: rgba(0, 0, 0, .8) !important;
 }
 
 ::ng-deep td.mat-cell {

@@ -29,7 +29,8 @@
 
 						<ng-container matColumnDef="uptime">
 							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Uptime </th>
-							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.uptime}} </td>
+							<td mat-cell *matCellDef="let element" class="br-cell"> {{secondsToDhms(element.uptime)}}
+							</td>
 						</ng-container>
 
 						<ng-container matColumnDef="host">
