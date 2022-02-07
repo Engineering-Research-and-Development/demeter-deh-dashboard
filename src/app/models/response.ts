@@ -1,6 +1,6 @@
 export interface Response {
-    data: any;
-    extraData: string[];
-    message: string;
-    success: boolean;
-  }
+  data: any;
+  extraData: string[];
+  message: string;
+  success: boolean;
+}
