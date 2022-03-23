@@ -10,7 +10,7 @@
                         <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
                                 type="checkbox"><span>Filter by DEH Resource name.</span></label>
                     </div>
-                    <input [(ngModel)]=name type="text" class="form-control col-12 span12 mob-in" name="data[title]"
+                    <input type="text" class="form-control col-12 span12 mob-in" name="data[title]"
                         searchable-label="Name" required="" filter-id="name">
                 </div>
 
@@ -20,7 +20,7 @@
                         <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
                                 type="checkbox"><span>Filter by Resource ID got from BSE.</span></label>
                     </div>
-                    <input [(ngModel)]=id type="text" class="form-control col-12 span12 mob-in" name="data[uid]"
+                    <input type="text" class="form-control col-12 span12 mob-in" name="data[uid]"
                         searchable-label="Resource id" required="" filter-id="resource_id">
                 </div>
 
@@ -49,13 +49,13 @@
                 </div>
 
 
-               
+
 
 
 
                 <div class="grpfilter col-lg-3 col-md-6 col-sm-12 margins-on-elements-advanced">
                     <div class="search-fields-text"><label class="kms-title-label">Distance (km)</label>
-                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                        <label class="tooltipL"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
                                 type="checkbox"><span>Filter by resources around you.</span></label>
                     </div>
                     <input type="text" class="form-control col-12 span12 mob-in" name="data[distance]"
@@ -69,9 +69,10 @@
                                 type="checkbox"><span>Filter by the category of "software" (SW) feature in
                                 which the DEH resource is classified.</span></label>
                     </div>
-                    <select [(ngModel)]=category class="form-control selectpicker" name="data[category]" multiple=""
+                    <select class="form-control selectpicker" name="data[category]" multiple=""
                         searchable-override="data[category]" searchable-label="" data-live-search="true"
                         searchable-element="false" searchable-text="Category" data-none-selected-text="Select category">
+
                         <option value="Agri Hub">Agri Hub</option>
                         <option value="AI">AI</option>
                         <option value="Algorithm">Algorithm</option>
@@ -120,7 +121,7 @@
                     <div class="search-fields-text">
 
                         <label for="description" class="kms-title-label">Tags</label>
-                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                        <label class="tooltipL"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
                                 type="checkbox"><span>Filter by common tags
                                 that describes DEH Resource</span></label>
                     </div>
@@ -168,7 +169,7 @@
                 </div>
                 <div class="grpfilter gpmaturitylevel col-lg-6 col-md-6 col-sm-12 margins-on-elements-advanced">
                     <div class="search-fields-text"><label class="kms-title-label">Maturity Level</label>
-                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                        <label class="tooltipL"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
                                 type="checkbox"><span>Filter by Maturity level. <br>
                                 1.Initial (chaotic, ad hoc, individual heroics) - the starting point for
                                 use of a new or
@@ -234,7 +235,7 @@
 
                 <div class="grpfilter gplastupdate col-lg-6 col-md-6 col-sm-12 margins-on-elements-advanced">
                     <div class="search-fields-text"><label class="kms-title-label">Last Updated</label>
-                        <label class="tooltip1"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
+                        <label class="tooltipL"> <i class="fa fa-info-circle icon-action icon-position"></i> <input
                                 type="checkbox"><span>Filter by DEH Resrouce last updated
                                 date</span></label>
                     </div>
@@ -260,7 +261,7 @@
 
 
                 <!-- Status -->
-                
+
 
                 <!-- <div class="grpfilter col-lg-2 col-md-4 col-sm-12 margins-on-elements-advanced">
 
@@ -324,10 +325,11 @@
 
                     </select>
                 </div> -->
-              
+
                 <div class="grpfilter col-lg-12 col-md-12 col-sm-12 margins-on-elements-advanced">
 
-                    <button type="button" class="btn btn-outline-danger btn-100" (click)="clear()">Clear filters</button>
+                    <button type="button" class="btn btn-outline-danger btn-100" (click)="clear()">Clear
+                        filters</button>
                 </div>
 
 

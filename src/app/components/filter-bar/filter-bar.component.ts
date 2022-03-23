@@ -16,10 +16,6 @@ export class FilterBarComponent implements OnInit {
   lastUpdateFromInput;
   todaysDate;
 
-  name;
-  id;
-  type: string;
-  category: string;
   constructor(private datePipe: DatePipe) {
     this.todaysDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   }

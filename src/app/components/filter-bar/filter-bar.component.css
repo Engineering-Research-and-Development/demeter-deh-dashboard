@@ -169,6 +169,115 @@
     }
 }
 
+
+
+.tooltipL {
+    position: relative;
+}
+
+.tooltipL span {
+    visibility: hidden;
+    max-width: 25em;
+    background-color: #8e8b8b;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px 10px;
+    position: absolute;
+    z-index: 9;
+    /* top: -11.3em; */
+    right: 100%;
+    margin-left: 1em;
+    opacity: 0;
+    transition: opacity 1s;
+    bottom: 0;
+    width: max-content;
+}
+
+.tooltipL span::after {
+    content: "";
+    position: absolute;
+    /* top: 1.5em; */
+    left: 100%;
+    margin-top: 2.2em;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #8e8b8b;
+    bottom: 8px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .tooltipL span {
+        visibility: hidden;
+        max-width: 14em;
+        background-color: #8e8b8b;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px 10px;
+        position: absolute;
+        z-index: 9;
+        /* top: -11.3em; */
+        right: 100%;
+        margin-left: 1em;
+        opacity: 0;
+        transition: opacity 1s;
+        bottom: 0;
+        font-size: 13px;
+        width: max-content;
+    }
+}
+
+.tooltipL input {
+    display: none;
+}
+
+.tooltipL input:checked+span {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media only screen and (max-width: 600px) {
+    .tooltipL {
+        position: absolute;
+        display: inline;
+        margin-top: 15px;
+    }
+
+
+
+    .tooltipL span {
+        visibility: hidden;
+        max-width: 18.7em;
+        background-color: #8e8b8b;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px 10px;
+        position: absolute;
+        z-index: 9;
+        right: 100%;
+        margin-left: 1em;
+        opacity: 0;
+        transition: opacity 1s;
+        bottom: -10px;
+        font-size: 12px;
+        width: -webkit-max-content;
+        width: max-content;
+    }
+
+    .tooltipL span::after {
+        content: "";
+        position: absolute;
+        left: 100%;
+        margin-top: 2.2em;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent transparent #8e8b8b;
+        bottom: 15px;
+    }
+}
+
 #dymer_filtercontent .btn-group {
     display: inline-flex !important;
     position: absolute;
@@ -185,6 +294,7 @@
     border-radius: unset;
 
 }
-.btn-100{
+
+.btn-100 {
     width: 100%;
 }
