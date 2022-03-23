@@ -41,6 +41,15 @@ DEH Dashboard functional module is in charge of User Interaction & Data Visualis
 ### Filter resource list
 ![](screenshots/search.png)
 
+### Resource metrics overview
+![](screenshots/metrics.png)
+
+### Resource metrics details
+![](screenshots/metrics_dash_1.png)
+![](screenshots/metrics_dash_2.png)
+
+
+
  
 
 ## Technologies
@@ -64,11 +73,11 @@ DEH Dashboard functional module is in charge of User Interaction & Data Visualis
 
  
 
-* User profile management
-* Resource discovery through search API
+* Resource discovery through advanced search API
 * New resources creation and editing
 * Resource compatibility checking
 * Resource rating visualization
+* Resource consumption metrics
 
  
 
