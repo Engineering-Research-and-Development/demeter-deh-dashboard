@@ -690,6 +690,73 @@ form.user .btn-user {
   color: #117a8b;
 }
 
+.listAddEntityicon {
+  position: absolute !important;
+  font-size: 16px !important;
+  left: -17px !important;
+  top: 4px !important;
+}
+
+.listAddEntityli {
+  position: relative !important;
+  list-style: none !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.listAddEntityli i {
+  color: rgb(255 255 255 / 31%) !important;
+}
+
+#cont-addentity ul {
+  margin: auto !important;
+}
+
+/* #cont-addentity ul li:hover> i{
+    color: #ffffff !important;
+} */
+
+.listAddEntityli:hover {
+  cursor: pointer !important;
+  color: #ffffff !important;
+}
+
+#cont-addentity ul li:hover {
+  cursor: pointer !important;
+  color: #ffffff !important;
+}
+
+.listAddEntityli:hover>i {
+  cursor: pointer !important;
+  color: #ffffff !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .listAddEntityli {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+
+  #cont-addentity ul {
+    margin: auto !important;
+    display: flex !important;
+    padding: unset !important;
+    text-align: center !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  .listAddEntityicon {
+
+    left: 0px !important;
+    top: 2px !important;
+    position: relative !important;
+    display: block !important;
+    text-align: center !important;
+  }
+}
+
+
 h1.text-center {
   color: #6c757d !important;
 }
