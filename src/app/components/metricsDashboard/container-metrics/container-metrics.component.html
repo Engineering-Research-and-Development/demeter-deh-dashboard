@@ -33,6 +33,11 @@
 							</td>
 						</ng-container>
 
+						<ng-container matColumnDef="lastupdated">
+							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Last updated </th>
+							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.lastUpdated | date}} </td>
+						</ng-container>
+
 						<ng-container matColumnDef="host">
 							<th mat-header-cell *matHeaderCellDef mat-sort-header class="br-cell"> Host </th>
 							<td mat-cell *matCellDef="let element" class="br-cell"> {{element.host}} </td>

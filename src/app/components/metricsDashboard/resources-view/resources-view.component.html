@@ -24,13 +24,9 @@
         <div class="item col-lg-4 col-sm-12 col-md-4 " d-pagegroup="1" *ngFor="let ownedResource of ownedResources">
           <div class="thumbnail card">
             <div class="caption card-body">
-              <h4 style="margin-bottom: 2px;" class="card-title
-         group
-         font-weight-bold
-         inner
-         list-group-item-heading
-         resource-title
-        " (click)="navigate(ownedResource.rrmId)">
+              <h4 style="margin-bottom: 2px;"
+                class="card-title group font-weight-bold inner list-group-item-heading resource-title"
+                (click)="navigate(ownedResource)">
                 {{ownedResource.name}}
               </h4>
               <div class="col-12 p0 mb-2">
@@ -71,13 +67,9 @@
           <div class="thumbnail card">
 
             <div class="caption card-body">
-              <h4 style="margin-bottom: 2px;" class="card-title
-         group
-         font-weight-bold
-         inner
-         list-group-item-heading
-         resource-title
-        " (click)="navigateToContainer(consumedResoruce)">
+              <h4 style="margin-bottom: 2px;"
+                class="card-title group font-weight-bold inner list-group-item-heading resource-title"
+                (click)="navigateToContainer(consumedResoruce)">
                 {{consumedResoruce.image}}
               </h4>
               <div class="col-12 p0 mb-2">

@@ -39,7 +39,7 @@ export class MetricsComponent implements OnInit {
     '#A4471F', '#292CDA'
   ]
 
-  displayedColumns: string[] = ['containerName', 'ipv4', 'uptime', 'host', 'consumer'];
+  displayedColumns: string[] = ['containerName', 'ipv4', 'uptime', 'lastupdated', 'host', 'consumer'];
   dataSource = new MatTableDataSource<ContainerData>();
 
   @ViewChild(MatSort) sortForDataSource: MatSort;
@@ -158,7 +158,7 @@ export class MetricsComponent implements OnInit {
 
         name: container._id,
         series: sortedArray.map(item => ({
-          name: moment.utc(item.time_stamp).format('MMMM D, YYYY'),
+          name: new Date(moment.utc(item.time_stamp).format('MMMM D, YYYY')),
           value: item.percent
         }))
       };
@@ -178,7 +178,7 @@ export class MetricsComponent implements OnInit {
         // Return the new object structure
         name: container._id,
         series: sortedArray.map(item => ({
-          name: moment.utc(item.time_stamp).format('MMMM D, YYYY'),
+          name: new Date(moment.utc(item.time_stamp).format('MMMM D, YYYY')),
           value: item.percent
         }))
       };
@@ -200,8 +200,8 @@ export class MetricsComponent implements OnInit {
         uptime: container.uptime,
         host: "DockerHost",
         consumerUsername: container.consumer.username,
-        consumerEmail: container.consumer.email
-
+        consumerEmail: container.consumer.email,
+        lastUpdated: container.lastupdated
       };
     });
   }
@@ -231,4 +231,5 @@ export interface ContainerData {
   host: string;
   consumerUsername: string;
   consumerEmail: string;
+  lastUpdated: string
 }
