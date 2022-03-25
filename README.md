@@ -77,6 +77,7 @@ DEH Dashboard functional module is in charge of User Interaction & Data Visualis
 * New resources creation and editing
 * Resource compatibility checking
 * Resource rating visualization
+* Resource download visualization
 * Resource consumption metrics
 
  
