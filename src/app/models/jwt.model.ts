@@ -1,7 +1,9 @@
+import { Role } from "./role";
+
 export interface JwtModel {
     organizations: string[],
     displayName: string,
-    roles: string[],
+    roles: Role[],
     app_id: string,
     trusted_apps: string[],
     isGravatarEnabled: boolean,

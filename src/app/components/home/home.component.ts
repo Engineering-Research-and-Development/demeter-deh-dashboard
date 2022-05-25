@@ -22,12 +22,11 @@ export class HomeComponent implements OnInit {
   @Output() isTablet = new EventEmitter<boolean>();
   clicked: boolean;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     if (this.authService.isExpired()) {
       this.authService.removeToken();
-      this.authService.removeCapToken();
       this.router.navigateByUrl('');
     }
   }

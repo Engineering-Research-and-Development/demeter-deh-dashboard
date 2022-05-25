@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserInfo } from '../models/userInfo.model';
 import { map } from 'rxjs/operators';
+import { JwtModel } from './../models/jwt.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,15 @@ export class AuthService {
       return null;
     }
     return JSON.parse(atob(token));
+  }
+
+
+  get currentUserJWT(): JwtModel {
+    let token = this.getTokenJWT();
+
+    if (!token) return null;
+
+    return new JwtHelperService().decodeToken(token);
   }
 
   login(name: string, password: string) {
@@ -59,6 +69,23 @@ export class AuthService {
     })
   }
 
+  getAttachmentCapTokenJWT(accessToken: string) {
+    const url = `${environment.DYMER_URL}/api/metrics/getCapToken`;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    // let token = JSON.parse(atob(accessToken))
+    // let accessTokenParsed = token.access_token;
+    this._http.post<Response>(url, { accessToken: accessToken }, { headers }).subscribe(resp => {
+
+      if (resp.success === true) {
+        localStorage.setItem('capToken', resp.data.token);
+      }
+    })
+  }
+
   logout() {
     let accessToken = this.currentUser.access_token;
 
@@ -81,11 +108,35 @@ export class AuthService {
   }
 
   setToken(token: string) {
+
+    var currentUser: JwtModel = new JwtHelperService().decodeToken(token);
+    localStorage.setItem("d_uid", currentUser.id);
+    this.getAttachmentCapTokenJWT(token);  
+    var dym: UserInfo = {
+      access_token: token, expires: "", valid: "true", User: {
+        scope: [],
+        id: currentUser.id,
+        username: currentUser.username,
+        email: currentUser.email,
+        date_password: "",
+        enabled: true,
+        admin: false,
+        roles: [currentUser.roles[0].name]
+      }
+    }
+    const string = JSON.stringify(dym) // convert Object to a String
+    const encodedDYM = btoa(string)
     localStorage.setItem('token', token);
+    localStorage.setItem('DYM', encodedDYM);
+
   }
 
   getToken() {
     return localStorage.getItem('DYM');
+  }
+
+  getTokenJWT() {
+    return localStorage.getItem("token");
   }
 
   isLoggedIn() {
@@ -112,6 +163,7 @@ export class AuthService {
       localStorage.removeItem('DYM');
       this.removeCapToken();
       this.removeLoggedUser();
+      this.removeJWTToken();
     }
   }
 
@@ -121,6 +173,11 @@ export class AuthService {
     }
   }
 
+  removeJWTToken(): void {
+    if (localStorage.getItem('token')) {
+      localStorage.removeItem('token');
+    }
+  }
   removeLoggedUser(): void {
     if (localStorage.getItem('logged')) {
       localStorage.removeItem('logged');
@@ -136,6 +193,17 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  //Adding new logic
+
+  authorize() {
+    window.location.href = `https://acs.bse.h2020-demeter-cloud.eu:5443/oauth2/authorize?response_type=token&client_id=8a94c9c1-7dc9-41e5-a558-f4db20e49a7a&state=xyz&redirect_uri=http://localhost:4200/&scope=jwt`;
+  }
+
+  clearKayrockSession() {
+    window.location.href = `https://acs.bse.h2020-demeter-cloud.eu:5443/auth/external_logout?_method=DELETE&client_id=8a94c9c1-7dc9-41e5-a558-f4db20e49a7a`;
+    this.removeToken();
   }
 }
 

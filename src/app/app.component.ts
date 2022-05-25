@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -8,15 +8,15 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-
   constructor(
+    private router: Router,
     private _activatedRoute: ActivatedRoute,
     public authService: AuthService
-  ) { }
+  ) {}
+
   ngOnInit(): void {
     if (this.authService.isExpired()) {
       this.authService.removeToken();
-      this.authService.removeCapToken();
     }
 
     if (
@@ -24,11 +24,11 @@ export class AppComponent implements OnInit {
       localStorage.getItem('DYM') !== undefined
     ) {
       this._activatedRoute.queryParams.subscribe((params) => {
-        const token = params['DYM'];
+        const token = params['token'];
         const tokenType = params.token_type;
-
         if (token) {
           this.authService.setToken(token);
+          this.router.navigateByUrl('');
         }
       });
     }

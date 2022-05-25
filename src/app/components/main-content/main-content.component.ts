@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
-declare let drawEntities: any;
+// declare let drawEntities: any;
 declare let resetDymerStart: any;
 declare let mainDymerView: any;
 declare let getResourcesRefresh: any;
-
+declare let drawEntities: any;
 
 @Component({
   selector: 'app-main-content',
@@ -13,18 +13,16 @@ declare let getResourcesRefresh: any;
   styleUrls: ['./main-content.component.css'],
 })
 export class MainContentComponent implements OnInit {
-
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     if (this.authService.isExpired()) {
       this.authService.removeToken();
-      this.authService.removeCapToken();
       this.router.navigateByUrl('');
     }
 
     if (this.authService.currentUser) {
-      if (!localStorage.getItem("logged")) {
+      if (!localStorage.getItem('logged')) {
         this.callDymer();
       }
       if (window.history.state.jsonConfig != undefined) {
@@ -34,20 +32,19 @@ export class MainContentComponent implements OnInit {
     this.showLocation();
   }
 
-
   callDymer() {
-    mainDymerView();
-    localStorage.setItem("logged", "true");
+    setTimeout(mainDymerView(), 1000);
+    localStorage.setItem('logged', 'true');
   }
 
   showLocation() {
-
     let options = {
       enableHighAccuracy: true,
     };
 
     function success(position) {
-      let coordinates = position.coords.latitude + ',' + position.coords.longitude;
+      let coordinates =
+        position.coords.latitude + ',' + position.coords.longitude;
       localStorage.setItem('userLocation', coordinates);
     }
 
@@ -60,18 +57,20 @@ export class MainContentComponent implements OnInit {
   }
 
   jsonConfig = {
-    "query": {
-      "query": {
-        "query": {
-          "bool": {
-            "should": [{
-              "term": {
-                "_index": "dymerservicecomponent"
-              }
-            }]
-          }
-        }
-      }
+    query: {
+      query: {
+        query: {
+          bool: {
+            should: [
+              {
+                term: {
+                  _index: 'dymerservicecomponent',
+                },
+              },
+            ],
+          },
+        },
+      },
     },
 
     endpoint: 'entity.search',
@@ -96,19 +95,20 @@ export class MainContentComponent implements OnInit {
 
   showAllResources() {
     let test = {
-      "query": {
-        "query": {
-          "query": {
-            "bool": {
-              "should": [{
-                "term": {
-                  "_index": "dymerservicecomponent"
-                }
-              }
-              ]
-            }
-          }
-        }
+      query: {
+        query: {
+          query: {
+            bool: {
+              should: [
+                {
+                  term: {
+                    _index: 'dymerservicecomponent',
+                  },
+                },
+              ],
+            },
+          },
+        },
       },
 
       endpoint: 'entity.search',
@@ -128,6 +128,5 @@ export class MainContentComponent implements OnInit {
 
     resetDymerStart();
     drawEntities(test);
-
   }
 }
