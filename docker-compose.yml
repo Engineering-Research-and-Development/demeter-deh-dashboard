@@ -1,15 +1,15 @@
 version: "3.5"
 services:
     web:
-        image:  demeterengteam/deh_dashboard:develop
-        container_name: deh-dashboard        
+        image: demeterengteam/deh_dashboard:20220525
+        container_name: deh-dashboard
         restart: always
         # build: .
         ports:
-            - ${DEH_EXTERNAL_PORT}:${DEH_INTERNAL_PORT}            
+            - ${DEH_EXTERNAL_PORT}:${DEH_INTERNAL_PORT}
             - ${DEH_EXTERNAL_SSH_PORT}:${DEH_INTERNAL_SSH_PORT}
         environment:
             - DYMER_URL=${DYMER_URL}
         volumes:
-        - "/app/node_modules"
-        - ".:/app"
+            - "/app/node_modules"
+            - ".:/app"
