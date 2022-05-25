@@ -3,8 +3,8 @@
 
  
 
-DEH Dashboard represents the DEH front-end application, which will be used by end-users or DEMETER Stakeholders for resource creation or discovery. The DEH resources are represented by a set of entities such as Component, Device, Service, Dataset, Platform which can be added via the DEH Dashboard or web-based UI (User Interface). 
-DEH Dashboard functional module is in charge of User Interaction & Data Visualisation. It will allow users to log in to DEH, discover, register, and manage DEMETER Enablers.
+DEH Dashboard represents the DEH front-end application, which is used by end-users or DEMETER Stakeholders for resource creation, discovery and monitoring consumption. The DEH Resources are represented by a set of entities such as Component, Device, Service, Dataset, Platform which can be added via the DEH Dashboard or RRM APIs. 
+DEH Dashboard functional module is in charge of User Interaction & Data Visualisation. It will allow users to log in to DEH, discover, register, and manage DEMETER Enablers, alongside monitoring their consumption.
 
  
 
@@ -41,10 +41,10 @@ DEH Dashboard functional module is in charge of User Interaction & Data Visualis
 ### Filter resource list
 ![](screenshots/search.png)
 
-### Resource metrics overview
+### DEH Resources metrics overview
 ![](screenshots/metrics.png)
 
-### Resource metrics details
+### Metrics for specific DEH Resource
 ![](screenshots/metrics_dash_1.png)
 ![](screenshots/metrics_dash_2.png)
 
@@ -78,7 +78,7 @@ DEH Dashboard functional module is in charge of User Interaction & Data Visualis
 * Resource compatibility checking
 * Resource rating visualization
 * Resource download visualization
-* Resource consumption metrics
+* Resource consumption monitoring
 
  
 
@@ -180,7 +180,7 @@ Project is: _in progress_
 
 
 ## Release
-V1.0
+V2.0
 
  
 
