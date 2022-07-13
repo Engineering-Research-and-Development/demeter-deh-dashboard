@@ -14,7 +14,7 @@
         <strong>DEMETER</strong> for exchanging information about resources (components, services, data sources,
         devices, platforms, etc.). More information you can find
         <a [routerLink]="['about']" style="cursor: pointer; color: #4ac2c1;">
-            here</a>. If you want to find or offer a resource, please <a (click)="slideLogin()"
+            here</a>. If you want to find or offer a resource, please <a (click)="authService.authorize()"
             style="cursor: pointer; color: #4ac2c1;">
             login</a> or <a href="https://acs.bse.h2020-demeter-cloud.eu:5443/sign_up/" target="_blank"
             style="cursor: pointer; color: #4ac2c1;">
