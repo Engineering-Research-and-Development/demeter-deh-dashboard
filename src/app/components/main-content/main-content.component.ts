@@ -18,7 +18,7 @@ export class MainContentComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isExpired()) {
       this.authService.removeToken();
-      this.router.navigateByUrl('');
+      this.authService.authorize();
     }
 
     if (this.authService.currentUser) {
@@ -89,7 +89,7 @@ export class MainContentComponent implements OnInit {
   };
 
   cambia(jj: any) {
-    resetDymerStart();
+    // resetDymerStart();
     drawEntities(jj);
   }
 
@@ -126,7 +126,7 @@ export class MainContentComponent implements OnInit {
       },
     };
 
-    resetDymerStart();
+    // resetDymerStart();
     drawEntities(test);
   }
 }
