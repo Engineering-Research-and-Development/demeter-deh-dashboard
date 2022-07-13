@@ -136,7 +136,7 @@ export class MetricsComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isExpired()) {
       this.authService.removeToken();
-      this.router.navigateByUrl('');
+      this.authService.authorize();
     }
 
     if (!this.authService.isLoggedIn) {

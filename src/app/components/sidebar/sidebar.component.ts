@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   toggleClass: boolean;
   public roles: string[];
 
-  constructor(private router: Router, public authService: AuthService) { }
+  constructor(private router: Router, public authService: AuthService) {}
 
   ngOnInit(): void {
     if (this.authService.currentUser) {
@@ -32,15 +32,29 @@ export class SidebarComponent implements OnInit {
     if (this.authService.currentUser) {
       return this.authService.currentUser.User.id;
     }
-    return "";
+    return '';
   }
 
   navigateToAllResources() {
-    this.router.navigateByUrl('', { state: { jsonConfig: this.showAllResources() } });
+    if (this.authService.isExpired()) {
+      this.authService.removeToken();
+      this.authService.authorize();
+    } else {
+      this.router.navigateByUrl('', {
+        state: { jsonConfig: this.showAllResources() },
+      });
+    }
   }
 
   navigateToUserResources() {
-    this.router.navigateByUrl('', { state: { jsonConfig: this.showUserResources() } });
+    if (this.authService.isExpired()) {
+      this.authService.removeToken();
+      this.authService.authorize();
+    } else {
+      this.router.navigateByUrl('', {
+        state: { jsonConfig: this.showUserResources() },
+      });
+    }
   }
 
   checkRoles() {
@@ -48,7 +62,7 @@ export class SidebarComponent implements OnInit {
 
     if (this.authService.currentUser) {
       this.authService.currentUser.User.roles.forEach((role) => {
-        if (role == "DEMETER Provider") {
+        if (role == 'DEMETER Provider') {
           demeterProvider = true;
         }
       });
@@ -58,22 +72,25 @@ export class SidebarComponent implements OnInit {
   }
   showUserResources() {
     let userResources = {
-      "query": {
-        "query": {
-          "query": {
-            "bool": {
-              "should": [{
-                "term": {
-                  "_index": "dymerservicecomponent"
-                }
-              }, {
-                "term": {
-                  "owner": this.getUserId()
-                }
-              }]
-            }
-          }
-        }
+      query: {
+        query: {
+          query: {
+            bool: {
+              should: [
+                {
+                  term: {
+                    _index: 'dymerservicecomponent',
+                  },
+                },
+                {
+                  term: {
+                    owner: this.getUserId(),
+                  },
+                },
+              ],
+            },
+          },
+        },
       },
 
       endpoint: 'entity.search',
@@ -99,19 +116,20 @@ export class SidebarComponent implements OnInit {
 
   showAllResources() {
     let allResources = {
-      "query": {
-        "query": {
-          "query": {
-            "bool": {
-              "should": [{
-                "term": {
-                  "_index": "dymerservicecomponent"
-                }
-              }
-              ]
-            }
-          }
-        }
+      query: {
+        query: {
+          query: {
+            bool: {
+              should: [
+                {
+                  term: {
+                    _index: 'dymerservicecomponent',
+                  },
+                },
+              ],
+            },
+          },
+        },
       },
 
       endpoint: 'entity.search',

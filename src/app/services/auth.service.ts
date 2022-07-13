@@ -10,7 +10,7 @@ import { JwtModel } from './../models/jwt.model';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
 
   get currentUser(): UserInfo {
     const token = this.getToken();
@@ -20,7 +20,6 @@ export class AuthService {
     }
     return JSON.parse(atob(token));
   }
-
 
   get currentUserJWT(): JwtModel {
     let token = this.getTokenJWT();
@@ -34,7 +33,7 @@ export class AuthService {
     const url = `${environment.DYMER_URL}/api/xauth/login`;
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
     };
 
     return this._http.post<Response>(url, { name, password }, { headers }).pipe(
@@ -42,7 +41,10 @@ export class AuthService {
         if (!resp.success) {
         } else {
           localStorage.setItem('DYM', resp.data.token);
-          localStorage.setItem("d_uid", JSON.parse(atob(resp.data.token)).User.id);
+          localStorage.setItem(
+            'd_uid',
+            JSON.parse(atob(resp.data.token)).User.id
+          );
 
           this.getAttachmentCapToken(resp.data.token);
         }
@@ -51,92 +53,106 @@ export class AuthService {
     );
   }
 
-
   getAttachmentCapToken(accessToken: string) {
     const url = `${environment.DYMER_URL}/api/metrics/getCapToken`;
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
     };
 
-    let token = JSON.parse(atob(accessToken))
+    let token = JSON.parse(atob(accessToken));
     let accessTokenParsed = token.access_token;
-    this._http.post<Response>(url, { accessToken: accessTokenParsed }, { headers }).subscribe(resp => {
-
-      if (resp.success === true) {
-        localStorage.setItem('capToken', resp.data.token);
-      }
-    })
+    this._http
+      .post<Response>(url, { accessToken: accessTokenParsed }, { headers })
+      .subscribe((resp) => {
+        if (resp.success === true) {
+          localStorage.setItem('capToken', resp.data.token);
+        }
+      });
   }
 
   getAttachmentCapTokenJWT(accessToken: string) {
     const url = `${environment.DYMER_URL}/api/metrics/getCapToken`;
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
     };
 
     // let token = JSON.parse(atob(accessToken))
     // let accessTokenParsed = token.access_token;
-    this._http.post<Response>(url, { accessToken: accessToken }, { headers }).subscribe(resp => {
-
-      if (resp.success === true) {
-        localStorage.setItem('capToken', resp.data.token);
-      }
-    })
+    this._http
+      .post<Response>(url, { accessToken: accessToken }, { headers })
+      .subscribe((resp) => {
+        if (resp.success === true) {
+          localStorage.setItem('capToken', resp.data.token);
+        }
+      });
   }
 
   logout() {
     let accessToken = this.currentUser.access_token;
 
-
     const url = `${environment.DYMER_URL}/api/xauth/logout`;
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'X-Auth-Token': accessToken,
     };
 
-    return this._http
-      .delete<Response>(url, { headers })
-      .pipe(
-        map((resp) => {
-          this.removeToken();
-          return resp;
-        })
-      );
+    return this._http.delete<Response>(url, { headers }).pipe(
+      map((resp) => {
+        this.removeToken();
+        return resp;
+      })
+    );
   }
 
   setToken(token: string) {
-
     var currentUser: JwtModel = new JwtHelperService().decodeToken(token);
-    localStorage.setItem("d_uid", currentUser.id);
-    this.getAttachmentCapTokenJWT(token);  
+    localStorage.setItem('d_uid', currentUser.id);
+    this.getAttachmentCapTokenJWT(token);
+
     var dym: UserInfo = {
-      access_token: token, expires: "", valid: "true", User: {
+      access_token: token,
+      expires: new Date(currentUser.exp * 1000),
+      valid: 'true',
+      User: {
         scope: [],
         id: currentUser.id,
         username: currentUser.username,
         email: currentUser.email,
-        date_password: "",
+        date_password: '',
         enabled: true,
         admin: false,
-        roles: [currentUser.roles[0].name]
-      }
-    }
-    const string = JSON.stringify(dym) // convert Object to a String
-    const encodedDYM = btoa(string)
+        roles: [currentUser.roles[0].name],
+      },
+    };
+    const string = JSON.stringify(dym); // convert Object to a String
+    const encodedDYM = btoa(string);
     localStorage.setItem('token', token);
     localStorage.setItem('DYM', encodedDYM);
-
+    this.cacheCapTokens(dym);
   }
 
+  cacheCapTokens(userInfo: any) {
+    const url = `${environment.DYMER_URL}/api/xauth/cacheCapTokens`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    // let token = JSON.parse(atob(accessToken))
+    // let accessTokenParsed = token.access_token;
+    this._http
+      .post<Response>(url, { userInfo: userInfo }, { headers })
+      .subscribe((resp) => {});
+  }
   getToken() {
     return localStorage.getItem('DYM');
   }
 
   getTokenJWT() {
-    return localStorage.getItem("token");
+    return localStorage.getItem('token');
   }
 
   isLoggedIn() {
@@ -150,12 +166,12 @@ export class AuthService {
   }
 
   isExpired() {
-    const token = this.getToken();
+    const token = this.getTokenJWT();
     if (!token) {
       return true;
     }
 
-    return this.checkTokenExpiration();
+    return new JwtHelperService().isTokenExpired(token);
   }
 
   removeToken(): void {
@@ -188,7 +204,6 @@ export class AuthService {
     let currentUser = this.currentUser;
     let currentTime = new Date();
     let expirationDate = new Date(currentUser.expires);
-
     if (currentTime > expirationDate) {
       return true;
     }
@@ -205,11 +220,13 @@ export class AuthService {
     window.location.href = `https://acs.bse.h2020-demeter-cloud.eu:5443/auth/external_logout?_method=DELETE&client_id=8a94c9c1-7dc9-41e5-a558-f4db20e49a7a`;
     this.removeToken();
   }
+
+  cacheCapToke;
 }
 
 export interface Response {
   data: {
-    token: string
+    token: string;
   };
   extraData: string[];
   message: string;

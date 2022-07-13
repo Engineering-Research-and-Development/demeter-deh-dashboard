@@ -1,6 +1,6 @@
 export interface UserInfo {
     access_token: string,
-    expires: string,
+    expires: Date,
     valid: string,
     User: {
         scope: string[],
