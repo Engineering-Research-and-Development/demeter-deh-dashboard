@@ -81,26 +81,27 @@ function mainDymerView() {
     userInfo = JSON.parse(atob(token));
     setTimeout(function () {
       dsearch = new dymerSearch({
-        objname: "dsearch", //same object name -> Mandatory
-        formid: "myfilter", //id of your form -> Mandatory
-        filterModel: "dymerservicecomponent", // index model to load searchables elements -> Not Mandatory
-        innerContainerid: "contform", // id div element indise form -> Mandatory
-        groupfilterclass: "col-12", // class to add on filters -> Not Mandatory , default value = "span12 col-12"
-        conditionQuery: "AND", // AND or OR  -> Not Mandatory, default value = "AND"
-        addfreesearch: true, // will add global search input, true/false -> Not Mandatory, default value = false
-        showFilterBtn: true, // will add button for advanced filter, true/false -> Not Mandatory, default value = false
-        query: {
-          // base query for search
-          bool: {
-            must: [
-              {
-                terms: { _index: ["dymerservicecomponent"] },
-              },
-            ],
-          },
+      objname: "dsearch", //same object name -> Mandatory
+      formid: "myfilter", //id of your form -> Mandatory
+      filterModel: "dymerservicecomponent", // index model to load searchables elements -> Not Mandatory
+      innerContainerid: "contform", // id div element indise form -> Mandatory
+      groupfilterclass: "col-12", // class to add on filters -> Not Mandatory , default value = "span12 col-12"
+      conditionQuery: "AND", // AND or OR  -> Not Mandatory, default value = "AND"
+      addfreesearch: true, // will add global search input, true/false -> Not Mandatory, default value = false
+      showFilterBtn: true, // will add button for advanced filter, true/false -> Not Mandatory, default value = false
+      query: {
+        // base query for search
+        bool: {
+          must: [
+            {
+              terms: { _index: ["dymerservicecomponent"] },
+            },
+          ],
         },
-      });
-    }, 100);
+      },
+    });
+  }, 200);
+
 
     let index = "dymerservicecomponent";
     if (checkRoles()) {
@@ -142,6 +143,6 @@ function getResourcesRefresh(config) {
       },
     },
   });
-  resetDymerStart();
+  // resetDymerStart();
   drawEntities(config); //rimane tale
 }
