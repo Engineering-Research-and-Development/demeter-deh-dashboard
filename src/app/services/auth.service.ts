@@ -213,11 +213,11 @@ export class AuthService {
   //Adding new logic
 
   authorize() {
-    window.location.href = `https://acs.bse.h2020-demeter-cloud.eu:5443/oauth2/authorize?response_type=token&client_id=8a94c9c1-7dc9-41e5-a558-f4db20e49a7a&state=xyz&redirect_uri=http://localhost:4200/&scope=jwt`;
+    window.location.href = `${environment.KEYROCK_URL}/oauth2/authorize?response_type=token&client_id=${environment.ID}&state=xyz&redirect_uri=${environment.DEH_DASHBOARD_URL}&scope=jwt`;
   }
 
   clearKayrockSession() {
-    window.location.href = `https://acs.bse.h2020-demeter-cloud.eu:5443/auth/external_logout?_method=DELETE&client_id=8a94c9c1-7dc9-41e5-a558-f4db20e49a7a`;
+    window.location.href = `${environment.KEYROCK_URL}/auth/external_logout?_method=DELETE&client_id=${environment.ID}`;
     this.removeToken();
   }
 
