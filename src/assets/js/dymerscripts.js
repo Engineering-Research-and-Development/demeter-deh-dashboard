@@ -81,44 +81,42 @@ function mainDymerView() {
     userInfo = JSON.parse(atob(token));
     setTimeout(function () {
       dsearch = new dymerSearch({
-      objname: "dsearch", //same object name -> Mandatory
-      formid: "myfilter", //id of your form -> Mandatory
-      filterModel: "dymerservicecomponent", // index model to load searchables elements -> Not Mandatory
-      innerContainerid: "contform", // id div element indise form -> Mandatory
-      groupfilterclass: "col-12", // class to add on filters -> Not Mandatory , default value = "span12 col-12"
-      conditionQuery: "AND", // AND or OR  -> Not Mandatory, default value = "AND"
-      addfreesearch: true, // will add global search input, true/false -> Not Mandatory, default value = false
-      showFilterBtn: true, // will add button for advanced filter, true/false -> Not Mandatory, default value = false
-      query: {
-        // base query for search
-        bool: {
-          must: [
-            {
-              terms: { _index: ["dymerservicecomponent"] },
-            },
-          ],
+        objname: "dsearch", //same object name -> Mandatory
+        formid: "myfilter", //id of your form -> Mandatory
+        filterModel: "dymerservicecomponent", // index model to load searchables elements -> Not Mandatory
+        innerContainerid: "contform", // id div element indise form -> Mandatory
+        groupfilterclass: "col-12", // class to add on filters -> Not Mandatory , default value = "span12 col-12"
+        conditionQuery: "AND", // AND or OR  -> Not Mandatory, default value = "AND"
+        addfreesearch: true, // will add global search input, true/false -> Not Mandatory, default value = false
+        showFilterBtn: true, // will add button for advanced filter, true/false -> Not Mandatory, default value = false
+        query: {
+          // base query for search
+          bool: {
+            must: [
+              {
+                terms: { _index: ["dymerservicecomponent"] },
+              },
+            ],
+          },
         },
-      },
-    });
-  }, 200);
+      });
+    }, 150);
 
+    setTimeout(function () {
+      let index = "dymerservicecomponent";
+      if (checkRoles()) {
+        setTimeout(function () {
+          loadModelListToModal($("#cont-addentity"), index);
+        }, 10);
+      }
 
-    let index = "dymerservicecomponent";
-    if (checkRoles()) {
-      setTimeout(function () {
-        loadModelListToModal($("#cont-addentity"), index);
-      }, 10);
-    }
-
-    let obj = getAllUrlParams(); //recupera i parametri presenti nell'url (passati in get)
-    let elId = obj["d_eid"]; //d_eid : lo scegli tu da portlet
-    if (elId != undefined)
-      drawEntityByIdUrl(
-        "#cont-MyList",
-        "d_eid"
-      ); //d_eid : lo scegli tu da portlet , "#cont-MyList": è il contenitore dove renderizzare
-    else drawEntities(jsonConfig); //rimane tale
-    loadFilterModel(index, dTagFilter);
+      let obj = getAllUrlParams(); //recupera i parametri presenti nell'url (passati in get)
+      let elId = obj["d_eid"]; //d_eid : lo scegli tu da portlet
+      if (elId != undefined) drawEntityByIdUrl("#cont-MyList", "d_eid");
+      //d_eid : lo scegli tu da portlet , "#cont-MyList": è il contenitore dove renderizzare
+      else drawEntities(jsonConfig); //rimane tale
+      loadFilterModel(index, dTagFilter);
+    }, 150);
   }
 }
 
